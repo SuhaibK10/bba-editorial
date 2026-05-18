@@ -185,7 +185,7 @@ export default function HomeEditorial() {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display font-bold text-[clamp(2.75rem,7vw,6rem)] text-[#1A1A1A] leading-[1.0] tracking-tight mb-8">
               India's most trusted<br />
-              <span className="text-[#0057FF]">display manufacturer.</span>
+              <span className="text-[#0057FF]">acrylic manufacturer.</span>
             </motion.h1>
 
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -239,10 +239,11 @@ export default function HomeEditorial() {
           <div className="max-w-4xl">
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-6">Who we are</motion.p>
+              
             <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display font-bold text-[clamp(1.75rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight">
-              For over three decades, B & B Appliances has been the{" "}
+              For over three decades, B & B Manufacturer has been the{" "}
               <span className="italic font-light text-[#6E6E73]">manufacturing backbone</span>
               {" "}behind India's most recognised brand displays.
             </motion.h2>
