@@ -288,9 +288,7 @@ export default function HomeEditorial() {
               <motion.div key={ind} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}>
                 <Link href="/industries"
-                  className="inline-block font-body text-sm text-[#6E6E73] border border-[#E0E0E0]
-                             rounded-full px-5 py-2.5 hover:border-[#0057FF] hover:text-[#0057FF]
-                             hover:bg-[#EEF2FF] transition-all duration-200">{ind}</Link>
+                  className="industry-pill" >{ind}</Link>
               </motion.div>
             ))}
           </div>
