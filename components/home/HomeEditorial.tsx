@@ -6,6 +6,9 @@ import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// ScrollTrigger is already registered in SmoothScrollProvider.
+// Re-registering here is harmless but we keep it as a safety net
+// in case this component is ever rendered outside that provider.
 gsap.registerPlugin(ScrollTrigger);
 
 const products = [
@@ -62,11 +65,15 @@ function CardStack() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = gsap.utils.toArray<HTMLElement>(".stack-card");
-    if (!containerRef.current || cards.length === 0) return;
+    if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Scope the selector to this container so it never leaks to other instances
+      const cards = gsap.utils.toArray<HTMLElement>(".stack-card", containerRef.current!);
+      if (cards.length === 0) return;
+
       cards.forEach((card, i) => { if (i > 0) gsap.set(card, { yPercent: 100 }); });
+
       cards.forEach((card, i) => {
         if (i === 0) return;
         ScrollTrigger.create({
@@ -81,6 +88,7 @@ function CardStack() {
         });
       });
     }, containerRef);
+
     return () => ctx.revert();
   }, []);
 
@@ -153,8 +161,14 @@ export default function HomeEditorial() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(bgRef.current, {
-        yPercent: 25, ease: "none",
-        scrollTrigger: { trigger: "#hero-section", start: "top top", end: "bottom top", scrub: true },
+        yPercent: 25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
       });
     });
     return () => ctx.revert();
@@ -239,7 +253,7 @@ export default function HomeEditorial() {
           <div className="max-w-4xl">
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-6">Who we are</motion.p>
-              
+
             <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display font-bold text-[clamp(1.75rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight">
@@ -288,8 +302,7 @@ export default function HomeEditorial() {
             {industries.map((ind, i) => (
               <motion.div key={ind} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}>
-                <Link href="/industries"
-                  className="industry-pill" >{ind}</Link>
+                <Link href="/industries" className="industry-pill">{ind}</Link>
               </motion.div>
             ))}
           </div>
@@ -317,8 +330,8 @@ export default function HomeEditorial() {
                 viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="border-t border-white/10 pt-8 pb-8 md:pr-8">
                 <div className="process-step-number">{item.step}</div>
-<h3 className="process-step-title">{item.title}</h3>
-<p className="process-step-desc">{item.desc}</p>
+                <h3 className="process-step-title">{item.title}</h3>
+                <p className="process-step-desc">{item.desc}</p>
               </motion.div>
             ))}
           </div>
