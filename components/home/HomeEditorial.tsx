@@ -3,9 +3,11 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 
 
 const products = [
