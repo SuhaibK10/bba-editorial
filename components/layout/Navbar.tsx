@@ -79,7 +79,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col leading-none">
                 <span className={`font-display font-bold text-sm tracking-tight
-                  ${scrolled || menuOpen ? "text-text-primary" : "text-text-primary"}`}>
+                  text-[#1A1A1A]`}>
                   B & B Appliances
                 </span>
                 <span className="text-text-faint text-[10px] font-body tracking-wide">

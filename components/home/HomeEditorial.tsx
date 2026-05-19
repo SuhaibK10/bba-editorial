@@ -6,10 +6,7 @@ import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// ScrollTrigger is already registered in SmoothScrollProvider.
-// Re-registering here is harmless but we keep it as a safety net
-// in case this component is ever rendered outside that provider.
-gsap.registerPlugin(ScrollTrigger);
+
 
 const products = [
   { id: "01", name: "Literature Holders", desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.", slug: "literature-holders", image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80", color: "#EEF2FF" },
@@ -108,7 +105,7 @@ function CardStack() {
               </p>
               <Link href="/products"
                 className="inline-flex items-center gap-2 font-body text-sm font-medium text-[#0057FF]
-                           border border-[#0057FF]/30 rounded-full px-5 py-2.5
+                           border border-[#0057FF]/30 rounded-full px-7 py-2.5
                            hover:bg-[#0057FF] hover:text-white hover:border-[#0057FF] transition-all duration-300">
                 View all products
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">

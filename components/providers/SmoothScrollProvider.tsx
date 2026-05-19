@@ -26,7 +26,7 @@ export default function SmoothScrollProvider({
 
     // Drive Lenis through GSAP's ticker so scrub animations stay frame-perfect
     // GSAP time is in seconds; Lenis.raf expects milliseconds
-    const rafCallback = (time: number) => lenis.raf(time * 1000);
+    const rafCallback = (time: number) => lenis.raf(time);
     gsap.ticker.add(rafCallback);
     gsap.ticker.lagSmoothing(0);
 
