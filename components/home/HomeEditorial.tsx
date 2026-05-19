@@ -14,8 +14,8 @@ const products = [
   { id: "01", name: "Literature Holders", desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.", slug: "literature-holders", image: "https://images.unsplash.com/photo-1738857734516-8bcf91a320d9?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", color: "#EEF2FF" },
   { id: "02", name: "Static Signages", desc: "Durable blow-moulded plastic signage for brand visibility at scale.", slug: "static-signages", image: "https://images.unsplash.com/photo-1636314326111-b7fa652a3abf?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", color: "#F0F9FF" },
   { id: "03", name: "Table Top Displays", desc: "Counter-top acrylic units engineered for maximum product visibility at POS.", slug: "table-top-displays", image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&q=80", color: "#F0FDF4" },
-  { id: "04", name: "Charging Stations", desc: "Display stands with integrated device charging. Serve customers while they wait.", slug: "mobile-charging-stations", image: "", color: "#FFF7ED" },
-  { id: "05", name: "Revolving Towers", desc: "Multi-tier rotating display towers that multiply shelf space without footprint.", slug: "revolving-display-towers", image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779206075/ChatGPT_Image_May_19_2026_at_09_23_05_PM_hgerxe.png", color: "#FDF4FF" },
+  { id: "04", name: "Charging Stations", desc: "Display stands with integrated device charging. Serve customers while they wait.", slug: "mobile-charging-stations", image: "https://res.cloudinary.com/deh394y0h/image/upload/f_auto,q_auto,c_pad,b_rgb:f5eff7,w_1400,h_700/v1779206075/ChatGPT_Image_May_19_2026_at_09_44_41_PM_xjre4k.png", color: "#FFF7ED" },
+  { id: "05", name: "Revolving Towers", desc: "Multi-tier rotating display towers that multiply shelf space without footprint.", slug: "revolving-display-towers", image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779208714/Revolving_Tower_t7mknk.png", color: "#FDF4FF" },
   { id: "06", name: "Retail POP Displays", desc: "Point-of-purchase systems engineered to drive impulse decisions at the shelf.", slug: "retail-pop-displays", image: "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?w=800&q=80", color: "#ECFEFF" },
   { id: "07", name: "Customised Displays", desc: "Bespoke acrylic fabrication built precisely to your brand specifications.", slug: "customised-displays", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80", color: "#FFF1F2" },
   
@@ -117,16 +117,16 @@ function CardStack() {
               </Link>
             </div>
 
-            <div className="relative h-[550px]">
+            <div className="relative aspect h-[950px]">
               {products.map((product, i) => (
                 <div key={product.id} className="stack-card absolute inset-0 rounded-3xl overflow-hidden shadow-[0_4px_32px_rgba(0,0,0,0.08)]"
                   style={{ zIndex: i + 1 }}>
                   <div className="w-full h-full flex flex-col" style={{ background: product.color }}>
-                    <div className="relative overflow-hidden" style={{ height: "420px" }}>
+                    <div className="relative flex-1 overflow-hidden" style={{ height: "420px" }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={product.image} alt={product.name}
-                        className="w-full h-full object-cover"
-                        style={{ filter: "brightness(0.9) saturate(0.85)" }} />
+                        className="w-full h-full object-cover "
+                        style={{ filter: "brightness(0.98) saturate(1.02)" }} />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
                       <span className="absolute top-5 left-5 font-display font-bold text-4xl text-white/90 drop-shadow-sm">
                         {product.id}
