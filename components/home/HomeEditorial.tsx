@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
@@ -18,7 +18,6 @@ const products = [
   { id: "05", name: "Revolving Towers", desc: "Multi-tier rotating display towers that multiply shelf space without footprint.", slug: "revolving-display-towers", image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779208714/Revolving_Tower_t7mknk.png", color: "#FDF4FF" },
   { id: "06", name: "Retail POP Displays", desc: "Point-of-purchase systems engineered to drive impulse decisions at the shelf.", slug: "retail-pop-displays", image: "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?w=800&q=80", color: "#ECFEFF" },
   { id: "07", name: "Customised Displays", desc: "Bespoke acrylic fabrication built precisely to your brand specifications.", slug: "customised-displays", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80", color: "#FFF1F2" },
-  
   { id: "08", name: "Motorised Signages", desc: "Rotating animated signage that commands attention in high-traffic locations.", slug: "motorised-signages", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", color: "#FAFAF9" },
 ];
 
@@ -61,95 +60,156 @@ function StatItem({ value, suffix, label, index }: { value: number; suffix: stri
   );
 }
 
-function CardStack() {
-  const containerRef = useRef<HTMLDivElement>(null);
+const CARD_WIDTH = 340;
+const GAP = 20;
+const STEP = CARD_WIDTH + GAP;
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+function CardCarousel() {
+  const [current, setCurrent] = useState(0);
+  const isDragging = useRef(false);
 
-    const ctx = gsap.context(() => {
-      // Scope the selector to this container so it never leaks to other instances
-      const cards = gsap.utils.toArray<HTMLElement>(".stack-card", containerRef.current!);
-      if (cards.length === 0) return;
+  const goTo = (index: number) => {
+    setCurrent(Math.max(0, Math.min(products.length - 1, index)));
+  };
 
-      cards.forEach((card, i) => { if (i > 0) gsap.set(card, { yPercent: 100 }); });
-
-      cards.forEach((card, i) => {
-        if (i === 0) return;
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: `${((i - 1) / (cards.length - 1)) * 80}% top`,
-          end: `${(i / (cards.length - 1)) * 80}% top`,
-          scrub: 1,
-          onUpdate: (self) => {
-            gsap.set(card, { yPercent: 100 - self.progress * 100 });
-            gsap.set(cards[i - 1], { scale: 1 - self.progress * 0.04, transformOrigin: "center bottom" });
-          },
-        });
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  const handleDragEnd = (_: unknown, info: { offset: { x: number }; velocity: { x: number } }) => {
+    const threshold = 50;
+    if (info.offset.x < -threshold || info.velocity.x < -300) {
+      goTo(current + 1);
+    } else if (info.offset.x > threshold || info.velocity.x > 300) {
+      goTo(current - 1);
+    }
+    // small delay so click doesn't fire after drag
+    setTimeout(() => { isDragging.current = false; }, 50);
+  };
 
   return (
-    <section ref={containerRef} className="relative border-t border-[#E0E0E0]"
-      style={{ minHeight: `${products.length * 100}vh` }}>
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <div className="w-full px-6 md:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 items-center max-w-[1400px] mx-auto">
-            <div>
-              <p className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-4">What we make</p>
-              <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight mb-6">
-                Multiple product<br /><span className="text-[#0057FF]">categories.</span><br />Endless applications.
-              </h2>
-              <p className="font-body text-[#6E6E73] leading-relaxed max-w-sm mb-8 text-base">
-                From a single brochure holder to a full motorised signage network, we manufacture it all.
-              </p>
+    <section className="border-t border-[#E0E0E0] py-24 md:py-32 overflow-hidden">
+      {/* Header */}
+      <div className="container-wide mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-4">What we make</motion.p>
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight">
+              Multiple product<br /><span className="text-[#0057FF]">categories.</span><br />Endless applications.
+            </motion.h2>
+          </div>
+
+          <div className="flex flex-col items-start md:items-end gap-4">
+            <p className="font-body text-[#6E6E73] leading-relaxed max-w-xs text-sm">
+              From a single brochure holder to a full motorised signage network, we manufacture it all.
+            </p>
+            <div className="flex items-center gap-3">
+              <button onClick={() => goTo(current - 1)} disabled={current === 0}
+                className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
+                           hover:border-[#0057FF] hover:text-[#0057FF] disabled:opacity-30 disabled:cursor-not-allowed
+                           transition-all duration-200">
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                  <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button onClick={() => goTo(current + 1)} disabled={current === products.length - 1}
+                className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
+                           hover:border-[#0057FF] hover:text-[#0057FF] disabled:opacity-30 disabled:cursor-not-allowed
+                           transition-all duration-200">
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                  <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
               <Link href="/products"
                 className="inline-flex items-center gap-2 font-body text-sm font-medium text-[#0057FF]
-                           border border-[#0057FF]/30 rounded-full px-7 py-2.5
-                           hover:bg-[#0057FF] hover:text-white hover:border-[#0057FF] transition-all duration-300">
-                View all products
+                           border border-[#0057FF]/30 rounded-full px-6 py-2.5
+                           hover:bg-[#0057FF] hover:text-white transition-all duration-300">
+                View all
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
             </div>
-
-            <div className="relative aspect h-[950px]">
-              {products.map((product, i) => (
-                <div key={product.id} className="stack-card absolute inset-0 rounded-3xl overflow-hidden shadow-[0_4px_32px_rgba(0,0,0,0.08)]"
-                  style={{ zIndex: i + 1 }}>
-                  <div className="w-full h-full flex flex-col" style={{ background: product.color }}>
-                    <div className="relative flex-1 overflow-hidden" style={{ height: "420px" }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={product.image} alt={product.name}
-                        className="w-full h-full object-cover "
-                        style={{ filter: "brightness(0.98) saturate(1.02)" }} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
-                      <span className="absolute top-5 left-5 font-display font-bold text-4xl text-white/90 drop-shadow-sm">
-                        {product.id}
-                      </span>
-                      <Link href={`/products/${product.slug}`}
-                        className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/90
-                                   backdrop-blur-sm flex items-center justify-center
-                                   hover:bg-[#0057FF] transition-colors duration-200 shadow-sm">
-                        <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-                          <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </Link>
-                    </div>
-                    <div className="p-6 flex-shrink-0">
-                      <h3 className="font-display font-bold text-xl text-[#1A1A1A] mb-2.5">{product.name}</h3>
-                      <p className="font-body text-sm text-[#6E6E73] leading-relaxed line-clamp-2">{product.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
+      </div>
+
+      {/* Carousel track */}
+      <div className="relative pl-6 md:pl-10 lg:pl-16 cursor-grab active:cursor-grabbing select-none">
+        <motion.div
+          className="flex"
+          style={{ gap: GAP, width: products.length * STEP }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.08}
+          onDragStart={() => { isDragging.current = true; }}
+          onDragEnd={handleDragEnd}
+          animate={{ x: -current * STEP }}
+          transition={{ type: "spring", stiffness: 300, damping: 35 }}
+        >
+          {products.map((product, i) => {
+            const isActive = i === current;
+            return (
+              <motion.div
+                key={product.id}
+                animate={{ scale: isActive ? 1 : 0.97, opacity: isActive ? 1 : 0.7 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex-shrink-0"
+                style={{ width: CARD_WIDTH, background: product.color }}
+                onClick={() => { if (!isDragging.current) goTo(i); }}
+              >
+                {/* Image area */}
+                <div className="relative overflow-hidden" style={{ height: 260 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                    style={{ filter: "brightness(0.97) saturate(1.02)", pointerEvents: "none" }}
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <span className="absolute top-4 left-5 font-display font-bold text-3xl text-white/90 drop-shadow-sm">
+                    {product.id}
+                  </span>
+                  <Link
+                    href={`/products/${product.slug}`}
+                    onClick={e => { if (isDragging.current) e.preventDefault(); }}
+                    className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90
+                               backdrop-blur-sm flex items-center justify-center
+                               hover:bg-[#0057FF] transition-colors duration-200 shadow-sm">
+                    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+
+                {/* Text area */}
+                <div className="p-5">
+                  <h3 className="font-display font-bold text-lg text-[#1A1A1A] mb-1.5">{product.name}</h3>
+                  <p className="font-body text-sm text-[#6E6E73] leading-relaxed line-clamp-2">{product.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* Progress dots + counter */}
+      <div className="container-wide mt-8 flex items-center gap-2">
+        {products.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`transition-all duration-300 rounded-full ${
+              i === current
+                ? "w-6 h-2 bg-[#0057FF]"
+                : "w-2 h-2 bg-[#E0E0E0] hover:bg-[#AEAEB2]"
+            }`}
+          />
+        ))}
+        <span className="ml-auto font-body text-xs text-[#AEAEB2] tabular-nums">
+          {current + 1} / {products.length}
+        </span>
       </div>
     </section>
   );
@@ -276,8 +336,8 @@ export default function HomeEditorial() {
         </div>
       </section>
 
-      {/* Card stack */}
-      <CardStack />
+      {/* Horizontal carousel */}
+      <CardCarousel />
 
       {/* Industries */}
       <section className="py-24 md:py-32 border-t border-[#E0E0E0] ">
