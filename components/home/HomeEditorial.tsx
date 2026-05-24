@@ -89,9 +89,9 @@ function CardCarousel() {
       <div className="container-wide mb-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-            <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-4">What we make</motion.p>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight">
               Multiple product<br /><span className="text-[#0057FF]">categories.</span><br />Endless applications.
@@ -105,7 +105,8 @@ function CardCarousel() {
             <div className="flex items-center gap-3">
               <button onClick={() => goTo(current - 1)} disabled={current === 0}
                 className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
-                           hover:border-[#0057FF] hover:text-[#0057FF] disabled:opacity-30 disabled:cursor-not-allowed
+                           text-[#6E6E73] hover:border-[#AEAEB2] hover:text-[#1A1A1A] hover:bg-[#F9F9FB]
+                           disabled:opacity-25 disabled:cursor-not-allowed
                            transition-all duration-200">
                 <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
                   <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -113,18 +114,22 @@ function CardCarousel() {
               </button>
               <button onClick={() => goTo(current + 1)} disabled={current === products.length - 1}
                 className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
-                           hover:border-[#0057FF] hover:text-[#0057FF] disabled:opacity-30 disabled:cursor-not-allowed
+                           text-[#6E6E73] hover:border-[#AEAEB2] hover:text-[#1A1A1A] hover:bg-[#F9F9FB]
+                           disabled:opacity-25 disabled:cursor-not-allowed
                            transition-all duration-200">
                 <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
                   <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
               <Link href="/products"
-                className="inline-flex items-center gap-2 font-body text-sm font-medium text-[#0057FF]
-                           border border-[#0057FF]/30 rounded-full px-6 py-2.5
-                           hover:bg-[#0057FF] hover:text-white transition-all duration-300">
+                className="group inline-flex items-center gap-1.5 font-body text-sm font-medium text-[#0057FF]
+                           h-9 px-4 rounded-full
+                           border border-[#0057FF]/25 bg-[#0057FF]/[0.04]
+                           hover:bg-accent hover:text-white hover:border-accent
+                           active:scale-[0.97]
+                           transition-all duration-200">
                 View all
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
                   <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
@@ -151,7 +156,7 @@ function CardCarousel() {
             return (
               <motion.div
                 key={product.id}
-                animate={{ scale: isActive ? 1 : 0.97, opacity: isActive ? 1 : 0.7 }}
+                animate={{ scale: isActive ? 1 : 0.91, opacity: isActive ? 1 : 0.55 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex-shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
@@ -246,8 +251,8 @@ export default function HomeEditorial() {
             style={{ background: "radial-gradient(circle, #0057FF 0%, transparent 65%)" }} />
         </div>
 
-        <div className="flex flex-col gap-10">
-          <div className="max-w-7xl">
+        <div className="container-wide flex flex-col gap-10">
+          <div className="max-w-4xl">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-center gap-3 mb-8">
@@ -267,29 +272,43 @@ export default function HomeEditorial() {
               className="font-body text-lg text-[#6E6E73] max-w-xl leading-relaxed mb-10">
               Acrylic fabrication and blow-moulded displays for every industry.
               Built to last, designed to perform.
+               <br />
+  <br />
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-4 flex-wra mb-6">
-             <Link href="/quote"
-  className="bg-[#4f86f4ef] text-white font-body font-medium text-base px-10 py-4 rounded-full
-             ring-2 ring-[#1A1A1A]
-             hover:bg-[#0047DD] shadow-[0_8px_32px_rgba(0,87,255,0.28)]
-             hover:shadow-[0_12px_40px_rgba(0,87,255,0.36)] transition-all duration-300 active:scale-95">
-  Get a Quote
-</Link>
-              <Link href="/products" className="font-body font-medium text-sm text-[#1A1A1A] flex items-center gap-2 group px-2">
+              className="flex items-center gap-5 flex-wrap mb-6">
+              <Link href="/quote"
+                className="group inline-flex items-center gap-2
+                           h-12 px-6 rounded-full
+                           bg-accent text-white font-body font-semibold text-[15px] tracking-[-0.01em]
+                           shadow-[0_1px_2px_rgba(0,0,0,0.06),0_3px_12px_rgba(0,87,255,0.20)]
+                           hover:bg-accent-hover hover:-translate-y-px
+                           hover:shadow-[0_2px_4px_rgba(0,0,0,0.08),0_8px_20px_rgba(0,87,255,0.28)]
+                           active:scale-[0.97] active:translate-y-0
+                           transition-all duration-200">
+                Get a Quote 
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
+                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+              <Link href="/products"
+                className="group inline-flex items-center gap-2
+                           h-12 px-3
+                           font-body font-medium text-[15px] text-text-secondary
+                           hover:text-text-primary
+                           transition-colors duration-200">
                 Browse products
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="group-hover:translate-x-1 transition-transform duration-200">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200">
+                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
             </motion.div>
           </div>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.9 }}
-            className="flex items-center gap-2 mt-20">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex items-center gap-2 mt-10">
             <div className="w-5 h-8 rounded-full border border-[#E0E0E0] flex items-start justify-center pt-1.5">
               <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 className="w-1 h-1.5 rounded-full bg-[#AEAEB2]" />
@@ -300,7 +319,7 @@ export default function HomeEditorial() {
       </section>
 
       {/* Trust bar */}
-      <section className="border-y border-[#E0E0E0] py-16 bg-[#F5F5F7]">
+      <section className="border-y border-[#E0E0E0] py-16 bg-surface">
         <div className="container-wide">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, i) => <StatItem key={stat.label} {...stat} index={i} />)}
@@ -312,24 +331,25 @@ export default function HomeEditorial() {
       <section className="py-24 md:py-32">
         <div className="container-wide">
           <div className="max-w-4xl">
-            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-6">Who we are</motion.p>
 
-            <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display font-bold text-[clamp(1.75rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight">
               For over three decades, B & B Manufacturer has been the{" "}
-              <span className="italic font-light text-[#6E6E73]">manufacturing backbone</span>
-              {" "}behind India's most recognised brand displays.
+              <span className="italic text-[#6E6E73]">manufacturing backbone</span>
+              {" "}behind India's most recognised brand displays.<br /> <br/>
+  
             </motion.h2>
-            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-10 pt-10 border-t border-[#E0E0E0] grid grid-cols-1 md:grid-cols-2 gap-8">
               <p className="font-body text-[#6E6E73] leading-relaxed">
                 From Airtel retail stores to pharmacy counters, from bank branches to FMCG shelves — if you've walked into a branded space in India, you've likely seen our work.
               </p>
               <p className="font-body text-[#6E6E73] leading-relaxed">
-                We specialise in acrylic fabrication and blow-moulded plastic displays, manufactured with precision at our GT Karnal Road facility in New Delhi.
+                We specialise in acrylic fabrication and blow-moulded plastic displays, manufactured with precision at our GT Karnal Road <br/><br/>
               </p>
             </motion.div>
           </div>
@@ -344,9 +364,9 @@ export default function HomeEditorial() {
         <div className="container-wide">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
-              <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
                 className="font-body text-xs text-[#AEAEB2] uppercase tracking-widest mb-3">Where we work</motion.p>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display font-bold text-[clamp(1.75rem,3.5vw,3rem)] text-[#1A1A1A]">
                 Multiple industries.<br />One manufacturer.
@@ -362,7 +382,7 @@ export default function HomeEditorial() {
           <div className="flex flex-wrap gap-3">
             {industries.map((ind, i) => (
               <motion.div key={ind} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}>
+                viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] }}>
                 <Link href="/industries" className="industry-pill">{ind}</Link>
               </motion.div>
             ))}
@@ -373,9 +393,9 @@ export default function HomeEditorial() {
       {/* How it works */}
       <section className="py-24 md:py-32 bg-[#1A1A1A]">
         <div className="container-wide">
-          <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
             className="font-body text-xs text-white/40 uppercase tracking-widest mb-4">The process</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="font-display font-bold text-[clamp(1.75rem,3.5vw,3rem)] text-white mb-16">
             Simple. Fast. Reliable.
@@ -388,7 +408,7 @@ export default function HomeEditorial() {
               { step: "04", title: "Deliver", desc: "Pan-India delivery. Your displays, on time, every time." },
             ].map((item, i) => (
               <motion.div key={item.step} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="border-t border-white/10 pt-8 pb-8 md:pr-8">
                 <div className="process-step-number">{item.step}</div>
                 <h3 className="process-step-title">{item.title}</h3>
@@ -403,34 +423,46 @@ export default function HomeEditorial() {
       <section className="py-24 md:py-32">
         <div className="container-wide">
           <div className="border border-[#E0E0E0] rounded-3xl p-12 md:p-20 flex flex-col md:flex-row
-                          items-start md:items-center justify-between gap-10 bg-[#F5F5F7]">
+                          items-start md:items-center justify-between gap-10 bg-surface">
             <div>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display font-bold text-[clamp(1.75rem,3.5vw,3rem)] text-[#1A1A1A] mb-4">
-                Ready to build something<br /><span className="text-[#0057FF]">remarkable?</span>
+                <br/><br/>Ready to build something<br /><span className="text-[#0057FF]">remarkable?</span>
               </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="font-body text-[#6E6E73] max-w-md leading-relaxed">
                 Tell us what you need. We'll quote you within 24 hours. No minimum order for first-time clients.
               </motion.p>
             </div>
-            <div className="flex flex-col gap-3 flex-shrink-0">
+            <div className="flex flex-col gap-3 flex-shrink-0 w-full md:w-auto md:min-w-[200px]">
               <Link href="/quote"
-                className="bg-[#6e99f0] text-white font-body font-medium px-8 py-4 rounded-full
-                           text-center hover:bg-[#0047DD] shadow-[0_8px_32px_rgba(0,87,255,0.24)]
-                           transition-all duration-300 active:scale-95">
+                className="group inline-flex items-center justify-center gap-2
+                           h-12 px-7 rounded-full w-full
+                           bg-accent text-white font-body font-semibold text-[15px] tracking-[-0.01em]
+                           shadow-[0_1px_2px_rgba(0,0,0,0.06),0_3px_12px_rgba(0,87,255,0.20)]
+                           hover:bg-accent-hover hover:-translate-y-px
+                           hover:shadow-[0_2px_4px_rgba(0,0,0,0.08),0_8px_20px_rgba(0,87,255,0.28)]
+                           active:scale-[0.97] active:translate-y-0
+                           transition-all duration-200">
                 Request a Quote
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
+                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </Link>
               <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer"
-                className="bg-white text-[#1A1A1A] font-body font-medium px-8 py-4 rounded-full
-                           text-center border border-[#E0E0E0] hover:border-[#6E6E73]
-                           transition-all duration-300 flex items-center justify-center gap-2">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366">
+                className="inline-flex items-center justify-center gap-2.5
+                           h-12 px-7 rounded-full w-full
+                           bg-white text-[#1A1A1A] font-body font-medium text-[15px]
+                           border border-[#D0D0D4] hover:border-[#8E8E93] hover:bg-[#FAFAFA]
+                           active:scale-[0.97]
+                           transition-all duration-200">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="#25D366">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                 </svg>
                 WhatsApp Us
+                
               </a>
             </div>
           </div>
