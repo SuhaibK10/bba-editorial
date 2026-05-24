@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const products = [
-  { id: "01", name: "Literature Holders", desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.", slug: "literature-holders", image: "https://images.unsplash.com/photo-1738857734516-8bcf91a320d9?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", color: "#EEF2FF" },
+  { id: "01", name: "Literature Holders", desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.", slug: "literature-holders", image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779649957/LiteratureHolder_fpbz6y.png", color: "#EEF2FF" },
   { id: "02", name: "Static Signages", desc: "Durable blow-moulded plastic signage for brand visibility at scale.", slug: "static-signages", image: "https://images.unsplash.com/photo-1636314326111-b7fa652a3abf?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", color: "#F0F9FF" },
   { id: "03", name: "Table Top Displays", desc: "Counter-top acrylic units engineered for maximum product visibility at POS.", slug: "table-top-displays", image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&q=80", color: "#F0FDF4" },
   { id: "04", name: "Charging Stations", desc: "Display stands with integrated device charging. Serve customers while they wait.", slug: "mobile-charging-stations", image: "https://res.cloudinary.com/deh394y0h/image/upload/f_auto,q_auto,c_pad,b_rgb:f5eff7,w_1400,h_700/v1779206075/ChatGPT_Image_May_19_2026_at_09_44_41_PM_xjre4k.png", color: "#FFF7ED" },
@@ -129,7 +129,7 @@ function CardCarousel() {
                            active:scale-[0.97]
                            transition-all duration-200">
                 View all
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
+                <svg width="15" height="12" viewBox="0 0 12 12" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
                   <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
@@ -139,7 +139,7 @@ function CardCarousel() {
       </div>
 
       {/* Carousel track */}
-      <div className="relative pl-6 md:pl-10 lg:pl-16 cursor-grab active:cursor-grabbing select-none">
+      <div className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none">
         <motion.div
           className="flex"
           style={{ gap: GAP, width: products.length * STEP }}
@@ -148,8 +148,17 @@ function CardCarousel() {
           dragElastic={0.08}
           onDragStart={() => { isDragging.current = true; }}
           onDragEnd={handleDragEnd}
-          animate={{ x: -current * STEP }}
-          transition={{ type: "spring", stiffness: 300, damping: 35 }}
+          animate={{
+  x:
+    window.innerWidth / 2 -
+    CARD_WIDTH / 2 -
+    current * STEP
+}}
+          transition={{type: "spring",
+          stiffness: 110,
+          damping: 22,
+          mass: 1.9
+          }}
         >
           {products.map((product, i) => {
             const isActive = i === current;
@@ -158,18 +167,18 @@ function CardCarousel() {
                 key={product.id}
                 animate={{ scale: isActive ? 1 : 0.91, opacity: isActive ? 1 : 0.55 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex-shrink-0"
+                className="rounded-2x1 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex-shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
                 {/* Image area */}
-                <div className="relative overflow-hidden" style={{ height: 260 }}>
+                <div className="relative overflow-hidden" style={{ height: 300 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover"
-                    style={{ filter: "brightness(0.97) saturate(1.02)", pointerEvents: "none" }}
+                    style={{ filter: "brightness(0.99) saturate(1.02)", pointerEvents: "none" }}
                     draggable={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -281,8 +290,9 @@ export default function HomeEditorial() {
               className="flex items-center gap-5 flex-wrap mb-6">
               <Link href="/quote"
                 className="group inline-flex items-center gap-2
-                           h-12 px-6 rounded-full
-                           bg-accent text-white font-body font-semibold text-[15px] tracking-[-0.01em]
+                           h-8 px-6 rounded-full
+                           bg-[#3B82F6] text-white font-body font-semibold text-[15px] tracking-[-0.01em]
+                           border-2 border-amber-30
                            shadow-[0_1px_2px_rgba(0,0,0,0.06),0_3px_12px_rgba(0,87,255,0.20)]
                            hover:bg-accent-hover hover:-translate-y-px
                            hover:shadow-[0_2px_4px_rgba(0,0,0,0.08),0_8px_20px_rgba(0,87,255,0.28)]
@@ -326,6 +336,7 @@ export default function HomeEditorial() {
           </div>
         </div>
       </section>
+      <br/><br/>
 
       {/* Intro */}
       <section className="py-24 md:py-32">
@@ -337,19 +348,19 @@ export default function HomeEditorial() {
             <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="font-display font-bold text-[clamp(1.75rem,4vw,3.5rem)] text-[#1A1A1A] leading-tight">
-              For over three decades, B & B Manufacturer has been the{" "}
+              B & B has been the{" "}
               <span className="italic text-[#6E6E73]">manufacturing backbone</span>
-              {" "}behind India's most recognised brand displays.<br /> <br/>
+              {" "}of India's most recognised brand displays.<br /> <br/>
   
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-10 pt-10 border-t border-[#E0E0E0] grid grid-cols-1 md:grid-cols-2 gap-8">
               <p className="font-body text-[#6E6E73] leading-relaxed">
-                From Airtel retail stores to pharmacy counters, from bank branches to FMCG shelves — if you've walked into a branded space in India, you've likely seen our work.
+                From Airtel retail stores to pharmacy counters, from bank branches to FMCG shelves.
               </p>
               <p className="font-body text-[#6E6E73] leading-relaxed">
-                We specialise in acrylic fabrication and blow-moulded plastic displays, manufactured with precision at our GT Karnal Road <br/><br/>
+                We specialise in acrylic fabrication and blow-moulded plastic displays, manufactured with precision at our GT Karnal Road Facility <br/><br/>
               </p>
             </motion.div>
           </div>
@@ -389,12 +400,13 @@ export default function HomeEditorial() {
           </div>
         </div>
       </section>
+      <br/>
 
       {/* How it works */}
       <section className="py-24 md:py-32 bg-[#1A1A1A]">
         <div className="container-wide">
           <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
-            className="font-body text-xs text-white/40 uppercase tracking-widest mb-4">The process</motion.p>
+            className="font-body text-xs text-white/40 uppercase tracking-widest mb-4">The process</motion.p><br/>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="font-display font-bold text-[clamp(1.75rem,3.5vw,3rem)] text-white mb-16">
@@ -428,7 +440,7 @@ export default function HomeEditorial() {
               <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display font-bold text-[clamp(1.75rem,3.5vw,3rem)] text-[#1A1A1A] mb-4">
-                <br/><br/>Ready to build something<br /><span className="text-[#0057FF]">remarkable?</span>
+                <br/> Ready to build something<br /><span className="text-[#0057FF]">remarkable?</span>
               </motion.h2>
               <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -440,8 +452,8 @@ export default function HomeEditorial() {
               <Link href="/quote"
                 className="group inline-flex items-center justify-center gap-2
                            h-12 px-7 rounded-full w-full
-                           bg-accent text-white font-body font-semibold text-[15px] tracking-[-0.01em]
-                           shadow-[0_1px_2px_rgba(0,0,0,0.06),0_3px_12px_rgba(0,87,255,0.20)]
+                           bg-[#3B82F6] text-white font-body font-semibold text-[15px] tracking-[-0.01em]
+                           shadow-[0_1px_2px_rgba(0,0,0,0.06),0_3px_12px_rgba(0,87,255,0.20) border-2 border-amber-300]
                            hover:bg-accent-hover hover:-translate-y-px
                            hover:shadow-[0_2px_4px_rgba(0,0,0,0.08),0_8px_20px_rgba(0,87,255,0.28)]
                            active:scale-[0.97] active:translate-y-0
@@ -455,7 +467,7 @@ export default function HomeEditorial() {
                 className="inline-flex items-center justify-center gap-2.5
                            h-12 px-7 rounded-full w-full
                            bg-white text-[#1A1A1A] font-body font-medium text-[15px]
-                           border border-[#D0D0D4] hover:border-[#8E8E93] hover:bg-[#FAFAFA]
+                          border-2 border-amber-30 hover:border-[#8E8E93] hover:bg-[#FAFAFA]
                            active:scale-[0.97]
                            transition-all duration-200">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="#25D366">
