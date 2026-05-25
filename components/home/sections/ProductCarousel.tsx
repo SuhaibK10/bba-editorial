@@ -1,20 +1,30 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { products } from "@/data/products";
 
 // ─── Carousel sizing ───────────────────────────────────────
-// Change these to resize cards
-const CARD_WIDTH = 340;  // card width in px
-const GAP = 20;          // gap between cards in px
+const CARD_WIDTH = 340;
+const GAP = 20;
 const STEP = CARD_WIDTH + GAP;
-const IMAGE_HEIGHT = 300; // product image height in px
+const IMAGE_HEIGHT = 300;
 
 export default function ProductCarousel() {
   const [current, setCurrent] = useState(0);
+  const [offsetX, setOffsetX] = useState(0); // SSR-safe: starts at 0
   const isDragging = useRef(false);
+
+  // Calculate x after mount + on resize
+  useEffect(() => {
+    const calc = () => {
+      setOffsetX(window.innerWidth / 2 - CARD_WIDTH / 2 - current * STEP);
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, [current]);
 
   const goTo = (index: number) => {
     setCurrent(Math.max(0, Math.min(products.length - 1, index)));
@@ -64,8 +74,6 @@ export default function ProductCarousel() {
               we manufacture it all.
             </p>
             <div className="flex items-center gap-5">
-
-              {/* Prev */}
               <button
                 onClick={() => goTo(current - 1)}
                 disabled={current === 0}
@@ -77,8 +85,6 @@ export default function ProductCarousel() {
                   <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-
-              {/* Next */}
               <button
                 onClick={() => goTo(current + 1)}
                 disabled={current === products.length - 1}
@@ -90,7 +96,6 @@ export default function ProductCarousel() {
                   <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-
               <Link href="/products" className="btn-text group">
                 View all
                 <svg
@@ -100,7 +105,6 @@ export default function ProductCarousel() {
                   <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </Link>
-
             </div>
           </div>
         </div>
@@ -116,11 +120,7 @@ export default function ProductCarousel() {
           dragElastic={0.08}
           onDragStart={() => { isDragging.current = true; }}
           onDragEnd={handleDragEnd}
-          animate={{
-            x: typeof window !== "undefined"
-              ? window.innerWidth / 2 - CARD_WIDTH / 2 - current * STEP
-              : 0,
-          }}
+          animate={{ x: offsetX }}
           transition={{ type: "spring", stiffness: 110, damping: 22, mass: 1.9 }}
         >
           {products.map((product, i) => {
@@ -134,7 +134,6 @@ export default function ProductCarousel() {
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
-                {/* Image */}
                 <div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -161,8 +160,6 @@ export default function ProductCarousel() {
                     </svg>
                   </Link>
                 </div>
-
-                {/* Text */}
                 <div className="p-5">
                   <h3 className="font-display font-bold text-lg text-[#1A1A1A] mb-1.5">
                     {product.name}

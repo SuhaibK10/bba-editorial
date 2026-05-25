@@ -18,8 +18,8 @@ export const products = [
     name: "Static Signages",
     desc: "Durable blow-moulded plastic signage for brand visibility at scale.",
     slug: "static-signages",
-    // TODO: Upload to Cloudinary → replace this URL
-    image: "/products/display-tower.png",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/f_auto,q_auto,w_800,h_600,c_fill/v.../your-filename.png",
+    
     color: "#F0F9FF",
   },
   {
