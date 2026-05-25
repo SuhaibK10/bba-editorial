@@ -4,11 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 
 const products = [
   { id: "01", name: "Literature Holders", desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.", slug: "literature-holders", image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779649957/LiteratureHolder_fpbz6y.png", color: "#EEF2FF" },
@@ -102,7 +97,7 @@ function CardCarousel() {
             <p className="font-body text-[#6E6E73] leading-relaxed max-w-xs text-sm">
               From a single brochure holder to a full motorised signage network, we manufacture it all.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-5">
               <button onClick={() => goTo(current - 1)} disabled={current === 0}
                 className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
                            text-[#6E6E73] hover:border-[#AEAEB2] hover:text-[#1A1A1A] hover:bg-[#F9F9FB]
@@ -121,18 +116,31 @@ function CardCarousel() {
                   <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <Link href="/products"
-                className="group inline-flex items-center gap-1.5 font-body text-sm font-medium text-[#0057FF]
-                           h-9 px-4 rounded-full
-                           border border-[#0057FF]/25 bg-[#0057FF]/[0.04]
-                           hover:bg-accent hover:text-white hover:border-accent
-                           active:scale-[0.97]
-                           transition-all duration-200">
-                View all
-                <svg width="15" height="12" viewBox="0 0 12 12" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
-                  <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
+             <Link
+  href="/products"
+  className="group inline-flex items-center gap-1.5
+             font-body text-sm font-medium text-[#0057FF]
+             hover:text-accent
+             transition-colors duration-200"
+>
+  View all
+
+  <svg
+    width="12"
+    height="12"
+    viewBox="0 0 12 12"
+    fill="none"
+    className="group-hover:translate-x-0.5 transition-transform duration-200"
+  >
+    <path
+      d="M2.5 6h7M6.5 3l3 3-3 3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</Link>
             </div>
           </div>
         </div>
@@ -148,12 +156,7 @@ function CardCarousel() {
           dragElastic={0.08}
           onDragStart={() => { isDragging.current = true; }}
           onDragEnd={handleDragEnd}
-          animate={{
-  x:
-    window.innerWidth / 2 -
-    CARD_WIDTH / 2 -
-    current * STEP
-}}
+          animate={{ x: window.innerWidth / 2 - CARD_WIDTH / 2 - current * STEP}}animate={{ x: typeof window !== 'undefined' ? window.innerWidth / 2 - CARD_WIDTH / 2 - current * STEP : 0 }}
           transition={{type: "spring",
           stiffness: 110,
           damping: 22,
@@ -167,7 +170,7 @@ function CardCarousel() {
                 key={product.id}
                 animate={{ scale: isActive ? 1 : 0.91, opacity: isActive ? 1 : 0.55 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-2x1 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex-shrink-0"
+                className="rounded-2xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.07)] flex-shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
@@ -260,7 +263,7 @@ export default function HomeEditorial() {
             style={{ background: "radial-gradient(circle, #0057FF 0%, transparent 65%)" }} />
         </div>
 
-        <div className="container-wide flex flex-col gap-10">
+        <div className="container-wide flex flex-col gap-8">
           <div className="max-w-4xl">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -290,7 +293,7 @@ export default function HomeEditorial() {
               className="flex items-center gap-5 flex-wrap mb-6">
               <Link href="/quote"
                 className="group inline-flex items-center gap-2
-                           h-8 px-6 rounded-full
+                           h-10 px-12 rounded-full
                            bg-[#3B82F6] text-white font-body font-semibold text-[15px] tracking-[-0.01em]
                            border-2 border-amber-30
                            shadow-[0_1px_2px_rgba(0,0,0,0.06),0_3px_12px_rgba(0,87,255,0.20)]
@@ -299,9 +302,7 @@ export default function HomeEditorial() {
                            active:scale-[0.97] active:translate-y-0
                            transition-all duration-200">
                 Get a Quote 
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform duration-200">
-                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                
               </Link>
               <Link href="/products"
                 className="group inline-flex items-center gap-2
