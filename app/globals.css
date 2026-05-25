@@ -187,13 +187,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
   /* Section wrapper — controls vertical padding of every section */
   .section-pad {
-    padding-top: 6rem;     /* ← change to adjust ALL section top spacing */
-    padding-bottom: 6rem;  /* ← change to adjust ALL section bottom spacing */
+    padding-top: 7rem;     /* ← change to adjust ALL section top spacing */
+    padding-bottom: 7rem;  /* ← change to adjust ALL section bottom spacing */
   }
   @media (min-width: 768px) {
     .section-pad {
-      padding-top: 8rem;
-      padding-bottom: 8rem;
+      padding-top: 10rem;
+      padding-bottom: 10rem;
     }
   }
 

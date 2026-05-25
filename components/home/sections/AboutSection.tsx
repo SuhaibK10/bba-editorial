@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="section-pad border-t border-[#E0E0E0]">
+    <section className="section-pad border-t border-b border-[#E0E0E0]">
       <div className="container-wide">
         <div className="max-w-4xl">
 
