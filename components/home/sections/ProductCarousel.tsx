@@ -156,7 +156,7 @@ export default function ProductCarousel() {
             return (
               <motion.div
                 key={product.id}
-                animate={{ scale: isActive ? 1 : 0.93, opacity: isActive ? 1 : 0.45 }}
+                animate={{ scale: isActive ? 1 : 0.93, opacity: isActive ? 1 : 0.75 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="rounded-2xl overflow-hidden flex-shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
@@ -172,7 +172,7 @@ export default function ProductCarousel() {
                     style={{ pointerEvents: "none" }}
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
                   <Link
                     href={`/products/${product.slug}`}
                     onClick={e => { if (isDragging.current) e.preventDefault(); }}
