@@ -12,8 +12,8 @@
   --color-text-primary: #1A1A1A;
   --color-text-secondary: #6E6E73;
   --color-text-faint: #AEAEB2;
-  --color-accent: #1b6b6b;
-  --color-accent-hover: #0C8490;
+  --color-accent: #1B6B6B;
+  --color-accent-hover: #155858;
   --color-border: #E0E0E0;
   --color-border-strong: #C7C7CC;
 
@@ -24,7 +24,7 @@
   --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
   --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.06);
   --shadow-nav: 0 1px 0 rgba(0,0,0,0.06);
-  --shadow-accent: 0 8px 32px rgba(13, 115, 119, 0.24);
+  --shadow-accent: 0 8px 32px rgba(27, 107, 107, 0.28);
 
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(24px); }
@@ -61,7 +61,7 @@ html.lenis { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 
 /* ── Selection & Focus ───────────────────────────────────── */
-::selection { background: rgba(13, 115, 119, 0.12); color: var(--color-accent); }
+::selection { background: rgba(27, 107, 107, 0.12); color: var(--color-accent); }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
@@ -117,50 +117,66 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ────────────────────────────────────────────────────────── */
 @layer components {
 
-  /* ── Buttons ─────────────────────────────────────────── */
+  /* ─────────────────────────────────────────────────────
+     BUTTONS
+     All buttons: 52px height, 0.5rem radius, consistent
+     ───────────────────────────────────────────────────── */
+
+  /* Primary — teal bg, white text */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 2.75rem;
+    height: 52px;
+    padding: 0 2rem;
     border-radius: 9999px;
     background-color: var(--color-accent);
-    color: white;
-    border: 2.5px solid rgb(0, 0, 0);
+    color: #ffffff;
+    border: none;
     font-family: var(--font-inter), sans-serif;
     font-weight: 600;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 3px 12px rgba(13,115,119,0.20);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(27,107,107,0.22);
     transition: all 0.2s ease;
+    white-space: nowrap;
   }
   .btn-primary:hover {
     background-color: var(--color-accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 8px 20px rgba(13,115,119,0.28);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.10), 0 8px 24px rgba(14,154,167,0.30);
   }
-  .btn-primary:active { transform: scale(0.97) translateY(0); }
+  .btn-primary:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
 
+  /* Ghost — white bg, dark text, subtle border */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
-    height: 3rem;
+    height: 52px;
     padding: 0 2rem;
     border-radius: 9999px;
     background-color: white;
     color: #1A1A1A;
+    border: 1.5px solid #D0D0D0;
     font-family: var(--font-inter), sans-serif;
     font-weight: 500;
     font-size: 0.9375rem;
-    border: 1px solid #E0E0E0;
     transition: all 0.2s ease;
+    white-space: nowrap;
   }
-  .btn-ghost:hover { border-color: #8E8E93; background-color: #FAFAFA; }
+  .btn-ghost:hover {
+    border-color: #1A1A1A;
+    background-color: #FAFAFA;
+  }
   .btn-ghost:active { transform: scale(0.97); }
 
+  /* Text link — no bg, accent color */
   .btn-text {
     display: inline-flex;
     align-items: center;
@@ -205,7 +221,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* ── Card ────────────────────────────────────────────── */
   .card {
     background: white;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     box-shadow: var(--shadow-card);
     overflow: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -230,7 +246,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .industry-pill:hover {
     border-color: var(--color-accent);
     color: var(--color-accent);
-    background-color: rgba(13, 115, 119, 0.08);
+    background-color: rgba(14, 154, 167, 0.06);
   }
 
 }
