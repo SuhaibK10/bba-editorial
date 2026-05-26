@@ -10,7 +10,7 @@ export const products = [
     name: "Literature Holders",
     desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.",
     slug: "literature-holders",
-    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779649957/LiteratureHolder_fpbz6y.png",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779712222/literatureholder3_gfmz7u.png",
     color: "#EEF2FF",
   },
   {
@@ -18,7 +18,7 @@ export const products = [
     name: "Static Signages",
     desc: "Durable blow-moulded plastic signage for brand visibility at scale.",
     slug: "static-signages",
-    image: "https://res.cloudinary.com/deh394y0h/image/upload/f_auto,q_auto,w_800,h_600,c_fill/v.../your-filename.png",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779711816/StaticSignage_cdmsko.png",
     
     color: "#F0F9FF",
   },
@@ -27,7 +27,7 @@ export const products = [
     name: "Table Top Displays",
     desc: "Counter-top acrylic units engineered for maximum product visibility at POS.",
     slug: "table-top-displays",
-    image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=800&q=80",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/c_pad,w_1200,h_800,b_white/v1779712393/Tabletopdisplays_sytjoi.png",
     color: "#F0FDF4",
   },
   {
@@ -70,6 +70,38 @@ export const products = [
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     color: "#FAFAF9",
   },
+  {
+    id: "09",
+    name: "Floor Standing Displays",
+    desc: "Rotating animated signage that commands attention in high-traffic locations.",
+    slug: "motorised-signages",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    color: "#FAFBF9",
+  },
+  {
+    id: "10",
+    name: "Acrlylic Risers",
+    desc: "Rotating animated signage that commands attention in high-traffic locations.",
+    slug: "motorised-signages",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    color: "#FAFAF9",
+  },
+  {
+    id: "11",
+    name: "Custom Size Acrlylic Display Cases",
+    desc: "Rotating animated signage that commands attention in high-traffic locations.",
+    slug: "motorised-signages",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    color: "#FAFAF9",
+  },
+  {
+    id: "12",
+    name: "Display Boxes",
+    desc: "Rotating animated signage that commands attention in high-traffic locations.",
+    slug: "motorised-signages",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    color: "#FAFAF9",
+  },
 ];
 
 export const industries = [
@@ -86,13 +118,14 @@ export const industries = [
   "Real Estate",
   "Government",
   "Petroleum",
+  
 ];
-
+//Trustbar ka hai
 export const stats = [
   { value: 35, suffix: "+", label: "Years in Business" },
   { value: 500, suffix: "+", label: "Brands Served" },
-  { value: 13, suffix: "", label: "Industries" },
-  { value: 8, suffix: "", label: "Product Families" },
+  { value: 13, suffix: "+", label: "Industries" },
+  { value: 8, suffix: "+", label: "Categories" },
 ];
 
 export const processSteps = [

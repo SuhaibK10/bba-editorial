@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="section-pad border-t border-b border-[#E0E0E0]">
+    <section className="section-pad">
       <div className="container-wide">
         <div className="max-w-4xl">
 
@@ -25,8 +25,8 @@ export default function AboutSection() {
             className="section-heading-lg"
           >
             B & B has been the{" "}
-            <span className="italic text-[#6E6E73]">manufacturing backbone</span>
-            {" "}of India&apos;s most recognised brand displays.
+            <span className="italic font-light text-[#6E6E73]">manufacturing backbone</span>
+            {" "}of India's most recognised brand displays.
           </motion.h2>
 
           <motion.div
@@ -34,14 +34,14 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-10 pt-10 border-t border-[#E0E0E0] grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             <p className="font-body text-[#6E6E73] leading-relaxed">
               From Airtel retail stores to pharmacy counters, from bank branches to FMCG shelves.
             </p>
             <p className="font-body text-[#6E6E73] leading-relaxed">
               We specialise in acrylic fabrication and blow-moulded plastic displays,
-              manufactured with precision at our GT Karnal Road facility.
+              manufactured with 35 years of precision at our GT Karnal Road facility.
             </p>
           </motion.div>
 

@@ -12,8 +12,8 @@
   --color-text-primary: #1A1A1A;
   --color-text-secondary: #6E6E73;
   --color-text-faint: #AEAEB2;
-  --color-accent: #0057FF;
-  --color-accent-hover: #0047DD;
+  --color-accent: #1b6b6b;
+  --color-accent-hover: #0C8490;
   --color-border: #E0E0E0;
   --color-border-strong: #C7C7CC;
 
@@ -24,7 +24,7 @@
   --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
   --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.06);
   --shadow-nav: 0 1px 0 rgba(0,0,0,0.06);
-  --shadow-accent: 0 8px 32px rgba(0, 87, 255, 0.24);
+  --shadow-accent: 0 8px 32px rgba(13, 115, 119, 0.24);
 
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(24px); }
@@ -61,8 +61,8 @@ html.lenis { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 
 /* ── Selection & Focus ───────────────────────────────────── */
-::selection { background: rgba(0, 87, 255, 0.12); color: #0057FF; }
-:focus-visible { outline: 2px solid #0057FF; outline-offset: 3px; border-radius: 4px; }
+::selection { background: rgba(13, 115, 119, 0.12); color: var(--color-accent); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
 
 /* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
@@ -93,35 +93,52 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (min-width: 1280px) { .container-wide { padding: 0 4rem; } }
 
 /* ──────────────────────────────────────────────────────────
-   COMPONENT CLASSES
-   Edit these to change buttons / labels / headings globally
+   SECTION SPACING — outside @layer so media queries work
    ────────────────────────────────────────────────────────── */
+.section-pad {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+@media (min-width: 1280px) {
+  .section-pad {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+}
 
-/* Buttons
-   Change --btn-radius to change shape: 9999px = pill, 0.75rem = rounded, 0 = square */
+/* ──────────────────────────────────────────────────────────
+   COMPONENT CLASSES
+   ────────────────────────────────────────────────────────── */
 @layer components {
 
+  /* ── Buttons ─────────────────────────────────────────── */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    height: 3rem;           /* ← change button height */
-    padding: 0 2rem;        /* ← change horizontal padding */
-    border-radius: 9999px;  /* ← change shape: 9999px pill | 0.75rem rounded | 0 square */
-    background-color: #3B82F6;
+    padding: 0.75rem 2.75rem;
+    border-radius: 9999px;
+    background-color: var(--color-accent);
     color: white;
+    border: 2.5px solid rgb(0, 0, 0);
     font-family: var(--font-inter), sans-serif;
     font-weight: 600;
     font-size: 0.9375rem;
     letter-spacing: -0.01em;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 3px 12px rgba(0,87,255,0.20);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 3px 12px rgba(13,115,119,0.20);
     transition: all 0.2s ease;
   }
   .btn-primary:hover {
-    background-color: #0047DD;
+    background-color: var(--color-accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 8px 20px rgba(0,87,255,0.28);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08), 0 8px 20px rgba(13,115,119,0.28);
   }
   .btn-primary:active { transform: scale(0.97) translateY(0); }
 
@@ -130,9 +147,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
-    height: 3rem;           /* ← match btn-primary height */
+    height: 3rem;
     padding: 0 2rem;
-    border-radius: 9999px;  /* ← match btn-primary shape */
+    border-radius: 9999px;
     background-color: white;
     color: #1A1A1A;
     font-family: var(--font-inter), sans-serif;
@@ -151,22 +168,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     font-family: var(--font-inter), sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
-    color: #0057FF;
+    color: var(--color-accent);
     transition: color 0.2s ease;
   }
-  .btn-text:hover { color: #0047DD; }
+  .btn-text:hover { color: var(--color-accent-hover); }
 
-  /* Section labels — "What we make", "Who we are" etc */
+  /* ── Labels & Headings ───────────────────────────────── */
   .section-label {
+    display: block;
     font-family: var(--font-inter), sans-serif;
     font-size: 0.75rem;
     color: #AEAEB2;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 1rem;   /* ← change spacing below label */
+    margin-bottom: 1.25rem;
   }
 
-  /* Section headings */
   .section-heading-lg {
     font-family: var(--font-sora), sans-serif;
     font-weight: 700;
@@ -185,22 +202,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     letter-spacing: -0.02em;
   }
 
-  /* Section wrapper — controls vertical padding of every section */
-  .section-pad {
-    padding-top: 7rem;     /* ← change to adjust ALL section top spacing */
-    padding-bottom: 7rem;  /* ← change to adjust ALL section bottom spacing */
-  }
-  @media (min-width: 768px) {
-    .section-pad {
-      padding-top: 10rem;
-      padding-bottom: 10rem;
-    }
-  }
-
-  /* Card */
+  /* ── Card ────────────────────────────────────────────── */
   .card {
     background: white;
-    border-radius: 1rem;   /* ← change card corner radius */
+    border-radius: 1rem;
     box-shadow: var(--shadow-card);
     overflow: hidden;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -210,22 +215,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     transform: translateY(-2px);
   }
 
-  /* Industry pill */
+  /* ── Industry pill ───────────────────────────────────── */
   .industry-pill {
     display: inline-block;
     font-family: var(--font-inter), sans-serif;
     font-size: 0.875rem;
     color: #6E6E73;
     border: 1px solid #E0E0E0;
-    border-radius: 9999px;  /* ← pill shape */
+    border-radius: 9999px;
     padding: 0.625rem 1.25rem;
     transition: all 0.2s ease;
     cursor: pointer;
   }
   .industry-pill:hover {
-    border-color: #0057FF;
-    color: #0057FF;
-    background-color: #EEF2FF;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background-color: rgba(13, 115, 119, 0.08);
   }
 
 }
@@ -234,21 +239,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .process-step-number {
   font-family: var(--font-sora), sans-serif;
   font-weight: 700;
-  font-size: 3rem;
+  font-size: 3.5rem;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.18);
-  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.12);
+  margin-bottom: 2rem;
 }
 .process-step-title {
   font-family: var(--font-sora), sans-serif;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   color: #FFFFFF;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 .process-step-desc {
   font-family: var(--font-inter), sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.5);
-  line-height: 1.6;
+  line-height: 1.7;
 }

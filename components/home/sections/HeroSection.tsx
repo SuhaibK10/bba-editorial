@@ -35,7 +35,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex items-center gap-3 mb-8"
           >
-            <div className="w-8 h-[1.5px] bg-[#0057FF]" />
+            <div className="w-8 h-[1.5px] bg-[#1b6b6b]" />
             <span className="section-label" style={{ marginBottom: 0 }}>
               Est. 1991 · New Delhi, India
             </span>
@@ -50,7 +50,7 @@ export default function HeroSection() {
                        text-[#1A1A1A] leading-[1.0] tracking-tight mb-8"
           >
             India&apos;s most trusted<br />
-            <span className="text-[#0057FF]">acrylic manufacturer.</span>
+            <span className="text-accent">acrylic manufacturer.</span>
           </motion.h1>
 
           {/* Subheading */}
@@ -71,7 +71,7 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="flex items-center gap-5 flex-wrap mb-6"
           >
-            <Link href="/quote" className="btn-primary">
+            <Link href="/quote" className="btn-primary ">
               Get a Quote
             </Link>
             <Link href="/products" className="btn-text group">

@@ -9,13 +9,13 @@ import CtaSection from "./sections/CtaSection";
 export default function HomeEditorial() {
   return (
     <div className="bg-white">
-      <HeroSection />
-      <TrustBar />
-      <AboutSection />
-      <ProductCarousel />
-      <IndustriesSection />
-      <ProcessSection />
-      <CtaSection />
+        <HeroSection />
+        <TrustBar />
+        <ProductCarousel />   
+        <AboutSection />      
+        <IndustriesSection />
+        <ProcessSection />
+        <CtaSection />
     </div>
   );
 }
