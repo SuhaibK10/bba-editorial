@@ -120,13 +120,21 @@ export default function ProductCarousel() {
                   <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <Link href="/products" className="btn-text group ml-2">
-                View all
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                  className="group-hover:translate-x-0.5 transition-transform duration-200">
-                  <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
+
+              
+
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-5 rounded-full border border-[#E0E0E0] flex items-center justify-start pl-1.5">
+                    <motion.div
+                    animate={{ x: [0, 18, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-1.5 h-1 rounded-full bg-[#AEAEB2]"
+                    />
+                </div>
+                <span className="font-body text-xs text-[#AEAEB2]">Scroll to explore</span>
+                </div>
+
+
             </div>
           </div>
 
@@ -201,6 +209,7 @@ export default function ProductCarousel() {
           {String(current + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
         </span>
       </div>
+      
 
     </section>
   );

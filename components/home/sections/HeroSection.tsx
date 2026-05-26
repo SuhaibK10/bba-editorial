@@ -95,7 +95,7 @@ export default function HeroSection() {
         >
           <div className="w-5 h-8 rounded-full border border-[#E0E0E0] flex items-start justify-center pt-1.5">
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 18, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               className="w-1 h-1.5 rounded-full bg-[#AEAEB2]"
             />
