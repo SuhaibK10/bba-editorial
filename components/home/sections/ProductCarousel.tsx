@@ -209,7 +209,17 @@ export default function ProductCarousel() {
           {String(current + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
         </span>
       </div>
-      
+      {/* CTAs */}
+<motion.div
+  initial={{ opacity: 0, y: 16 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+  className="flex items-center justify-center gap-5 flex-wrap mb-6"
+>
+  <Link href="/quote" className="btn-primary ">
+    Get a Quote
+  </Link>
+  </motion.div>
 
     </section>
   );

@@ -35,7 +35,7 @@ export default function CtaSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center gap-4 flex-wrap"
+            className="flex items-center gap-4 flex-wrap h-3"
           >
             <Link href="/quote" className="btn-primary">
               Request a Quote

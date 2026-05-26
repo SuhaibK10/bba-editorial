@@ -25,8 +25,9 @@ export default function AboutSection() {
             className="section-heading-lg"
           >
             B & B has been the{" "}
-            <span className="italic font-light text-[#6E6E73]">manufacturing backbone</span>
-            {" "}of India's most recognised brand displays.
+            <span className="italic font-light text-[#1b6b6b]">manufacturing backbone</span>
+            {" "}of India.
+            <br/> <br/>
           </motion.h2>
 
           <motion.div
