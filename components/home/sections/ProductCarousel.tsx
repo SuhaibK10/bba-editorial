@@ -162,16 +162,28 @@ export default function ProductCarousel() {
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
-                {/* Image */}
-                <div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                    style={{ pointerEvents: "none" }}
-                    draggable={false}
-                  />
+               {/* Image */}
+<div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
+  {/* eslint-disable-next-line @next/next/no-img-element */}
+  {product.video ? (
+    <video
+      src={product.image}
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="w-full h-full object-cover"
+      style={{ pointerEvents: "none" }}
+    />
+  ) : (
+    <img
+      src={product.image}
+      alt={product.name}
+      className="w-full h-full object-cover"
+      style={{ pointerEvents: "none" }}
+      draggable={false}
+    />
+  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
                   <Link
                     href={`/products/${product.slug}`}
