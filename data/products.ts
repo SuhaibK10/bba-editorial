@@ -6,13 +6,14 @@
 
 export const products = [
   {
-    id: "01",
-    name: "Literature Holders",
-    desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.",
-    slug: "literature-holders",
-    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779712222/literatureholder3_gfmz7u.png",
-    color: "#EEF2FF",
-  },
+  id: "01",
+  name: "Literature Holders",
+  desc: "Acrylic brochure & pamphlet dispensers for retail and banking environments.",
+  slug: "literature-holders",
+  image: "https://res.cloudinary.com/deh394y0h/video/upload/v1779904970/literatureHolder_wm7oz7.mp4",
+  video: true,
+  color: "#EEF2FF",
+},
   {
     id: "02",
     name: "Static Signages",
