@@ -229,7 +229,8 @@ export default function ProductCarousel() {
         transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="flex items-center justify-center gap-5 flex-wrap mb-6"
       >
-        <Link href="/quote" className="btn-primary">
+        
+        <Link href="/quote" className="btn-primary ">
           Get a Quote
         </Link>
       </motion.div>
