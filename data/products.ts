@@ -16,7 +16,7 @@ export const products = [
   {
     id: "02",
     name: "Static Signages",
-    desc: "Durable blow-moulded plastic signage for brand visibility at scale.",
+    desc: "Durable blow-moulded plastic signage for visibility at scale.",
     slug: "static-signages",
     image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779711816/StaticSignage_cdmsko.png",
     
@@ -122,7 +122,7 @@ export const industries = [
 ];
 //Trustbar ka hai
 export const stats = [
-  { value: 35, suffix: "+", label: "Years in Business" },
+  { value: 35, suffix: "+", label: "Years of Manufacturing" },
   { value: 500, suffix: "+", label: "Brands Served" },
   { value: 13, suffix: "+", label: "Industries" },
   { value: 8, suffix: "+", label: "Categories" },

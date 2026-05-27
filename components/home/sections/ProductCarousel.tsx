@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { motion, useMotionValue, animate, AnimatePresence } from "framer-motion";
 import { products } from "@/data/products";
 
 const CARD_WIDTH = 340;
@@ -125,20 +125,16 @@ export default function ProductCarousel() {
                 </svg>
               </button>
 
-              
-
               <div className="flex items-center gap-2">
                 <div className="w-8 h-5 rounded-full border border-[#E0E0E0] flex items-center justify-start pl-1.5">
-                    <motion.div
+                  <motion.div
                     animate={{ x: [0, 18, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     className="w-1.5 h-1 rounded-full bg-[#AEAEB2]"
-                    />
+                  />
                 </div>
                 <span className="font-body text-xs text-[#7b7b7c]">Scroll to explore</span>
-                </div>
-
-
+              </div>
             </div>
           </div>
 
@@ -176,7 +172,7 @@ export default function ProductCarousel() {
                     style={{ pointerEvents: "none" }}
                     draggable={false}
                   />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
                   <Link
                     href={`/products/${product.slug}`}
                     onClick={e => { if (isDragging.current) e.preventDefault(); }}
@@ -207,23 +203,36 @@ export default function ProductCarousel() {
         </motion.div>
       </div>
 
-      {/* Counter */}
+      {/* Animated Counter */}
       <div className="container-wide mt-8">
-        <span className="font-body text-sm text-[#AEAEB2] tabular-nums">
-          {String(current + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
-        </span>
+        <div className="flex items-center gap-1.5 font-body text-sm text-[#AEAEB2] tabular-nums">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={current}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {String(current + 1).padStart(2, "0")}
+            </motion.span>
+          </AnimatePresence>
+          <span>/</span>
+          <span>{String(products.length).padStart(2, "0")}</span>
+        </div>
       </div>
-      {/* CTAs */}
-<motion.div
-  initial={{ opacity: 0, y: 16 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-  className="flex items-center justify-center gap-5 flex-wrap mb-6"
->
-  <Link href="/quote" className="btn-primary ">
-    Get a Quote
-  </Link>
-  </motion.div>
+
+      {/* CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center justify-center gap-5 flex-wrap mb-6"
+      >
+        <Link href="/quote" className="btn-primary">
+          Get a Quote
+        </Link>
+      </motion.div>
 
     </section>
   );

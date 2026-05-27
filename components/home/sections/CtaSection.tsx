@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function CtaSection() {
   return (
-    <section className="section-pad">
+    <section className="section-pad" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
       <div className="container-wide">
         <div className="max-w-2xl">
 

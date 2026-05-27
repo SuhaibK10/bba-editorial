@@ -5,7 +5,7 @@ import { processSteps } from "@/data/products";
 
 export default function ProcessSection() {
   return (
-    <section className="section-pad bg-[#1A1A1A]">
+    <section className="section-pad bg-[#1A1A1A]" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
       <div className="container-wide">
 
         <motion.p

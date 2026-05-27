@@ -283,3 +283,29 @@
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.7;
 }
+
+.trustbar {
+  position: relative;
+  overflow: visible;
+}
+
+.trustbar::before,
+.trustbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(27, 107, 107, 0.08) 10%,
+    rgba(27, 107, 107, 0.35) 50%,
+    rgba(27, 107, 107, 0.08) 90%,
+    transparent
+  );
+  border-radius: 999px;
+}
+
+.trustbar::before { top: -1px; }
+.trustbar::after  { bottom: -1px; }

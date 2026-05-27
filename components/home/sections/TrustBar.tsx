@@ -52,7 +52,7 @@ function StatItem({
 
 export default function TrustBar() {
   return (
-    <section className="border-y border-[#E0E0E0] py-16 bg-surface">
+    <section className="trustbar border-y border-[#E0E0E0] py-16 bg-surface">
       <div className="container-wide">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
