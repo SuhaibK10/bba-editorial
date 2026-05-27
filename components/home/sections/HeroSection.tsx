@@ -5,7 +5,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero-section"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 md:pt-32"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
@@ -82,6 +82,7 @@ export default function HeroSection() {
             />
           </div>
           <span className="font-body text-xs text-[#AEAEB2]">Scroll down to explore</span>
+          <br/> <br/> <br/> <br/> <br/> <br/>
         </motion.div>
     </section>
   );

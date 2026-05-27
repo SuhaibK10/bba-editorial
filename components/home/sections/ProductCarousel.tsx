@@ -12,7 +12,11 @@ const IMAGE_HEIGHT = 300;
 
 function getTargetX(index: number) {
   if (typeof window === "undefined") return 0;
-  return window.innerWidth / 2 - CARD_WIDTH / 2 - index * STEP;
+  const maxWidth = 88 * 16;
+  const sidePadding = window.innerWidth >= 1280 ? 64 : window.innerWidth >= 768 ? 40 : 24;
+  const containerLeft = Math.max(0, (window.innerWidth - maxWidth) / 2) + sidePadding;
+  const centeredX = window.innerWidth / 2 - CARD_WIDTH / 2 - index * STEP;
+  return Math.min(centeredX, containerLeft);
 }
 
 export default function ProductCarousel() {

@@ -43,7 +43,7 @@ export const products = [
     name: "Revolving Towers",
     desc: "Multi-tier rotating display towers that multiply shelf space without footprint.",
     slug: "revolving-display-towers",
-    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779208714/Revolving_Tower_t7mknk.png",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779810413/RevolvingTower1_ciedw2.png",
     color: "#FDF4FF",
   },
   {
@@ -99,7 +99,7 @@ export const products = [
     name: "Display Boxes",
     desc: "Rotating animated signage that commands attention in high-traffic locations.",
     slug: "motorised-signages",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1779810590/CustomizeAcrylicBoxes_hv33gu.png",
     color: "#FAFAF9",
   },
 ];
@@ -118,7 +118,7 @@ export const industries = [
   "Real Estate",
   "Government",
   "Petroleum",
-  
+
 ];
 //Trustbar ka hai
 export const stats = [
