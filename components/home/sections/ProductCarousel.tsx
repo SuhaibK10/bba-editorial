@@ -67,7 +67,7 @@ export default function ProductCarousel() {
   };
 
   return (
-    <section className="section-pad overflow-hidden">
+    <section className="section-pad overflow-hidden" style={{ paddingBottom: '2rem' }}>
 
       <div className="container-wide mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -135,7 +135,7 @@ export default function ProductCarousel() {
                     className="w-1.5 h-1 rounded-full bg-[#AEAEB2]"
                     />
                 </div>
-                <span className="font-body text-xs text-[#AEAEB2]">Scroll to explore</span>
+                <span className="font-body text-xs text-[#7b7b7c]">Scroll to explore</span>
                 </div>
 
 
@@ -176,7 +176,7 @@ export default function ProductCarousel() {
                     style={{ pointerEvents: "none" }}
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
                   <Link
                     href={`/products/${product.slug}`}
                     onClick={e => { if (isDragging.current) e.preventDefault(); }}

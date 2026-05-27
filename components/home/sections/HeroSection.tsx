@@ -5,7 +5,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero-section"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 md:pt-32"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-1 md:pt-18"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
@@ -34,7 +34,7 @@ export default function HeroSection() {
             className="flex items-center gap-3 mb-12"
           >
             <div className="w-8 h-[1.5px] bg-[#1b6b6b]" />
-            <span className="section-label" style={{ marginBottom: 0 }}>
+            <span className="section-label mb-0">
               Est. 1991 · New Delhi, India
             </span>
           </motion.div>
@@ -56,7 +56,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body text-lg text-[#6E6E73] max-w-xl leading-relaxed mb-16"
+            className="font-body text-lg text-[#6E6E73] max-w-xl leading-relaxed mb-10"
           >
             Acrylic fabrication and blow-moulded displays for every industry.
             Built to last, designed to perform.
@@ -72,7 +72,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex items-center justify-center gap-2 mt-10 w-full"
+          className="flex items-center justify-center gap-2 mt-8 w-full"
         >
           <div className="w-5 h-8 rounded-full border border-[#E0E0E0] flex items-start justify-center pt-1.5">
             <motion.div
@@ -81,8 +81,7 @@ export default function HeroSection() {
               className="w-1 h-1.5 rounded-full bg-[#AEAEB2]"
             />
           </div>
-          <span className="font-body text-xs text-[#AEAEB2]">Scroll down to explore</span>
-          <br/> <br/> <br/> <br/> <br/> <br/>
+          <span className="font-body text-xs text-[#7b7b7c]">Scroll down to explore</span>
         </motion.div>
     </section>
   );

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs cat)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('Next:', d.get\\('dependencies',{}\\).get\\('next'\\)\\); print\\('TW:', d.get\\('devDependencies',{}\\).get\\('tailwindcss'\\) or d.get\\('dependencies',{}\\).get\\('tailwindcss'\\)\\); print\\('@tw/postcss:', d.get\\('devDependencies',{}\\).get\\('@tailwindcss/postcss'\\) or d.get\\('dependencies',{}\\).get\\('@tailwindcss/postcss'\\)\\)\")"
+    ]
+  }
+}

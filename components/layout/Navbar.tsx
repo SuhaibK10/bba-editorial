@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
 const navLinks = [
   { label: "Products", href: "/products" },
@@ -16,6 +16,13 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+
+const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -33,15 +40,20 @@ export default function Navbar() {
   return (
     <>
       <header
+      
         className={`
           fixed top-0 left-0 right-0 z-50
           transition-all duration-300
-          ${scrolled || menuOpen
-            ? "bg-white/95 backdrop-blur-md shadow-nav"
+            ${scrolled || menuOpen
+            ? "bg-white/95 backdrop-blur-md shadow-nav border-b border-[#F0F0F0]"
             : "bg-transparent"
           }
         `}
-      >
+        > 
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-accent"
+          style={{ scaleX }}
+            />
         <div className="container-wide">
           <div className="flex items-center justify-between h-16 md:h-18">
 
