@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { site, whatsappUrl, phoneHref, emailHref } from "@/data/site";
 
 const links = [
   { label: "Products", href: "/products" },
@@ -28,12 +29,12 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-white/40 font-body text-sm leading-relaxed ">
-              India's trusted acrylic manufacturer.<br/>Serving 13+ industries for over 35+ years.<br/> GT Karnal Road, New Delhi.
+              India&apos;s trusted acrylic manufacturer.<br/>Serving 13+ industries for over 35+ years.<br/> {site.address.street}, {site.address.city}.
             </p>
           </div>
 
           {/* Links */}
-          <nav className="flex flex-col gap-3">
+          <nav className="flex flex-col gap-3" aria-label="Footer">
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -44,6 +45,22 @@ export default function Footer() {
               </Link>
             ))}
           </nav>
+
+          {/* Contact */}
+          <div className="flex flex-col gap-3">
+            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer"
+              className="font-body text-sm text-white/60 hover:text-white transition-colors duration-200 w-fit">
+              WhatsApp
+            </a>
+            <a href={phoneHref}
+              className="font-body text-sm text-white/60 hover:text-white transition-colors duration-200 w-fit">
+              +{site.phone}
+            </a>
+            <a href={emailHref}
+              className="font-body text-sm text-white/60 hover:text-white transition-colors duration-200 w-fit">
+              {site.email}
+            </a>
+          </div>
 
         </div>
 

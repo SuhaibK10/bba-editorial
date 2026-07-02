@@ -1,0 +1,47 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+export default function PageHeader({
+  label,
+  title,
+  description,
+}: {
+  label: string;
+  title: React.ReactNode;
+  description?: string;
+}) {
+  return (
+    <div className="container-wide pt-32 md:pt-40 pb-12 md:pb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-3 mb-8"
+      >
+        <div className="w-8 h-[1.5px] bg-accent" />
+        <span className="section-label mb-0">{label}</span>
+      </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="section-heading-lg max-w-4xl"
+      >
+        {title}
+      </motion.h1>
+
+      {description && (
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="font-body text-lg text-text-secondary max-w-xl leading-relaxed mt-6"
+        >
+          {description}
+        </motion.p>
+      )}
+    </div>
+  );
+}

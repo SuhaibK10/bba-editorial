@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useMotionValue, animate, AnimatePresence } from "framer-motion";
 import { products } from "@/data/products";
+import { videoPoster } from "@/lib/media";
 
 const CARD_WIDTH = 340;
 const GAP = 24;
@@ -105,22 +107,24 @@ export default function ProductCarousel() {
               <button
                 onClick={() => goTo(current - 1)}
                 disabled={current === 0}
+                aria-label="Previous product"
                 className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
                            text-[#6E6E73] hover:border-[#1A1A1A] hover:text-[#1A1A1A]
                            disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
               >
-                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
               <button
                 onClick={() => goTo(current + 1)}
                 disabled={current === products.length - 1}
+                aria-label="Next product"
                 className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
                            text-[#6E6E73] hover:border-[#1A1A1A] hover:text-[#1A1A1A]
                            disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
               >
-                <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
@@ -156,44 +160,49 @@ export default function ProductCarousel() {
             return (
               <motion.div
                 key={product.id}
-                animate={{ scale: isActive ? 1 : 0.93, opacity: isActive ? 1 : 0.75 }}
+                animate={{ scale: isActive ? 1 : 0.99, opacity: isActive ? 1 : 0.99 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="rounded-2xl overflow-hidden flex-shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
-               {/* Image */}
-<div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
-  {/* eslint-disable-next-line @next/next/no-img-element */}
-  {product.video ? (
-    <video
-      src={product.image}
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="w-full h-full object-cover"
-      style={{ pointerEvents: "none" }}
-    />
-  ) : (
-    <img
-      src={product.image}
-      alt={product.name}
-      className="w-full h-full object-cover"
-      style={{ pointerEvents: "none" }}
-      draggable={false}
-    />
-  )}
+                {/* Image */}
+                <div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
+                  {product.video ? (
+                    <video
+                      src={product.image}
+                      poster={videoPoster(product.image)}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      aria-label={product.name}
+                      className="w-full h-full object-cover"
+                      style={{ pointerEvents: "none" }}
+                    />
+                  ) : (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes={`${CARD_WIDTH}px`}
+                      className="object-cover"
+                      style={{ pointerEvents: "none" }}
+                      draggable={false}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
                   <Link
                     href={`/products/${product.slug}`}
                     onClick={e => { if (isDragging.current) e.preventDefault(); }}
+                    aria-label={`View ${product.name}`}
                     className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90
                                backdrop-blur-sm flex items-center justify-center
                                hover:bg-accent hover:text-white
                                transition-all duration-200 shadow-sm"
                   >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                       <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </Link>
