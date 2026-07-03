@@ -10,7 +10,10 @@ export type Product = {
   desc: string;
   longDesc: string;
   slug: string;
-  image: string;
+  // TODO: upload photos to Cloudinary and paste URLs for the
+  // categories below that don't have one yet — until then a
+  // styled placeholder is shown automatically.
+  image?: string;
   video?: boolean;
   color: string;
   features: string[];
@@ -172,22 +175,108 @@ export const products: Product[] = [
       "Low minimum order quantities",
     ],
   },
+  {
+    id: "10",
+    name: "Acrylic Lecterns & Podiums",
+    desc: "Premium clear and chrome-trimmed lecterns for events, hotels and auditoriums.",
+    longDesc:
+      "Full-height acrylic lecterns and podiums with clear, frosted or chrome-trimmed finishes. A modern alternative to wooden podiums for conferences, hotels, showrooms and places of worship.",
+    slug: "acrylic-lecterns-podiums",
+    color: "#F0F9FF",
+    features: [
+      "Clear, black-chrome and silver-chrome finishes",
+      "Angled reading surface with book stop",
+      "Optional logo panel on the front face",
+      "Knock-down design for easy transport",
+    ],
+  },
+  {
+    id: "11",
+    name: "Donation & Ballot Boxes",
+    desc: "Secure acrylic collection boxes for donations, ballots, coupons and lucky draws.",
+    longDesc:
+      "Lockable acrylic boxes for donations, ballots, feedback slips and coupon collection. Clear construction builds trust — people see exactly where their contribution goes.",
+    slug: "donation-ballot-boxes",
+    color: "#FFF7ED",
+    features: [
+      "Lockable lids with tamper-evident options",
+      "Counter-top and floor-standing sizes",
+      "Custom slot sizes for coupons or currency",
+      "Printed branding and signage headers",
+    ],
+  },
+  {
+    id: "12",
+    name: "Jewellery Displays",
+    desc: "Refined acrylic stands, trays and busts that let the jewellery do the talking.",
+    longDesc:
+      "Necklace busts, ring trays, bangle stands and full counter presentation sets in polished clear acrylic. Designed to disappear so the jewellery commands all the attention.",
+    slug: "jewellery-displays",
+    color: "#FDF4FF",
+    features: [
+      "Necklace, ring, bangle and earring formats",
+      "Clear, frosted and velvet-finish options",
+      "Full counter and window presentation sets",
+      "Scratch-free polished edges",
+    ],
+  },
+  {
+    id: "13",
+    name: "Display Pedestals",
+    desc: "Clear and mirrored pedestals that give hero products a stage of their own.",
+    longDesc:
+      "Cube and column pedestals in clear, coloured and mirrored acrylic. The standard tool of window dressers, galleries and product launches — built solid enough for daily retail use.",
+    slug: "display-pedestals",
+    color: "#F5F3FF",
+    features: [
+      "Clear, mirrored and coloured finishes",
+      "Cube, column and nesting sets",
+      "Load-tested for heavy merchandise",
+      "Any height, made to order",
+    ],
+  },
+  {
+    id: "14",
+    name: "Raffle Drums & Spinners",
+    desc: "Rotating acrylic drums for lucky draws, contests and promotional events.",
+    longDesc:
+      "Hand-cranked acrylic raffle drums and spinners for lucky draws, mall promotions and society events. Clear construction keeps every draw visibly fair.",
+    slug: "raffle-drums-spinners",
+    color: "#ECFEFF",
+    features: [
+      "Table-top and free-standing sizes",
+      "Smooth bearing-mounted rotation",
+      "Lockable loading door",
+      "Custom printing on drum and stand",
+    ],
+  },
+  {
+    id: "15",
+    name: "Acrylic Solid Blocks",
+    desc: "Precision-cut solid acrylic blocks for awards, embedments and premium displays.",
+    longDesc:
+      "Solid cast acrylic blocks, machined and polished to optical clarity. Used for awards, embedded mementos, brand paperweights and premium product plinths.",
+    slug: "acrylic-solid-blocks",
+    color: "#F0FDF4",
+    features: [
+      "Optically clear cast acrylic",
+      "Diamond-polished faces and edges",
+      "Laser and UV printing available",
+      "Custom shapes and thicknesses",
+    ],
+  },
 ];
 
 export const getProduct = (slug: string) =>
   products.find((p) => p.slug === slug);
 
-// Categories we manufacture but don't photograph yet —
+// Categories we manufacture but don't list as full products yet —
 // shown as quote-linked entries on /products.
 export const moreCategories = [
-  "Acrylic Lecterns & Podiums",
-  "Donation & Ballot Boxes",
-  "Jewellery Displays",
-  "Display Pedestals",
-  "Raffle Drums & Spinners",
-  "Acrylic Solid Blocks",
   "Menu & Card Holders",
   "Protective Screens & Shields",
+  "Acrylic Trays",
+  "Sign & Poster Frames",
 ];
 
 export const industries = [
@@ -211,7 +300,7 @@ export const stats = [
   { value: 35, suffix: "+", label: "Years of Manufacturing" },
   { value: 500, suffix: "+", label: "Brands Served" },
   { value: 13, suffix: "+", label: "Industries" },
-  { value: 8, suffix: "+", label: "Categories" },
+  { value: 15, suffix: "+", label: "Categories" },
 ];
 
 export const processSteps = [

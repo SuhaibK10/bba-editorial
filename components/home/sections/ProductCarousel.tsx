@@ -4,8 +4,14 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, animate, AnimatePresence } from "framer-motion";
-import { products } from "@/data/products";
+import { products, type Product } from "@/data/products";
 import { videoPoster } from "@/lib/media";
+
+// The home carousel only shows categories with photography;
+// the full catalog (including made-to-order ones) lives at /products.
+const carouselProducts = products.filter(
+  (p): p is Product & { image: string } => Boolean(p.image)
+);
 
 const CARD_WIDTH = 340;
 const GAP = 24;
@@ -41,7 +47,7 @@ export default function ProductCarousel() {
   }, [current, x]);
 
   const goTo = (index: number) => {
-    setCurrent(Math.max(0, Math.min(products.length - 1, index)));
+    setCurrent(Math.max(0, Math.min(carouselProducts.length - 1, index)));
   };
 
   const handleDragEnd = (
@@ -55,7 +61,7 @@ export default function ProductCarousel() {
         ? current - 1
         : current;
 
-    const clamped = Math.max(0, Math.min(products.length - 1, next));
+    const clamped = Math.max(0, Math.min(carouselProducts.length - 1, next));
 
     animate(x, getTargetX(clamped), {
       type: "spring",
@@ -118,7 +124,7 @@ export default function ProductCarousel() {
               </button>
               <button
                 onClick={() => goTo(current + 1)}
-                disabled={current === products.length - 1}
+                disabled={current === carouselProducts.length - 1}
                 aria-label="Next product"
                 className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
                            text-[#6E6E73] hover:border-[#1A1A1A] hover:text-[#1A1A1A]
@@ -149,13 +155,13 @@ export default function ProductCarousel() {
       <div className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none">
         <motion.div
           className="flex"
-          style={{ gap: GAP, width: products.length * STEP, x }}
+          style={{ gap: GAP, width: carouselProducts.length * STEP, x }}
           drag="x"
           dragElastic={0.1}
           onDragStart={() => { isDragging.current = true; }}
           onDragEnd={handleDragEnd}
         >
-          {products.map((product, i) => {
+          {carouselProducts.map((product, i) => {
             const isActive = i === current;
             return (
               <motion.div
@@ -239,7 +245,7 @@ export default function ProductCarousel() {
             </motion.span>
           </AnimatePresence>
           <span>/</span>
-          <span>{String(products.length).padStart(2, "0")}</span>
+          <span>{String(carouselProducts.length).padStart(2, "0")}</span>
         </div>
       </div>
 

@@ -18,7 +18,7 @@ export default function ProductsPage() {
         label="Our products"
         title={
           <>
-            Nine categories.
+            Fifteen categories.
             <br />
             <span className="text-accent">Endless applications.</span>
           </>
