@@ -63,7 +63,7 @@ const { scrollYProgress } = useScroll();
                       border backdrop-blur-md transition-all duration-300
                       ${overHero
                         ? "bg-black/25 border-white/15"
-                        : "bg-white/85 border-black/5 shadow-card"}`}
+                        : "bg-[#16181A]/90 border-white/10 shadow-card"}`}
         >
 
             {/* Logo */}
@@ -73,12 +73,10 @@ const { scrollYProgress } = useScroll();
                 <span className="text-white font-display font-bold text-sm leading-none">B</span>
               </div>
               <div className="flex flex-col leading-none">
-                <span className={`font-display font-bold text-sm tracking-tight transition-colors duration-300
-                                  ${overHero ? "text-white" : "text-text-primary"}`}>
+                <span className="font-display font-bold text-sm tracking-tight text-white">
                   B & B Appliances
                 </span>
-                <span className={`text-[10px] font-body tracking-wide transition-colors duration-300
-                                  ${overHero ? "text-white/60" : "text-text-faint"}`}>
+                <span className="text-[10px] font-body tracking-wide text-white/60">
                   Since 1991
                 </span>
               </div>
@@ -94,12 +92,10 @@ const { scrollYProgress } = useScroll();
                     relative font-body text-sm font-medium
                     transition-colors duration-200
                     after:absolute after:bottom-[-3px] after:left-0 after:h-[1.5px]
-                    after:bg-accent after:transition-all after:duration-300
+                    after:bg-[#5FBDBB] after:transition-all after:duration-300
                     ${pathname === link.href
-                      ? overHero ? "text-white after:w-full" : "text-accent after:w-full"
-                      : overHero
-                        ? "text-white/75 hover:text-white after:w-0 hover:after:w-full"
-                        : "text-text-secondary hover:text-text-primary after:w-0 hover:after:w-full"
+                      ? "text-white after:w-full"
+                      : "text-white/70 hover:text-white after:w-0 hover:after:w-full"
                     }
                   `}
                 >
@@ -126,25 +122,24 @@ const { scrollYProgress } = useScroll();
               {/* Hamburger */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className={`md:hidden flex flex-col gap-1.25 w-10 h-10 items-center justify-center
-                           rounded-full transition-colors duration-200
-                           ${overHero ? "hover:bg-white/10" : "hover:bg-surface"}`}
+                className="md:hidden flex flex-col gap-1.25 w-10 h-10 items-center justify-center
+                           rounded-full transition-colors duration-200 hover:bg-white/10"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
                 <span
                   className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              ${overHero ? "bg-white" : "bg-text-primary"}`}
+                              bg-white`}
                   style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
                 />
                 <span
                   className={`block w-5 h-[1.5px] origin-center transition-all duration-200
-                              ${overHero ? "bg-white" : "bg-text-primary"}`}
+                              bg-white`}
                   style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
                 />
                 <span
                   className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              ${overHero ? "bg-white" : "bg-text-primary"}`}
+                              bg-white`}
                   style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
                 />
               </button>
