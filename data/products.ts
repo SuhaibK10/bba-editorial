@@ -309,3 +309,39 @@ export const processSteps = [
   { step: "03", title: "Manufacture", desc: "We fabricate at our facility with 35 years of precision." },
   { step: "04", title: "Deliver", desc: "Pan-India delivery. Your displays, on time, every time." },
 ];
+
+// Homepage hero slider — full-bleed category shots.
+// Cloudinary c_fill crop keeps the subject centred at hero aspect ratios.
+export type HeroSlide = { name: string; slug: string; image: string };
+
+const heroCrop = "c_fill,g_auto,w_1920,h_1280";
+const heroImg = (path: string) =>
+  `https://res.cloudinary.com/deh394y0h/image/upload/${heroCrop}/${path}`;
+
+export const heroSlides: HeroSlide[] = [
+  {
+    name: "Retail POP Displays",
+    slug: "retail-pop-displays",
+    image: heroImg("v1779898405/POP_Displays_mccdso.png"),
+  },
+  {
+    name: "Floor Standing Displays",
+    slug: "floor-standing-displays",
+    image: heroImg("v1779899150/FloorStandingDisplays_k43oyj.png"),
+  },
+  {
+    name: "Static Signages",
+    slug: "static-signages",
+    image: heroImg("v1779711816/StaticSignage_cdmsko.png"),
+  },
+  {
+    name: "Charging Stations",
+    slug: "mobile-charging-stations",
+    image: heroImg("v1779903523/Charging_ongamy.png"),
+  },
+  {
+    name: "Acrylic Risers",
+    slug: "acrylic-risers",
+    image: heroImg("v1779899888/AcrylicRisersB_B_uicnrb.png"),
+  },
+];

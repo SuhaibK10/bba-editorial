@@ -45,6 +45,9 @@ const { scrollYProgress } = useScroll();
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  // Homepage hero is a full-bleed photo — use light text while over it
+  const overHero = pathname === "/" && !scrolled && !menuOpen;
+
   return (
     <>
       <header
@@ -72,10 +75,12 @@ const { scrollYProgress } = useScroll();
                 <span className="text-white font-display font-bold text-sm leading-none">B</span>
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-display font-bold text-sm tracking-tight text-[#1A1A1A]">
+                <span className={`font-display font-bold text-sm tracking-tight transition-colors duration-300
+                                  ${overHero ? "text-white" : "text-text-primary"}`}>
                   B & B Appliances
                 </span>
-                <span className="text-text-faint text-[10px] font-body tracking-wide">
+                <span className={`text-[10px] font-body tracking-wide transition-colors duration-300
+                                  ${overHero ? "text-white/60" : "text-text-faint"}`}>
                   Since 1991
                 </span>
               </div>
@@ -93,8 +98,10 @@ const { scrollYProgress } = useScroll();
                     after:absolute after:bottom-[-3px] after:left-0 after:h-[1.5px]
                     after:bg-accent after:transition-all after:duration-300
                     ${pathname === link.href
-                      ? "text-accent after:w-full"
-                      : "text-text-secondary hover:text-text-primary after:w-0 hover:after:w-full"
+                      ? overHero ? "text-white after:w-full" : "text-accent after:w-full"
+                      : overHero
+                        ? "text-white/75 hover:text-white after:w-0 hover:after:w-full"
+                        : "text-text-secondary hover:text-text-primary after:w-0 hover:after:w-full"
                     }
                   `}
                 >
@@ -121,21 +128,27 @@ const { scrollYProgress } = useScroll();
               {/* Hamburger */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="md:hidden flex flex-col gap-[5px] w-10 h-10 items-center justify-center
-                           rounded-lg hover:bg-surface transition-colors duration-200"
+                className={`md:hidden flex flex-col gap-1.25 w-10 h-10 items-center justify-center
+                           rounded-lg transition-colors duration-200
+                           ${overHero
+                             ? "bg-black/25 backdrop-blur-sm hover:bg-black/35"
+                             : "hover:bg-surface"}`}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
                 <span
-                  className="block w-5 h-[1.5px] bg-text-primary origin-center transition-transform duration-300"
+                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
+                              ${overHero ? "bg-white" : "bg-text-primary"}`}
                   style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
                 />
                 <span
-                  className="block w-5 h-[1.5px] bg-text-primary origin-center transition-all duration-200"
+                  className={`block w-5 h-[1.5px] origin-center transition-all duration-200
+                              ${overHero ? "bg-white" : "bg-text-primary"}`}
                   style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
                 />
                 <span
-                  className="block w-5 h-[1.5px] bg-text-primary origin-center transition-transform duration-300"
+                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
+                              ${overHero ? "bg-white" : "bg-text-primary"}`}
                   style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
                 />
               </button>
