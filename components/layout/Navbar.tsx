@@ -15,7 +15,6 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -35,18 +34,9 @@ const { scrollYProgress } = useScroll();
   });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
-
-  // Homepage hero is a full-bleed photo — use light text while over it
-  const overHero = pathname === "/" && !scrolled && !menuOpen;
 
   return (
     <>
@@ -58,12 +48,9 @@ const { scrollYProgress } = useScroll();
 
       <header className="fixed top-3 md:top-4 inset-x-0 z-50 px-3 md:px-6">
         <div
-          className={`mx-auto max-w-5xl flex items-center justify-between
-                      h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
-                      border backdrop-blur-md transition-all duration-300
-                      ${overHero
-                        ? "bg-black/25 border-white/15"
-                        : "bg-[#16181A]/90 border-white/10 shadow-card"}`}
+          className="mx-auto max-w-5xl flex items-center justify-between
+                     h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
+                     border backdrop-blur-md bg-[#16181A]/90 border-white/10 shadow-card"
         >
 
             {/* Logo */}
