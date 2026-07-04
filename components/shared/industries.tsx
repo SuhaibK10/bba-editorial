@@ -1,4 +1,4 @@
-// Shared industry list — icons + copy used by the home section
+// Shared industry list: icons + copy used by the home section
 // and the /industries page. Keep labels in sync with data/products.ts.
 
 export type Industry = {
@@ -21,7 +21,7 @@ const iconProps = {
 export const industryList: Industry[] = [
   {
     label: "Telecom",
-    desc: "Handset stands, live-demo units and charging stations for telecom retail — from flagship stores to multi-brand outlets.",
+    desc: "Handset stands, live-demo units and charging stations for telecom retail, from flagship stores to multi-brand outlets.",
     icon: (
       <svg {...iconProps} aria-hidden="true">
         <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
@@ -40,7 +40,7 @@ export const industryList: Industry[] = [
   },
   {
     label: "Pharma & Healthcare",
-    desc: "Counter displays and dispensers for pharmacies, clinics and hospital receptions — easy to clean, built to last.",
+    desc: "Counter displays and dispensers for pharmacies, clinics and hospital receptions. Easy to clean, built to last.",
     icon: (
       <svg {...iconProps} aria-hidden="true">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />

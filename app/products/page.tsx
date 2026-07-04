@@ -7,7 +7,7 @@ import { products, moreCategories } from "@/data/products";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Explore our full range of acrylic display solutions — literature holders, POP displays, charging stations, revolving towers, signage and custom fabrication.",
+    "Explore our full range of acrylic display solutions, including literature holders, POP displays, charging stations, revolving towers, signage and custom fabrication.",
   alternates: { canonical: "/products" },
 };
 
@@ -23,7 +23,7 @@ export default function ProductsPage() {
             <span className="text-accent">Endless applications.</span>
           </>
         }
-        description="Every unit is fabricated at our New Delhi facility. Don't see exactly what you need? We build custom — that's most of what we do."
+        description="Every unit is fabricated at our New Delhi facility. Don't see exactly what you need? We build custom, and that's most of what we do."
       />
 
       <div className="container-wide pb-20 md:pb-28">

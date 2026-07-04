@@ -1,8 +1,8 @@
 // ─────────────────────────────────────────────
-//  B & B Appliances — site-wide config
+//  B & B Appliances: site-wide config
 //  ⚠️ TODO before launch: replace the placeholder
 //  phone/WhatsApp number, email and domain below.
-//  Every page reads from this file — edit once here.
+//  Every page reads from this file. Edit once here.
 // ─────────────────────────────────────────────
 
 export const site = {

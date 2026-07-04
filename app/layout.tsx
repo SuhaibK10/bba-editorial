@@ -5,6 +5,8 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { MotionConfig } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import MobileNav from "@/components/layout/MobileNav";
+import DesktopGate from "@/components/layout/DesktopGate";
 import { site } from "@/data/site";
 
 const sora = Sora({
@@ -24,8 +26,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s — ${site.name}`,
+    default: `${site.name} · ${site.tagline}`,
+    template: `%s · ${site.name}`,
   },
   description:
     "India's trusted manufacturer of acrylic display solutions. Literature holders, POP displays, charging stations, blow-moulded signages and more. Serving 13+ industries for 35 years.",
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${site.name} — Acrylic Display Manufacturers`,
+    title: `${site.name} · Acrylic Display Manufacturers`,
     description:
       "35 years of display excellence. Trusted by 500+ brands across India.",
     type: "website",
@@ -70,7 +72,7 @@ const jsonLd = {
     addressCountry: site.address.country,
   },
   description:
-    "Manufacturer of acrylic display solutions — literature holders, POP displays, charging stations and blow-moulded signage. Serving 13+ industries since 1991.",
+    "Manufacturer of acrylic display solutions including literature holders, POP displays, charging stations and blow-moulded signage. Serving 13+ industries since 1991.",
 };
 
 export default function RootLayout({
@@ -86,11 +88,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <MotionConfig reducedMotion="user">
-          <SmoothScrollProvider>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScrollProvider>
+          <DesktopGate>
+            <SmoothScrollProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+              <MobileNav />
+              <div className="mobile-nav-spacer md:hidden" aria-hidden="true" />
+            </SmoothScrollProvider>
+          </DesktopGate>
         </MotionConfig>
       </body>
     </html>

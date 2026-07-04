@@ -98,7 +98,7 @@
 @media (min-width: 1280px) { .container-wide { padding: 0 4rem; } }
 
 /* ──────────────────────────────────────────────────────────
-   SECTION SPACING — outside @layer so media queries work
+   SECTION SPACING: outside @layer so media queries work
    ────────────────────────────────────────────────────────── */
 .section-pad {
   padding-top: 5rem;
@@ -127,7 +127,7 @@
      All buttons: 52px height, 0.5rem radius, consistent
      ───────────────────────────────────────────────────── */
 
-  /* Primary — teal bg, white text */
+  /* Primary: teal bg, white text */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -160,7 +160,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
 
-  /* Ghost — white bg, dark text, subtle border */
+  /* Ghost: white bg, dark text, subtle border */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
@@ -184,7 +184,7 @@
   }
   .btn-ghost:active { transform: scale(0.97); }
 
-  /* Text link — no bg, accent color */
+  /* Text link: no bg, accent color */
   .btn-text {
     display: inline-flex;
     align-items: center;
@@ -309,3 +309,13 @@
 
 .trustbar::before { top: -1px; }
 .trustbar::after  { bottom: -1px; }
+
+/* ── Mobile bottom nav safe area ─────────────────────────────────────── */
+.mobile-nav-bar {
+  padding-bottom: max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px));
+}
+
+/* Spacer matching the nav height so page content doesn't hide behind it */
+.mobile-nav-spacer {
+  height: calc(56px + max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px)));
+}

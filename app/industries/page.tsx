@@ -6,7 +6,7 @@ import { industryList } from "@/components/shared/industries";
 export const metadata: Metadata = {
   title: "Industries",
   description:
-    "13+ industries trust B & B Appliances for display manufacturing — telecom, banking, pharma, FMCG, cosmetics, hospitality, automobile and more.",
+    "13+ industries trust B & B Appliances for display manufacturing, including telecom, banking, pharma, FMCG, cosmetics, hospitality, automobile and more.",
   alternates: { canonical: "/industries" },
 };
 
@@ -22,7 +22,7 @@ export default function IndustriesPage() {
             <span className="text-accent">Thirteen industries.</span>
           </>
         }
-        description="35 years of manufacturing means we've already solved the display problems of your industry — probably several times over."
+        description="35 years of manufacturing means we've already solved the display problems of your industry, probably several times over."
       />
 
       <div className="container-wide pb-20 md:pb-28">

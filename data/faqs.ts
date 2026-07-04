@@ -1,7 +1,7 @@
 export const faqs = [
   {
     q: "What is the minimum order quantity?",
-    a: "There isn't a fixed MOQ — we quote single custom units as readily as 1,000-piece production runs. Larger quantities bring the per-unit price down significantly.",
+    a: "There isn't a fixed MOQ. We quote single custom units as readily as 1,000-piece production runs, and larger quantities bring the per-unit price down significantly.",
   },
   {
     q: "How fast will I get my quote?",
@@ -9,11 +9,11 @@ export const faqs = [
   },
   {
     q: "Can you manufacture from a sketch or photo?",
-    a: "Yes — most custom work starts that way. Send a sketch, a photo or a competitor's unit and we'll engineer it, prototype it for approval, then produce it.",
+    a: "Yes, most custom work starts that way. Send a sketch, a photo or a competitor's unit and we'll engineer it, prototype it for approval, then produce it.",
   },
   {
     q: "Do you deliver outside Delhi NCR?",
-    a: "We deliver pan-India. Multi-city rollouts — the same display delivered to hundreds of branches or stores — are a core part of our business.",
+    a: "We deliver pan-India. Multi-city rollouts, the same display delivered to hundreds of branches or stores, are a core part of our business.",
   },
   {
     q: "Can you add our branding?",

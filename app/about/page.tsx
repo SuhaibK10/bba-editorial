@@ -21,7 +21,7 @@ const milestones = [
   {
     year: "2000s",
     title: "National distribution",
-    desc: "Telecom and banking rollouts take our displays into branches and stores across India — hundreds of identical units, delivered on schedule.",
+    desc: "Telecom and banking rollouts take our displays into branches and stores across India: hundreds of identical units, delivered on schedule.",
   },
   {
     year: "2010s",
@@ -61,7 +61,7 @@ export default function AboutPage() {
               <p className="font-body text-text-secondary leading-relaxed">
                 B & B Appliances started in 1991 with a simple observation: Indian retail
                 was growing fast, and nobody was building the display infrastructure it
-                needed — well, locally, and at scale. We set up a fabrication facility on
+                needed, well, locally, and at scale. We set up a fabrication facility on
                 GT Karnal Road and started making acrylic literature holders for banks.
               </p>
               <p className="font-body text-text-secondary leading-relaxed">

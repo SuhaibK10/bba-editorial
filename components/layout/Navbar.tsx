@@ -40,17 +40,12 @@ const { scrollYProgress } = useScroll();
 
   return (
     <>
-      {/* Scroll progress — slim line pinned to the viewport's top edge */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-0.5 z-50 origin-left bg-accent"
-        style={{ scaleX }}
-      />
-
       <header className="fixed top-3 md:top-4 inset-x-0 z-50 px-3 md:px-6">
+        <div className="relative mx-auto max-w-5xl">
         <div
-          className="mx-auto max-w-5xl flex items-center justify-between
+          className="flex items-center justify-between
                      h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
-                     border backdrop-blur-md bg-[#16181A]/90 border-white/10 shadow-card"
+                     border backdrop-blur-md bg-[#0F3634]/95 border-white/10 shadow-card"
         >
 
             {/* Logo */}
@@ -94,7 +89,7 @@ const { scrollYProgress } = useScroll();
             {/* CTA + Hamburger */}
             <div className="flex items-center gap-4">
 
-              {/* Navbar CTA — uses btn-primary, slightly smaller via style override */}
+              {/* Navbar CTA: uses btn-primary, slightly smaller via style override */}
               <Link
                 href="/quote"
                 className="hidden md:inline-flex btn-primary"
@@ -133,6 +128,16 @@ const { scrollYProgress } = useScroll();
             </div>
 
         </div>
+
+        {/* Scroll progress: thin track attached to the pill's bottom edge */}
+        <div className="absolute left-6 right-6 md:left-8 md:right-8 top-full h-0.5 rounded-full bg-white/15 overflow-hidden">
+          <motion.div
+            className="h-full origin-left bg-[#E3B15C]"
+            style={{ scaleX }}
+          />
+        </div>
+
+        </div>
       </header>
 
       {/* Mobile menu */}
@@ -143,10 +148,9 @@ const { scrollYProgress } = useScroll();
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white flex flex-col"
+            className="fixed inset-0 z-40 bg-white flex flex-col pt-20"
           >
-            <div className="h-20" />
-            <nav className="flex-1 flex flex-col justify-center px-8 gap-2">
+            <nav className="flex-1 flex flex-col justify-start pt-8 px-8 gap-1">
               {[{ label: "Home", href: "/" }, ...navLinks].map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -174,7 +178,7 @@ const { scrollYProgress } = useScroll();
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
               transition={{ delay: 0.4, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="px-8 pb-12 flex flex-col gap-3"
+              className="px-8 pb-20 flex flex-col gap-3"
             >
               <Link
                 href="/quote"

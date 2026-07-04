@@ -7,14 +7,14 @@ import { site, whatsappUrl, phoneHref, emailHref } from "@/data/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Reach B & B Appliances — WhatsApp, phone or email. Manufacturing facility on GT Karnal Road, New Delhi. Quotes within 24 hours.",
+    "Reach B & B Appliances via WhatsApp, phone or email. Manufacturing facility on GT Karnal Road, New Delhi. Quotes within 24 hours.",
   alternates: { canonical: "/contact" },
 };
 
 const channels = [
   {
     label: "WhatsApp",
-    value: "Fastest response — usually within the hour",
+    value: "Fastest response, usually within the hour",
     href: whatsappUrl("Hi, I'd like to talk about a display requirement."),
     external: true,
   },

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────
 //  Client testimonials
 //  ⚠️ TODO: replace with real client quotes before
-//  launch — names, roles and companies below are
+//  launch. Names, roles and companies below are
 //  realistic placeholders for the pitch.
 // ─────────────────────────────────────────────
 
@@ -22,7 +22,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Three vendors quoted us. B & B was the only one who asked the right questions before quoting — and the only quote that didn't change afterwards.",
+      "Three vendors quoted us. B & B was the only one who asked the right questions before quoting, and the only quote that didn't change afterwards.",
     name: "Admin & Facilities Manager",
     company: "Pharmacy Chain",
     location: "New Delhi",
@@ -31,7 +31,7 @@ export const testimonials = [
 
 export const trustBadges = [
   { title: "Pan-India Delivery", desc: "From single units to full national rollouts" },
-  { title: "Factory-Direct Pricing", desc: "No middlemen — you buy from the manufacturer" },
+  { title: "Factory-Direct Pricing", desc: "No middlemen: you buy from the manufacturer" },
   { title: "24-Hour Quotes", desc: "Every enquiry answered by the production team" },
   { title: "In-House Fabrication", desc: "Design, prototype and production under one roof" },
 ];

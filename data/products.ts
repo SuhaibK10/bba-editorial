@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-//  B & B Appliances — centralized data
+//  B & B Appliances: centralized data
 //  Edit product names, images, descriptions here
 //  Upload new images to Cloudinary, paste URL here
 // ─────────────────────────────────────────────
@@ -11,7 +11,7 @@ export type Product = {
   longDesc: string;
   slug: string;
   // TODO: upload photos to Cloudinary and paste URLs for the
-  // categories below that don't have one yet — until then a
+  // categories below that don't have one yet. Until then a
   // styled placeholder is shown automatically.
   image?: string;
   video?: boolean;
@@ -43,7 +43,7 @@ export const products: Product[] = [
     name: "Static Signages",
     desc: "Durable blow-moulded plastic signage for brand visibility at scale.",
     longDesc:
-      "Blow-moulded plastic signage built to survive Indian weather — sun, dust and monsoon. Ideal for petrol pumps, dealer boards and franchise networks that need identical branding at hundreds of locations.",
+      "Blow-moulded plastic signage built to survive Indian weather: sun, dust and monsoon. Ideal for petrol pumps, dealer boards and franchise networks that need identical branding at hundreds of locations.",
     slug: "static-signages",
     image:
       "https://res.cloudinary.com/deh394y0h/image/upload/v1779711816/StaticSignage_cdmsko.png",
@@ -94,7 +94,7 @@ export const products: Product[] = [
     name: "Charging Stations",
     desc: "Display stands with integrated device charging. Serve customers while they wait.",
     longDesc:
-      "Display stands with integrated multi-device charging — customers charge their phones while your brand holds their attention. Popular in telecom stores, hospitality and waiting areas.",
+      "Display stands with integrated multi-device charging, so customers charge their phones while your brand holds their attention. Popular in telecom stores, hospitality and waiting areas.",
     slug: "mobile-charging-stations",
     image:
       "https://res.cloudinary.com/deh394y0h/image/upload/v1779903523/Charging_ongamy.png",
@@ -163,7 +163,7 @@ export const products: Product[] = [
     name: "Custom Display Cases",
     desc: "Bespoke enclosures fabricated to your exact dimensions and brand specifications.",
     longDesc:
-      "Fully bespoke enclosures and cases fabricated to your drawings — or ours. Send us a sketch, a sample or a competitor's unit and we engineer, prototype and produce it.",
+      "Fully bespoke enclosures and cases fabricated to your drawings, or ours. Send us a sketch, a sample or a competitor's unit and we engineer, prototype and produce it.",
     slug: "custom-display-cases",
     image:
       "https://res.cloudinary.com/deh394y0h/image/upload/c_pad,w_1400,h_1000,b_white/v1779810590/CustomizeAcrylicBoxes_hv33gu.png",
@@ -195,7 +195,7 @@ export const products: Product[] = [
     name: "Donation & Ballot Boxes",
     desc: "Secure acrylic collection boxes for donations, ballots, coupons and lucky draws.",
     longDesc:
-      "Lockable acrylic boxes for donations, ballots, feedback slips and coupon collection. Clear construction builds trust — people see exactly where their contribution goes.",
+      "Lockable acrylic boxes for donations, ballots, feedback slips and coupon collection. Clear construction builds trust: people see exactly where their contribution goes.",
     slug: "donation-ballot-boxes",
     color: "#FFF7ED",
     features: [
@@ -225,7 +225,7 @@ export const products: Product[] = [
     name: "Display Pedestals",
     desc: "Clear and mirrored pedestals that give hero products a stage of their own.",
     longDesc:
-      "Cube and column pedestals in clear, coloured and mirrored acrylic. The standard tool of window dressers, galleries and product launches — built solid enough for daily retail use.",
+      "Cube and column pedestals in clear, coloured and mirrored acrylic. The standard tool of window dressers, galleries and product launches, built solid enough for daily retail use.",
     slug: "display-pedestals",
     color: "#F5F3FF",
     features: [
@@ -267,10 +267,46 @@ export const products: Product[] = [
   },
 ];
 
+// Homepage hero slider: full-bleed category shots.
+// Cloudinary c_fill crop keeps the subject centred at hero aspect ratios.
+export type HeroSlide = { name: string; slug: string; image: string };
+
+const heroCrop = "c_fill,g_auto,w_1920,h_1280";
+const heroImg = (path: string) =>
+  `https://res.cloudinary.com/deh394y0h/image/upload/${heroCrop}/${path}`;
+
+export const heroSlides: HeroSlide[] = [
+  {
+    name: "Retail POP Displays",
+    slug: "retail-pop-displays",
+    image: heroImg("v1779649957/LiteratureHolder_fpbz6y.png"),
+  },
+  {
+    name: "Floor Standing Displays",
+    slug: "floor-standing-displays",
+    image: heroImg("v1779899150/FloorStandingDisplays_k43oyj.png"),
+  },
+  {
+    name: "Static Signages",
+    slug: "static-signages",
+    image: heroImg("v1779711816/StaticSignage_cdmsko.png"),
+  },
+  {
+    name: "Charging Stations",
+    slug: "mobile-charging-stations",
+    image: heroImg("v1779903523/Charging_ongamy.png"),
+  },
+  {
+    name: "Acrylic Risers",
+    slug: "acrylic-risers",
+    image: heroImg("v1779899888/AcrylicRisersB_B_uicnrb.png"),
+  },
+];
+
 export const getProduct = (slug: string) =>
   products.find((p) => p.slug === slug);
 
-// Categories we manufacture but don't list as full products yet —
+// Categories we manufacture but don't list as full products yet,
 // shown as quote-linked entries on /products.
 export const moreCategories = [
   "Menu & Card Holders",

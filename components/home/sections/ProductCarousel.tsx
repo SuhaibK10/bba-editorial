@@ -80,7 +80,7 @@ export default function ProductCarousel() {
       <div className="container-wide mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
 
-          {/* Left — heading */}
+          {/* Left: heading */}
           <div>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -103,7 +103,7 @@ export default function ProductCarousel() {
             </motion.h2>
           </div>
 
-          {/* Right — description + nav */}
+          {/* Right: description + nav */}
           <div className="flex flex-col items-start md:items-end gap-4">
             <p className="font-body text-[#6E6E73] leading-relaxed max-w-xs text-sm">
               From a single brochure holder to a full motorised signage network,

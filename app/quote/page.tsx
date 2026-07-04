@@ -6,7 +6,7 @@ import { faqs } from "@/data/faqs";
 export const metadata: Metadata = {
   title: "Get a Quote",
   description:
-    "Tell us what you need — product, quantity, specs — and get a manufacturing quote from B & B Appliances within 24 hours.",
+    "Tell us what you need (product, quantity, specs) and get a manufacturing quote from B & B Appliances within 24 hours.",
   alternates: { canonical: "/quote" },
 };
 
@@ -28,7 +28,7 @@ export default async function QuotePage({ searchParams }: Props) {
             <span className="text-accent">24 hours.</span>
           </>
         }
-        description="Fill in what you know — we'll ask the right questions about the rest. Every quote comes directly from our production team."
+        description="Fill in what you know, and we'll ask the right questions about the rest. Every quote comes directly from our production team."
       />
 
       <div className="container-wide pb-20 md:pb-28">

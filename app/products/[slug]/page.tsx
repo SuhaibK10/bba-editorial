@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductMedia from "@/components/products/ProductMedia";
+import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
 import { products, getProduct } from "@/data/products";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -89,11 +90,7 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row items-start gap-3">
-              <Link href={`/quote?product=${product.slug}`} className="btn-primary">
-                Get a Quote for {product.name}
-              </Link>
-            </div>
+            <AddToQuoteButton slug={product.slug} name={product.name} />
           </div>
         </div>
 
