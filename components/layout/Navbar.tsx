@@ -50,23 +50,21 @@ const { scrollYProgress } = useScroll();
 
   return (
     <>
-      <header
-      
-        className={`
-          fixed top-0 left-0 right-0 z-50
-          transition-all duration-300
-            ${scrolled || menuOpen
-            ? "bg-white/95 backdrop-blur-md shadow-nav border-b border-[#F0F0F0]"
-            : "bg-transparent"
-          }
-        `}
-        > 
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-accent"
-          style={{ scaleX }}
-            />
-        <div className="container-wide">
-          <div className="flex items-center justify-between h-16 md:h-18">
+      {/* Scroll progress — slim line pinned to the viewport's top edge */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-0.5 z-50 origin-left bg-accent"
+        style={{ scaleX }}
+      />
+
+      <header className="fixed top-3 md:top-4 inset-x-0 z-50 px-3 md:px-6">
+        <div
+          className={`mx-auto max-w-5xl flex items-center justify-between
+                      h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
+                      border backdrop-blur-md transition-all duration-300
+                      ${overHero
+                        ? "bg-black/25 border-white/15"
+                        : "bg-white/85 border-black/5 shadow-card"}`}
+        >
 
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group" aria-label="B & B Appliances">
@@ -129,10 +127,8 @@ const { scrollYProgress } = useScroll();
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className={`md:hidden flex flex-col gap-1.25 w-10 h-10 items-center justify-center
-                           rounded-lg transition-colors duration-200
-                           ${overHero
-                             ? "bg-black/25 backdrop-blur-sm hover:bg-black/35"
-                             : "hover:bg-surface"}`}
+                           rounded-full transition-colors duration-200
+                           ${overHero ? "hover:bg-white/10" : "hover:bg-surface"}`}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
@@ -154,7 +150,6 @@ const { scrollYProgress } = useScroll();
               </button>
             </div>
 
-          </div>
         </div>
       </header>
 
@@ -168,7 +163,7 @@ const { scrollYProgress } = useScroll();
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-white flex flex-col"
           >
-            <div className="h-16" />
+            <div className="h-20" />
             <nav className="flex-1 flex flex-col justify-center px-8 gap-2">
               {[{ label: "Home", href: "/" }, ...navLinks].map((link, i) => (
                 <motion.div
