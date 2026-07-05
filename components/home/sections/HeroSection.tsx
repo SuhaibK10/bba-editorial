@@ -43,7 +43,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero-section"
-      className="relative h-[70svh] md:h-[70vh] flex flex-col justify-end overflow-hidden bg-[#101314]"
+      className="relative h-[90svh] md:h-[70vh] flex flex-col justify-end overflow-hidden bg-[#101314]"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -75,40 +75,17 @@ export default function HeroSection() {
       {/* Bottom-centred text */}
       <div className="container-wide relative z-10 pb-8 md:pb-24">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: easeOutExpo }}
-            className="flex items-center justify-center gap-3 mb-4 md:mb-6"
-          >
-            <div className="w-8 h-[1.5px] bg-[#E3B15C]" />
-            <span className="font-body text-xs text-white/60 uppercase tracking-widest">
-              Est. 1991 · New Delhi, India
-            </span>
-            <div className="w-8 h-[1.5px] bg-[#E3B15C]" />
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
             className="font-display font-bold text-[clamp(1.75rem,5vw,3.75rem)] md:text-[clamp(2rem,5.5vw,4.25rem)]
-                       text-white leading-[1.08] tracking-tight mb-3 md:mb-5"
+                       text-white leading-[1.08] tracking-tight mb-5 md:mb-8"
           >
             India&apos;s most trusted
             <br />
             acrylic manufacturer.
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: easeOutExpo }}
-            className="font-body text-sm md:text-lg text-white/70 max-w-xl mx-auto leading-relaxed mb-5 md:mb-8"
-          >
-            Acrylic fabrication and blow-moulded displays for every industry.
-            Built to last, designed to perform.
-          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -4,38 +4,75 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "@/lib/cart-store";
 
-function HomeIcon({ size = 20 }: { size?: number }) {
+type IconProps = { size?: number; active?: boolean };
+
+function HomeIcon({ size = 20, active }: IconProps) {
+  if (active) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 3.2a1 1 0 0 1 .64.23l8 6.5a1 1 0 0 1 .36.77V19a2 2 0 0 1-2 2h-4a1 1 0 0 1-1-1v-5h-2v5a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-8.3a1 1 0 0 1 .36-.77l8-6.5a1 1 0 0 1 .64-.23Z" />
+      </svg>
+    );
+  }
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 10.5 12 3l9 7.5" />
-      <path d="M5 9.5V20a1 1 0 0 0 1 1h5v-6h2v6h5a1 1 0 0 0 1-1V9.5" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 10.5 12 4l8 6.5" />
+      <path d="M6 9.5V19a1 1 0 0 0 1 1h4v-5.5h2V20h4a1 1 0 0 0 1-1V9.5" />
     </svg>
   );
 }
 
-function ProductsIcon({ size = 20 }: { size?: number }) {
+function ProductsIcon({ size = 20, active }: IconProps) {
+  if (active) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2.25" />
+        <rect x="13" y="3.5" width="7.5" height="7.5" rx="2.25" />
+        <rect x="3.5" y="13" width="7.5" height="7.5" rx="2.25" />
+        <rect x="13" y="13" width="7.5" height="7.5" rx="2.25" />
+      </svg>
+    );
+  }
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="8" height="8" rx="1.5" />
-      <rect x="13" y="3" width="8" height="8" rx="1.5" />
-      <rect x="3" y="13" width="8" height="8" rx="1.5" />
-      <rect x="13" y="13" width="8" height="8" rx="1.5" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2" />
+      <rect x="13" y="3.5" width="7.5" height="7.5" rx="2" />
+      <rect x="3.5" y="13" width="7.5" height="7.5" rx="2" />
+      <rect x="13" y="13" width="7.5" height="7.5" rx="2" />
     </svg>
   );
 }
 
-function CartIcon({ size = 20 }: { size?: number }) {
+function CartIcon({ size = 20, active }: IconProps) {
+  if (active) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" fill="currentColor" />
+        <path d="M3 6h18" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M16 10a4 4 0 0 1-8 0" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M6 8h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8Z" />
-      <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+      <path d="M3 6h18" />
+      <path d="M16 10a4 4 0 0 1-8 0" />
     </svg>
   );
 }
 
-function AccountIcon({ size = 20 }: { size?: number }) {
+function AccountIcon({ size = 20, active }: IconProps) {
+  if (active) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M12 13c-4.2 0-7.7 2.8-9 7a1 1 0 0 0 .97 1.3h16.06a1 1 0 0 0 .97-1.3c-1.3-4.2-4.8-7-9-7Z" />
+      </svg>
+    );
+  }
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="12" cy="8" r="3.5" />
       <path d="M4.5 20c1.5-4 4-6 7.5-6s6 2 7.5 6" />
     </svg>
@@ -51,7 +88,9 @@ const NAV = [
 
 // Fixed bottom tab bar, mobile only. Sits below the full-screen hamburger
 // menu (z-30 vs the menu's z-40) so opening the menu covers it, avoiding
-// two overlapping navigation surfaces at once.
+// two overlapping navigation surfaces at once. Each icon has an outline
+// (inactive) and filled (active) state, matching the dual-state pattern
+// used in most premium iOS/Android tab bars.
 export default function MobileNav() {
   const pathname = usePathname();
   const cartCount = useCartStore((s) => s.items.length);
@@ -72,7 +111,7 @@ export default function MobileNav() {
                           ${isActive ? "text-accent" : "text-text-secondary hover:text-text-primary"}`}
             >
               <span className="relative">
-                <Icon />
+                <Icon active={isActive} />
                 {isCart && cartCount > 0 && (
                   <span
                     className="absolute -top-1 -right-1.5 min-w-3.75 h-3.75 px-0.75 rounded-full
