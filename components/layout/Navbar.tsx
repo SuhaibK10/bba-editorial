@@ -45,7 +45,7 @@ const { scrollYProgress } = useScroll();
         <div
           className="flex items-center justify-between
                      h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
-                     border backdrop-blur-md bg-[#0F3634]/95 border-white/10 shadow-card"
+                     border backdrop-blur-md bg-[#F5F3ED]/95 border-border shadow-card"
         >
 
             {/* Logo */}
@@ -55,10 +55,10 @@ const { scrollYProgress } = useScroll();
                 <span className="text-white font-display font-bold text-sm leading-none">B</span>
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-display font-bold text-sm tracking-tight text-white">
+                <span className="font-display font-bold text-sm tracking-tight text-text-primary">
                   B & B Appliances
                 </span>
-                <span className="text-[10px] font-body tracking-wide text-white/60">
+                <span className="text-[10px] font-body tracking-wide text-text-faint">
                   Since 1991
                 </span>
               </div>
@@ -74,10 +74,10 @@ const { scrollYProgress } = useScroll();
                     relative font-body text-sm font-medium
                     transition-colors duration-200
                     after:absolute after:bottom-[-3px] after:left-0 after:h-[1.5px]
-                    after:bg-[#5FBDBB] after:transition-all after:duration-300
+                    after:bg-accent after:transition-all after:duration-300
                     ${pathname === link.href
-                      ? "text-white after:w-full"
-                      : "text-white/70 hover:text-white after:w-0 hover:after:w-full"
+                      ? "text-accent after:w-full"
+                      : "text-text-secondary hover:text-text-primary after:w-0 hover:after:w-full"
                     }
                   `}
                 >
@@ -105,23 +105,23 @@ const { scrollYProgress } = useScroll();
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="md:hidden flex flex-col gap-1.25 w-10 h-10 items-center justify-center
-                           rounded-full transition-colors duration-200 hover:bg-white/10"
+                           rounded-full transition-colors duration-200 hover:bg-surface"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
                 <span
                   className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              bg-white`}
+                              bg-text-primary`}
                   style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
                 />
                 <span
                   className={`block w-5 h-[1.5px] origin-center transition-all duration-200
-                              bg-white`}
+                              bg-text-primary`}
                   style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
                 />
                 <span
                   className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              bg-white`}
+                              bg-text-primary`}
                   style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
                 />
               </button>
@@ -130,7 +130,7 @@ const { scrollYProgress } = useScroll();
         </div>
 
         {/* Scroll progress: thin track attached to the pill's bottom edge */}
-        <div className="absolute left-6 right-6 md:left-8 md:right-8 top-full h-0.5 rounded-full bg-white/15 overflow-hidden">
+        <div className="absolute left-6 right-6 md:left-8 md:right-8 top-full h-0.5 rounded-full bg-black/10 overflow-hidden">
           <motion.div
             className="h-full origin-left bg-[#E3B15C]"
             style={{ scaleX }}
