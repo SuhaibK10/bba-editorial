@@ -68,7 +68,7 @@ export default function ProductCarousel() {
   return (
     <section className="section-pad section-pad-bottom-tight overflow-hidden">
 
-      <div className="container-wide mb-12">
+      <div className="container-wide mb-16 md:mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
 
           {/* Left: heading */}
@@ -79,7 +79,7 @@ export default function ProductCarousel() {
               viewport={VIEWPORT_ONCE}
               className="section-label"
             >
-              What we make
+              Best sellers
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -88,17 +88,17 @@ export default function ProductCarousel() {
               transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
               className="section-heading-lg"
             >
-              Multiple<br />
-              <span className="text-accent">Categories.</span><br />
-              Endless <span className="text-accent">Applications.</span>
+              The Displays<br />
+              <span className="text-accent">Clients</span><br />
+              Buy <span className="text-accent">Again.</span>
             </motion.h2>
           </div>
 
           {/* Right: description + nav */}
           <div className="flex flex-col items-start md:items-end gap-4">
             <p className="font-body text-text-secondary leading-relaxed max-w-xs text-sm">
-              From a single brochure holder to a full motorised signage network,
-              we manufacture it all.
+              The categories our clients order most, and reorder
+              most often.
             </p>
             <div className="flex items-center gap-4">
               <button
@@ -164,24 +164,26 @@ export default function ProductCarousel() {
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
                 {/* Image */}
-                <div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
-                  <ProductMedia
-                    product={product}
-                    sizes={`${CARD_WIDTH}px`}
-                    className="pointer-events-none"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
-                  <Link
-                    href={`/products/${product.slug}`}
-                    onClick={e => { if (isDragging.current) e.preventDefault(); }}
-                    aria-label={`View ${product.name}`}
-                    className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90
-                               backdrop-blur-sm flex items-center justify-center
-                               hover:bg-accent hover:text-white
-                               transition-all duration-200 shadow-sm"
-                  >
-                    <DiagonalArrowIcon size={12} />
-                  </Link>
+                <div className="p-4 pb-0">
+                  <div className="relative overflow-hidden rounded-xl" style={{ height: IMAGE_HEIGHT }}>
+                    <ProductMedia
+                      product={product}
+                      sizes={`${CARD_WIDTH}px`}
+                      className="pointer-events-none"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
+                    <Link
+                      href={`/products/${product.slug}`}
+                      onClick={e => { if (isDragging.current) e.preventDefault(); }}
+                      aria-label={`View ${product.name}`}
+                      className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90
+                                 backdrop-blur-sm flex items-center justify-center
+                                 hover:bg-accent hover:text-white
+                                 transition-all duration-200 shadow-sm"
+                    >
+                      <DiagonalArrowIcon size={12} />
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Text panel */}

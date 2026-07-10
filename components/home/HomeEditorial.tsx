@@ -1,6 +1,7 @@
 import HeroSection from "./sections/HeroSection";
 import AboutSection from "./sections/AboutSection";
 import ProductCarousel from "./sections/ProductCarousel";
+import LegacySection from "./sections/LegacySection";
 import IndustriesSection from "./sections/IndustriesSection";
 import ProcessSection from "./sections/ProcessSection";
 import TestimonialsSection from "./sections/TestimonialsSection";
@@ -11,8 +12,9 @@ export default function HomeEditorial() {
   return (
     <div className="bg-white">
         <HeroSection />
+        <AboutSection />
         <ProductCarousel />
-        <AboutSection />      
+        <LegacySection />
         <IndustriesSection />
         <ProcessSection />
         <TestimonialsSection />

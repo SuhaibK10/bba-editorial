@@ -47,9 +47,14 @@ export default function IndustriesSection() {
             >
               <Link
                 href="/industries"
-                className="industry-pill flex items-center gap-2"
+                className="industry-pill flex items-center gap-2.5"
               >
-                {ind.icon}
+                <span
+                  className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: ind.color, color: ind.iconColor }}
+                >
+                  {ind.icon}
+                </span>
                 {ind.label}
               </Link>
             </motion.div>

@@ -27,7 +27,7 @@ export default function AboutSection() {
             style={{ marginBottom: '2.5rem' }}
           >
             B & B has been the{" "}
-            <span className="italic font-light text-accent">manufacturing backbone</span>
+            <span className="font-light text-accent">manufacturing backbone</span>
             {" "}of India.
           </motion.h2>
 

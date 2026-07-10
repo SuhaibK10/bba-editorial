@@ -28,13 +28,15 @@ export default function ProductCard({
       className="card group"
       style={{ background: product.color }}
     >
-      <div className={`relative overflow-hidden ${imageHeight}`}>
-        <ProductMedia
-          product={product}
-          sizes={sizes}
-          priority={priority}
-          className="group-hover:scale-[1.03] transition-transform duration-500"
-        />
+      <div className="p-4 pb-0">
+        <div className={`relative overflow-hidden rounded-xl ${imageHeight}`}>
+          <ProductMedia
+            product={product}
+            sizes={sizes}
+            priority={priority}
+            className="group-hover:scale-[1.03] transition-transform duration-500"
+          />
+        </div>
       </div>
       <div className={showDescription ? "p-6 bg-white/60" : "p-5 bg-white/60"}>
         <div className={showViewArrow ? "flex items-center justify-between mb-2" : ""}>

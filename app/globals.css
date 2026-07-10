@@ -100,7 +100,7 @@
 .container-wide {
   width: 100%;
   max-width: 88rem;
-  margin: 0 auto;
+  margin-inline: auto;
   padding: 0 1.5rem;
 }
 @media (min-width: 768px)  { .container-wide { padding: 0 2.5rem; } }

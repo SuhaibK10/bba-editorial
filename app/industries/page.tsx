@@ -34,7 +34,10 @@ export default function IndustriesPage() {
               className="card p-7 border border-border"
               style={{ boxShadow: "none" }}
             >
-              <div className="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-accent mb-5">
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center mb-5"
+                style={{ background: industry.color, color: industry.iconColor }}
+              >
                 {industry.icon}
               </div>
               <h2 className="font-display font-bold text-lg text-text-primary mb-2">
