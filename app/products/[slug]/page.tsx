@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductMedia from "@/components/products/ProductMedia";
+import ProductCard from "@/components/products/ProductCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
 import { products, getProduct } from "@/data/products";
+import CheckIcon from "@/components/shared/icons/CheckIcon";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -81,10 +83,7 @@ export default async function ProductPage({ params }: Props) {
             <ul className="flex flex-col gap-3 mb-12">
               {product.features.map((feature) => (
                 <li key={feature} className="flex items-start gap-3 font-body text-text-secondary">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"
-                    className="mt-1.5 shrink-0 text-accent">
-                    <path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <CheckIcon size={16} className="mt-1.5 shrink-0 text-accent" />
                   {feature}
                 </li>
               ))}
@@ -101,25 +100,14 @@ export default async function ProductPage({ params }: Props) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {related.map((p) => (
-              <Link
+              <ProductCard
                 key={p.id}
-                href={`/products/${p.slug}`}
-                className="card group"
-                style={{ background: p.color }}
-              >
-                <div className="relative overflow-hidden h-48">
-                  <ProductMedia
-                    product={p}
-                    sizes="(max-width: 640px) 100vw, 33vw"
-                    className="group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5 bg-white/60">
-                  <h3 className="font-display font-bold text-base text-text-primary">
-                    {p.name}
-                  </h3>
-                </div>
-              </Link>
+                product={p}
+                sizes="(max-width: 640px) 100vw, 33vw"
+                imageHeight="h-48"
+                showDescription={false}
+                showViewArrow={false}
+              />
             ))}
           </div>
         </div>

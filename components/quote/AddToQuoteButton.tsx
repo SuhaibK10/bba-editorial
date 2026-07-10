@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCartStore } from "@/lib/cart-store";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
+import CheckIcon from "@/components/shared/icons/CheckIcon";
 
 export default function AddToQuoteButton({
   slug,
@@ -13,9 +15,8 @@ export default function AddToQuoteButton({
 }) {
   const items = useCartStore((s) => s.items);
   const addItem = useCartStore((s) => s.addItem);
+  const alreadyInCart = useCartStore((s) => s.isInCart(slug));
   const [justAdded, setJustAdded] = useState(false);
-
-  const alreadyInCart = items.some((i) => i.productSlug === slug);
 
   useEffect(() => {
     if (!justAdded) return;
@@ -39,9 +40,7 @@ export default function AddToQuoteButton({
         {justAdded || alreadyInCart ? (
           <>
             Added
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8.5l3.5 3.5L13 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <CheckIcon size={14} />
           </>
         ) : (
           "Add to Quote"
@@ -51,10 +50,7 @@ export default function AddToQuoteButton({
       {items.length > 0 && (
         <Link href="/quote" className="btn-text group">
           Review quote list ({items.length})
-          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"
-            className="group-hover:translate-x-1 transition-transform duration-200">
-            <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
         </Link>
       )}
     </div>

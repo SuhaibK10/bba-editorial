@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { EASE_OUT_EXPO, VIEWPORT_ONCE } from "@/lib/motion";
 import { testimonials } from "@/data/testimonials";
 
 export default function TestimonialsSection() {
   return (
-    <section className="section-pad bg-surface" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+    <section className="section-pad section-pad-md bg-surface">
       <div className="container-wide">
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={VIEWPORT_ONCE}
           className="section-label"
         >
           What clients say
@@ -20,8 +21,8 @@ export default function TestimonialsSection() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
           className="section-heading-md mb-12"
         >
           Trusted by the people <br />
@@ -34,8 +35,8 @@ export default function TestimonialsSection() {
               key={t.quote}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: EASE_OUT_EXPO }}
               className="bg-white rounded-2xl p-8 flex flex-col justify-between gap-8"
             >
               <blockquote className="font-body text-text-primary leading-relaxed">

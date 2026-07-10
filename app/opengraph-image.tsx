@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/data/site";
+import { theme } from "@/lib/theme";
 
 export const alt = `${site.name} · ${site.tagline}`;
 export const size = { width: 1200, height: 630 };
@@ -15,7 +16,7 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#FFFFFF",
+          background: theme.background,
           padding: 80,
           fontFamily: "sans-serif",
         }}
@@ -26,11 +27,11 @@ export default function OpenGraphImage() {
               width: 64,
               height: 64,
               borderRadius: 16,
-              background: "#1B6B6B",
+              background: theme.accent,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#FFFFFF",
+              color: theme.background,
               fontSize: 36,
               fontWeight: 700,
             }}
@@ -38,10 +39,10 @@ export default function OpenGraphImage() {
             B
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 32, fontWeight: 700, color: "#1A1A1A" }}>
+            <div style={{ fontSize: 32, fontWeight: 700, color: theme.textPrimary }}>
               {site.name}
             </div>
-            <div style={{ fontSize: 20, color: "#6E6E73" }}>
+            <div style={{ fontSize: 20, color: theme.textSecondary }}>
               {`Since ${site.foundingYear}`}
             </div>
           </div>
@@ -52,7 +53,7 @@ export default function OpenGraphImage() {
             style={{
               fontSize: 76,
               fontWeight: 700,
-              color: "#1A1A1A",
+              color: theme.textPrimary,
               lineHeight: 1.1,
               letterSpacing: "-0.02em",
             }}
@@ -63,16 +64,16 @@ export default function OpenGraphImage() {
             style={{
               fontSize: 76,
               fontWeight: 700,
-              color: "#1B6B6B",
+              color: theme.accent,
               lineHeight: 1.1,
               letterSpacing: "-0.02em",
             }}
           >
-            acrylic manufacturer.
+            Acrylic Manufacturer
           </div>
         </div>
 
-        <div style={{ fontSize: 24, color: "#6E6E73" }}>
+        <div style={{ fontSize: 24, color: theme.textSecondary }}>
           35+ years · 500+ brands · 13+ industries
         </div>
       </div>

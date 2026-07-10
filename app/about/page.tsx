@@ -53,7 +53,7 @@ export default function AboutPage() {
       <TrustBar />
 
       {/* Story */}
-      <section className="section-pad" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+      <section className="section-pad section-pad-md">
         <div className="container-wide">
           <div className="max-w-4xl">
             <p className="section-label">Our story</p>
@@ -98,7 +98,7 @@ export default function AboutPage() {
       <ProcessSection />
 
       {/* CTA */}
-      <section className="section-pad" style={{ paddingTop: "4rem", paddingBottom: "5rem" }}>
+      <section className="section-pad section-pad-lg">
         <div className="container-wide">
           <h2 className="section-heading-md mb-6">
             Work with a <span className="text-accent">manufacturer.</span>

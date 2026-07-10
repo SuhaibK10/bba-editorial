@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useMotionValue, animate, AnimatePresence } from "framer-motion";
+import { EASE_OUT_EXPO, CAROUSEL_SPRING, VIEWPORT_ONCE } from "@/lib/motion";
 import { products, type Product } from "@/data/products";
-import { videoPoster } from "@/lib/media";
+import ProductMedia from "@/components/products/ProductMedia";
+import DiagonalArrowIcon from "@/components/shared/icons/DiagonalArrowIcon";
 
 // The home carousel only shows categories with photography;
 // the full catalog (including made-to-order ones) lives at /products.
@@ -34,12 +35,7 @@ export default function ProductCarousel() {
 
   useEffect(() => {
     const update = () => {
-      animate(x, getTargetX(current), {
-        type: "spring",
-        stiffness: 110,
-        damping: 22,
-        mass: 1.9,
-      });
+      animate(x, getTargetX(current), CAROUSEL_SPRING);
     };
     update();
     window.addEventListener("resize", update);
@@ -63,19 +59,14 @@ export default function ProductCarousel() {
 
     const clamped = Math.max(0, Math.min(carouselProducts.length - 1, next));
 
-    animate(x, getTargetX(clamped), {
-      type: "spring",
-      stiffness: 110,
-      damping: 22,
-      mass: 1.9,
-    });
+    animate(x, getTargetX(clamped), CAROUSEL_SPRING);
 
     setCurrent(clamped);
     setTimeout(() => { isDragging.current = false; }, 50);
   };
 
   return (
-    <section className="section-pad overflow-hidden" style={{ paddingBottom: '2rem' }}>
+    <section className="section-pad section-pad-bottom-tight overflow-hidden">
 
       <div className="container-wide mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -85,7 +76,7 @@ export default function ProductCarousel() {
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={VIEWPORT_ONCE}
               className="section-label"
             >
               What we make
@@ -93,8 +84,8 @@ export default function ProductCarousel() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
               className="section-heading-lg"
             >
               Multiple<br />
@@ -105,7 +96,7 @@ export default function ProductCarousel() {
 
           {/* Right: description + nav */}
           <div className="flex flex-col items-start md:items-end gap-4">
-            <p className="font-body text-[#6E6E73] leading-relaxed max-w-xs text-sm">
+            <p className="font-body text-text-secondary leading-relaxed max-w-xs text-sm">
               From a single brochure holder to a full motorised signage network,
               we manufacture it all.
             </p>
@@ -114,8 +105,8 @@ export default function ProductCarousel() {
                 onClick={() => goTo(current - 1)}
                 disabled={current === 0}
                 aria-label="Previous product"
-                className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
-                           text-[#6E6E73] hover:border-[#1A1A1A] hover:text-[#1A1A1A]
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center
+                           text-text-secondary hover:border-text-primary hover:text-text-primary
                            disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
               >
                 <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -126,8 +117,8 @@ export default function ProductCarousel() {
                 onClick={() => goTo(current + 1)}
                 disabled={current === carouselProducts.length - 1}
                 aria-label="Next product"
-                className="w-10 h-10 rounded-full border border-[#E0E0E0] flex items-center justify-center
-                           text-[#6E6E73] hover:border-[#1A1A1A] hover:text-[#1A1A1A]
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center
+                           text-text-secondary hover:border-text-primary hover:text-text-primary
                            disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
               >
                 <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -136,14 +127,14 @@ export default function ProductCarousel() {
               </button>
 
               <div className="flex items-center gap-2">
-                <div className="w-8 h-5 rounded-full border border-[#E0E0E0] flex items-center justify-start pl-1.5">
+                <div className="w-8 h-5 rounded-full border border-border flex items-center justify-start pl-1.5">
                   <motion.div
                     animate={{ x: [0, 18, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-1.5 h-1 rounded-full bg-[#AEAEB2]"
+                    className="w-1.5 h-1 rounded-full bg-text-faint"
                   />
                 </div>
-                <span className="font-body text-xs text-[#7b7b7c]">Scroll to explore</span>
+                <span className="font-body text-xs text-text-secondary">Scroll to explore</span>
               </div>
             </div>
           </div>
@@ -167,37 +158,18 @@ export default function ProductCarousel() {
               <motion.div
                 key={product.id}
                 animate={{ scale: isActive ? 1 : 0.99, opacity: isActive ? 1 : 0.99 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
                 className="rounded-2xl overflow-hidden flex-shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
                 {/* Image */}
                 <div className="relative overflow-hidden" style={{ height: IMAGE_HEIGHT }}>
-                  {product.video ? (
-                    <video
-                      src={product.image}
-                      poster={videoPoster(product.image)}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                      aria-label={product.name}
-                      className="w-full h-full object-cover"
-                      style={{ pointerEvents: "none" }}
-                    />
-                  ) : (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      sizes={`${CARD_WIDTH}px`}
-                      className="object-cover"
-                      style={{ pointerEvents: "none" }}
-                      draggable={false}
-                    />
-                  )}
+                  <ProductMedia
+                    product={product}
+                    sizes={`${CARD_WIDTH}px`}
+                    className="pointer-events-none"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
                   <Link
                     href={`/products/${product.slug}`}
@@ -208,18 +180,16 @@ export default function ProductCarousel() {
                                hover:bg-accent hover:text-white
                                transition-all duration-200 shadow-sm"
                   >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                      <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <DiagonalArrowIcon size={12} />
                   </Link>
                 </div>
 
                 {/* Text panel */}
                 <div className="p-5 text-center">
-                  <h3 className="font-display font-bold text-lg text-[#1A1A1A] mb-1.5">
+                  <h3 className="font-display font-bold text-lg text-text-primary mb-1.5">
                     {product.name}
                   </h3>
-                  <p className="font-body text-sm text-[#6E6E73] leading-relaxed line-clamp-2">
+                  <p className="font-body text-sm text-text-secondary leading-relaxed line-clamp-2">
                     {product.desc}
                   </p>
                 </div>
@@ -232,14 +202,14 @@ export default function ProductCarousel() {
 
       {/* Animated Counter */}
       <div className="container-wide mt-8">
-        <div className="flex items-center gap-1.5 font-body text-sm text-[#AEAEB2] tabular-nums">
+        <div className="flex items-center gap-1.5 font-body text-sm text-text-faint tabular-nums">
           <AnimatePresence mode="wait">
             <motion.span
               key={current}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
             >
               {String(current + 1).padStart(2, "0")}
             </motion.span>
@@ -253,7 +223,7 @@ export default function ProductCarousel() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, delay: 0.35, ease: EASE_OUT_EXPO }}
         className="flex items-center justify-center gap-5 flex-wrap mb-6"
       >
         

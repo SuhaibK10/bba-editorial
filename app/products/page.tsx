@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/shared/PageHeader";
-import ProductMedia from "@/components/products/ProductMedia";
-import { products, moreCategories } from "@/data/products";
+import ProductCard from "@/components/products/ProductCard";
+import { products } from "@/data/products";
+import { moreCategories } from "@/data/home-content";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -29,41 +31,12 @@ export default function ProductsPage() {
       <div className="container-wide pb-20 md:pb-28">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, i) => (
-            <Link
+            <ProductCard
               key={product.id}
-              href={`/products/${product.slug}`}
-              className="card group"
-              style={{ background: product.color }}
-            >
-              <div className="relative overflow-hidden h-64">
-                <ProductMedia
-                  product={product}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  priority={i < 3}
-                  className="group-hover:scale-[1.03] transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 bg-white/60">
-                <div className="flex items-center justify-between mb-2">
-                  <h2 className="font-display font-bold text-lg text-text-primary">
-                    {product.name}
-                  </h2>
-                  <span
-                    className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0
-                               text-text-secondary group-hover:bg-accent group-hover:text-white
-                               transition-colors duration-200 shadow-sm"
-                    aria-hidden="true"
-                  >
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-                <p className="font-body text-sm text-text-secondary leading-relaxed">
-                  {product.desc}
-                </p>
-              </div>
-            </Link>
+              product={product}
+              priority={i < 3}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
           ))}
         </div>
 
@@ -81,9 +54,7 @@ export default function ProductsPage() {
                 className="industry-pill flex items-center gap-2"
               >
                 {category}
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <ArrowIcon size={12} />
               </Link>
             ))}
           </div>
@@ -95,10 +66,7 @@ export default function ProductsPage() {
           </p>
           <Link href="/quote" className="btn-text group">
             Request a custom fabrication
-            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"
-              className="group-hover:translate-x-1 transition-transform duration-200">
-              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </div>
       </div>

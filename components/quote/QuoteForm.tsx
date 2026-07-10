@@ -2,16 +2,15 @@
 
 import { useEffect, useState } from "react";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
-import { site, whatsappUrl, emailHref } from "@/data/site";
+import { whatsappUrl, emailHref, site } from "@/data/site";
 import { products, getProduct } from "@/data/products";
 import { useCartStore } from "@/lib/cart-store";
-
-type FormState = {
-  name: string;
-  company: string;
-  phone: string;
-  message: string;
-};
+import {
+  validateQuoteForm,
+  composeWhatsAppMessage,
+  type QuoteFormFields,
+  type QuoteFormErrors,
+} from "@/lib/quote";
 
 const inputClass =
   "w-full rounded-lg border border-border bg-white px-4 py-3 font-body text-sm text-text-primary " +
@@ -24,15 +23,16 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
   const updateQuantity = useCartStore((s) => s.updateQuantity);
   const updateNote = useCartStore((s) => s.updateNote);
   const clearCart = useCartStore((s) => s.clearCart);
+  const isInCart = useCartStore((s) => s.isInCart);
 
-  const [form, setForm] = useState<FormState>({
+  const [form, setForm] = useState<QuoteFormFields>({
     name: "",
     company: "",
     phone: "",
     message: "",
   });
   const [pendingProduct, setPendingProduct] = useState("");
-  const [errors, setErrors] = useState<Partial<FormState> & { items?: string }>({});
+  const [errors, setErrors] = useState<QuoteFormErrors>({});
 
   // Pre-fill from a deep link like /quote?product=<slug>. Runs once on mount.
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const set = (field: keyof FormState) =>
+  const set = (field: keyof QuoteFormFields) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((f) => ({ ...f, [field]: e.target.value }));
       setErrors((err) => ({ ...err, [field]: undefined }));
@@ -64,44 +64,12 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
     setErrors((err) => ({ ...err, items: undefined }));
   };
 
-  const validate = () => {
-    const next: Partial<FormState> & { items?: string } = {};
-    if (!form.name.trim()) next.name = "Please enter your name.";
-    if (!/^[+\d][\d\s-]{7,15}$/.test(form.phone.trim()))
-      next.phone = "Please enter a valid phone number.";
-    if (items.length === 0) next.items = "Please add at least one product below.";
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  };
-
-  const composeMessage = () => {
-    const itemLines = items.map((item, i) => {
-      const parts = [`${i + 1}. ${item.name}`];
-      if (item.quantity.trim()) parts.push(`Qty: ${item.quantity.trim()}`);
-      if (item.note?.trim()) parts.push(`Note: ${item.note.trim()}`);
-      return parts.join(", ");
-    });
-
-    const lines: (string | null)[] = [
-      `Hi ${site.name}, I'd like a quote.`,
-      "",
-      `Name: ${form.name.trim()}`,
-      form.company.trim() ? `Company: ${form.company.trim()}` : null,
-      `Phone: ${form.phone.trim()}`,
-      "",
-      "Products:",
-      ...itemLines,
-      form.message.trim() ? "" : null,
-      form.message.trim() ? `Details: ${form.message.trim()}` : null,
-    ];
-
-    return lines.filter((line): line is string => line !== null).join("\n");
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
-    window.open(whatsappUrl(composeMessage()), "_blank", "noopener,noreferrer");
+    const nextErrors = validateQuoteForm(form, items);
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+    window.open(whatsappUrl(composeWhatsAppMessage(form, items)), "_blank", "noopener,noreferrer");
     clearCart();
   };
 
@@ -241,7 +209,7 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
             >
               <option value="">+ Add another product…</option>
               {products
-                .filter((p) => !items.some((i) => i.productSlug === p.slug))
+                .filter((p) => !isInCart(p.slug))
                 .map((p) => (
                   <option key={p.slug} value={p.slug}>
                     {p.name}

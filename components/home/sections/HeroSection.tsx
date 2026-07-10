@@ -4,10 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { heroSlides } from "@/data/products";
+import { heroSlides } from "@/data/hero-slides";
+import { EASE_OUT_EXPO } from "@/lib/motion";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
+import HeroDots from "@/components/home/sections/HeroDots";
 
 const SLIDE_MS = 4000;
-const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
@@ -31,19 +33,22 @@ export default function HeroSection() {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+    touchStartX.current = e.touches[0]?.clientX ?? 0;
   };
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    const delta = touchStartX.current - (e.changedTouches[0]?.clientX ?? 0);
     if (Math.abs(delta) < 40) return;
     const dir = delta > 0 ? 1 : -1;
     goTo((current + dir + heroSlides.length) % heroSlides.length);
   };
 
+  const slide = heroSlides[current];
+  if (!slide) return null;
+
   return (
     <section
       id="hero-section"
-      className="relative h-[90svh] md:h-[70vh] flex flex-col justify-end overflow-hidden bg-[#101314]"
+      className="relative h-[95svh] md:h-[95vh] flex flex-col justify-end overflow-hidden bg-hero-bg"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -58,12 +63,20 @@ export default function HeroSection() {
           className="absolute inset-0"
         >
           <Image
-            src={heroSlides[current].image}
-            alt={heroSlides[current].name}
+            src={slide.mobileImage ?? slide.desktopImage}
+            alt={slide.name}
             fill
             preload={current === 0}
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center md:hidden"
+          />
+          <Image
+            src={slide.desktopImage}
+            alt={slide.name}
+            fill
+            preload={current === 0}
+            sizes="100vw"
+            className="hidden md:block object-cover object-center"
           />
         </motion.div>
       </AnimatePresence>
@@ -78,7 +91,7 @@ export default function HeroSection() {
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: easeOutExpo }}
+            transition={{ duration: 0.8, delay: 0.1, ease: EASE_OUT_EXPO }}
             className="font-display font-bold text-[clamp(1.75rem,5vw,3.75rem)] md:text-[clamp(2rem,5.5vw,4.25rem)]
                        text-white leading-[1.08] tracking-tight mb-5 md:mb-8"
           >
@@ -90,20 +103,12 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: easeOutExpo }}
-            className="flex flex-wrap gap-3 justify-center"
+            transition={{ duration: 0.7, delay: 0.3, ease: EASE_OUT_EXPO }}
+            className="flex flex-wrap gap-3 justify-center mb-4 md:mb-8"
           >
             <Link href="/quote" className="btn-primary">
               Get a Quote
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path
-                  d="M2.5 6h7M6.5 3l3 3-3 3"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ArrowIcon size={12} />
             </Link>
             <Link
               href="/products"
@@ -124,38 +129,23 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.3, ease: easeOutExpo }}
+                transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
               >
                 <Link
-                  href={`/products/${heroSlides[current].slug}`}
-                  className="font-display font-bold text-sm text-white hover:text-[#E3B15C] transition-colors duration-200"
+                  href={`/products/${slide.slug}`}
+                  className="font-display font-bold text-sm text-white hover:text-accent transition-colors duration-200"
                 >
-                  {heroSlides[current].name}
+                  {slide.name}
                 </Link>
               </motion.div>
             </AnimatePresence>
-            <div className="flex items-center justify-center gap-2">
-              {heroSlides.map((slide, i) => (
-                <button
-                  key={slide.slug}
-                  onClick={() => goTo(i)}
-                  aria-label={`Show ${slide.name}`}
-                  className="relative h-0.75 rounded-full overflow-hidden transition-all duration-300"
-                  style={{ width: i === current ? "2rem" : "0.75rem" }}
-                >
-                  <span className="absolute inset-0 bg-white/25" />
-                  {i === current && (
-                    <motion.span
-                      key={`fill-mobile-${current}`}
-                      className="absolute inset-0 bg-[#E3B15C] origin-left"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: SLIDE_MS / 1000, ease: "linear" }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
+            <HeroDots
+              slides={heroSlides}
+              current={current}
+              onSelect={goTo}
+              slideMs={SLIDE_MS}
+              className="flex items-center justify-center gap-2"
+            />
           </div>
         </div>
       </div>
@@ -168,38 +158,22 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.3, ease: easeOutExpo }}
+            transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
           >
             <Link
-              href={`/products/${heroSlides[current].slug}`}
-              className="font-display font-bold text-sm text-white hover:text-[#E3B15C] transition-colors duration-200"
+              href={`/products/${slide.slug}`}
+              className="font-display font-bold text-sm text-white hover:text-accent transition-colors duration-200"
             >
-              {heroSlides[current].name}
+              {slide.name}
             </Link>
           </motion.div>
         </AnimatePresence>
-        <div className="flex gap-2">
-          {heroSlides.map((slide, i) => (
-            <button
-              key={slide.slug}
-              onClick={() => goTo(i)}
-              aria-label={`Show ${slide.name}`}
-              className="relative h-0.75 rounded-full overflow-hidden transition-all duration-300"
-              style={{ width: i === current ? "2rem" : "0.75rem" }}
-            >
-              <span className="absolute inset-0 bg-white/25" />
-              {i === current && (
-                <motion.span
-                  key={`fill-desktop-${current}`}
-                  className="absolute inset-0 bg-[#E3B15C] origin-left"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: SLIDE_MS / 1000, ease: "linear" }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
+        <HeroDots
+          slides={heroSlides}
+          current={current}
+          onSelect={goTo}
+          slideMs={SLIDE_MS}
+        />
       </div>
     </section>
   );

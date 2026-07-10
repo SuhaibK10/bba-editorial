@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { processSteps } from "@/data/products";
+import { EASE_OUT_EXPO, VIEWPORT_ONCE } from "@/lib/motion";
+import { processSteps } from "@/data/home-content";
 
 export default function ProcessSection() {
   return (
-    <section className="section-pad bg-[#1A1A1A]" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+    <section className="section-pad section-pad-sm bg-text-primary">
       <div className="container-wide">
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={VIEWPORT_ONCE}
           className="section-label"
           style={{ color: "rgba(255,255,255,0.4)" }}
         >
@@ -21,8 +22,8 @@ export default function ProcessSection() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
           className="section-heading-md mb-10"
           style={{ color: "white" }}
         >
@@ -35,8 +36,8 @@ export default function ProcessSection() {
               key={item.step}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: EASE_OUT_EXPO }}
               className="border-t border-white/10 pt-6 pb-6 md:pr-10"
             >
               <div className="process-step-number">{item.step}</div>

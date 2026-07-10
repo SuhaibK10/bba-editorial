@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { stats } from "@/data/products";
+import { EASE_OUT_EXPO } from "@/lib/motion";
+import { stats } from "@/data/home-content";
 
 function StatItem({
   value,
@@ -38,10 +39,10 @@ function StatItem({
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: EASE_OUT_EXPO }}
       className="flex flex-col items-center text-center gap-2"
     >
-      <div className="font-display font-bold text-5xl md:text-6xl text-[#1A1A1A] tracking-tight leading-none">
+      <div className="font-display font-bold text-5xl md:text-6xl text-text-primary tracking-tight leading-none">
         <span ref={countRef}>0</span>
         <span>{suffix}</span>
       </div>
@@ -52,7 +53,7 @@ function StatItem({
 
 export default function TrustBar() {
   return (
-    <section className="trustbar border-y border-[#E0E0E0] py-16 bg-surface">
+    <section className="trustbar border-y border-border py-16 bg-surface">
       <div className="container-wide">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (

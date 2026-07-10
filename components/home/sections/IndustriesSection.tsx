@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { industryList } from "@/components/shared/industries";
+import { EASE_OUT_EXPO, VIEWPORT_ONCE } from "@/lib/motion";
+import { industryList } from "@/data/industries";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 
 export default function IndustriesSection() {
   return (
-    <section className="section-pad" style={{ paddingTop: '2rem' }}>
+    <section className="section-pad section-pad-top-tight">
       <div className="container-wide">
 
         {/* Heading */}
@@ -14,7 +16,7 @@ export default function IndustriesSection() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={VIEWPORT_ONCE}
             className="section-label"
           >
             Where we work
@@ -22,8 +24,8 @@ export default function IndustriesSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
             className="section-heading-md"
           >
             Multiple
@@ -40,7 +42,7 @@ export default function IndustriesSection() {
               key={ind.label}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={VIEWPORT_ONCE}
               transition={{ duration: 0.3, delay: i * 0.04 }}
             >
               <Link
@@ -58,14 +60,11 @@ export default function IndustriesSection() {
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={VIEWPORT_ONCE}
         >
           <Link href="/industries" className="btn-text group">
             View all industries
-            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"
-              className="group-hover:translate-x-1 transition-transform duration-200">
-              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </motion.div>
 

@@ -1,5 +1,4 @@
-// Shared industry list: icons + copy used by the home section
-// and the /industries page. Keep labels in sync with data/products.ts.
+// Industry list: icons + copy used by the home section and the /industries page.
 
 export type Industry = {
   label: string;

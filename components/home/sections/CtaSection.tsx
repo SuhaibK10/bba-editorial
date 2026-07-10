@@ -2,20 +2,21 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { EASE_OUT_EXPO, VIEWPORT_ONCE } from "@/lib/motion";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import { whatsappUrl } from "@/data/site";
 
 export default function CtaSection() {
   return (
-    <section className="section-pad" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
+    <section className="section-pad section-pad-sm">
       <div className="container-wide">
         <div className="max-w-2xl">
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
             className="section-heading-lg mb-6"
           >
             Ready to build something{" "}
@@ -25,9 +26,9 @@ export default function CtaSection() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-body text-[#6E6E73] text-lg leading-relaxed mb-10"
+            className="font-body text-text-secondary text-lg leading-relaxed mb-10"
           >
             Tell us what you need. We&apos;ll quote you within 24 hours.
           </motion.p>
@@ -35,7 +36,7 @@ export default function CtaSection() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row items-start gap-3"
           >

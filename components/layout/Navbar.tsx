@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
-import { site, whatsappUrl } from "@/data/site";
+import { motion, useScroll, useSpring } from "framer-motion";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
+import MobileMenuOverlay from "@/components/layout/MobileMenuOverlay";
 
 const navLinks = [
   { label: "Products", href: "/products" },
@@ -35,7 +35,11 @@ const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => {
+      document.body.style.overflow = "";
+      document.body.classList.remove("menu-open");
+    };
   }, [menuOpen]);
 
   return (
@@ -45,7 +49,7 @@ const { scrollYProgress } = useScroll();
         <div
           className="flex items-center justify-between
                      h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
-                     border backdrop-blur-md bg-[#F5F3ED]/95 border-border shadow-card"
+                     border backdrop-blur-md bg-surface/95 border-border shadow-card"
         >
 
             {/* Logo */}
@@ -96,9 +100,7 @@ const { scrollYProgress } = useScroll();
                 style={{ height: "40px", fontSize: "0.875rem", padding: "0 1.25rem", borderRadius: "9999px" }}
               >
                 Get a Quote
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ArrowIcon size={12} />
               </Link>
 
               {/* Hamburger */}
@@ -132,7 +134,7 @@ const { scrollYProgress } = useScroll();
         {/* Scroll progress: thin track attached to the pill's bottom edge */}
         <div className="absolute left-6 right-6 md:left-8 md:right-8 top-full h-0.5 rounded-full bg-black/10 overflow-hidden">
           <motion.div
-            className="h-full origin-left bg-[#E3B15C]"
+            className="h-full origin-left bg-accent"
             style={{ scaleX }}
           />
         </div>
@@ -140,69 +142,11 @@ const { scrollYProgress } = useScroll();
         </div>
       </header>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)" }}
-            exit={{ clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white flex flex-col pt-20"
-          >
-            <nav className="flex-1 flex flex-col justify-start pt-8 px-8 gap-1">
-              {[{ label: "Home", href: "/" }, ...navLinks].map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -24 }}
-                  transition={{ delay: 0.1 + i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    href={link.href}
-                    className="block py-4 border-b border-border"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <span className="font-display font-bold text-3xl text-text-primary
-                                     hover:text-accent transition-colors duration-200">
-                      {link.label}
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 16 }}
-              transition={{ delay: 0.4, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="px-8 pb-20 flex flex-col gap-3"
-            >
-              <Link
-                href="/quote"
-                onClick={() => setMenuOpen(false)}
-                className="btn-primary w-full justify-center"
-              >
-                Get a Quote
-              </Link>
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-ghost w-full justify-center"
-              >
-                <WhatsAppIcon />
-                WhatsApp Us
-              </a>
-              <p className="text-center text-text-faint text-xs font-body pt-1">
-                {site.name} · {site.address.street}, {site.address.city}
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenuOverlay
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        navLinks={navLinks}
+      />
     </>
   );
 }

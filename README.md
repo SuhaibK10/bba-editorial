@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# B & B Appliances
 
-## Getting Started
+Marketing and product-catalog site for B & B Appliances, an acrylic display
+manufacturer. Next.js App Router site with no backend and no checkout —
+visitors build a quote list and submit it via a pre-filled WhatsApp message
+(or email).
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, Turbopack) + React + TypeScript (strict)
+- **Tailwind CSS v4**, configured via the `@theme` block in `app/globals.css`
+  (no `tailwind.config.js` — colors, easing curves, shadows are CSS custom
+  properties)
+- **Zustand** (`lib/cart-store.ts`) for the quote cart, persisted to
+  `localStorage`
+- **Framer Motion** for scroll-triggered and interactive animation
+- Images/video served from **Cloudinary**
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev        # start the dev server (Turbopack) on :3000
+npm run build       # production build
+npm run start        # serve the production build
+npm run lint         # eslint
+npm run typecheck    # tsc --noEmit, no output on success
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/                   Routes (App Router). Pages are server components;
+                        interactivity is pushed down into client components.
+components/
+  home/sections/       One component per homepage section
+  layout/               Navbar, Footer, MobileNav (bottom tab bar),
+                        MobileMenuOverlay (full-screen hamburger menu)
+  products/             ProductCard, ProductMedia (image/video/placeholder)
+  quote/                QuoteForm, AddToQuoteButton, cart UI
+  shared/                Cross-page components, including shared icons/
+data/                   Typed, hand-authored content — the site's content
+                        source of truth. No CMS.
+  products.ts           Product catalog + `getProduct()`
+  hero-slides.ts        Homepage hero slider content
+  home-content.ts       Homepage-only content (stats, process steps, etc.)
+  industries.tsx        Industry list (icons + copy)
+  site.ts                Brand/contact info, WhatsApp/email link builders
+  testimonials.ts        Testimonials + trust badges
+  faqs.ts                 FAQ content
+lib/
+  cart-store.ts          Zustand quote-cart store
+  quote.ts                Pure functions: form validation, WhatsApp message
+                        composition (used by QuoteForm, easy to unit test)
+  motion.ts                Shared Framer Motion constants — easing curves,
+                        spring configs, viewport triggers. Import from here,
+                        don't redefine inline.
+  media.ts, theme.ts     Cloudinary/video helpers, theme constants
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing content
 
-## Learn More
+Everything a non-engineer would want to change — products, hero slides,
+testimonials, contact info — lives in `data/`, typed against the exported
+interfaces in each file. There's no CMS; editing a `data/*.ts` file and
+redeploying is the workflow.
 
-To learn more about Next.js, take a look at the following resources:
+## Known placeholders
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`data/site.ts` (phone/email/domain) and `data/testimonials.ts` (client
+quotes) contain placeholder values marked with `TODO` comments. Replace
+these with real values before launch.

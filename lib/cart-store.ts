@@ -18,11 +18,12 @@ type CartState = {
   updateQuantity: (key: string, quantity: string) => void;
   updateNote: (key: string, note: string) => void;
   clearCart: () => void;
+  isInCart: (productSlug: string) => boolean;
 };
 
 export const useCartStore = create<CartState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       items: [],
 
       addItem: ({ productSlug, name }) =>
@@ -35,6 +36,9 @@ export const useCartStore = create<CartState>()(
             items: [...state.items, { key, productSlug, name, quantity: "" }],
           };
         }),
+
+      isInCart: (productSlug) =>
+        get().items.some((i) => i.productSlug === productSlug),
 
       removeItem: (key) =>
         set((state) => ({ items: state.items.filter((i) => i.key !== key) })),

@@ -1,8 +1,16 @@
 // ─────────────────────────────────────────────
-//  B & B Appliances: centralized data
+//  B & B Appliances: product catalog
 //  Edit product names, images, descriptions here
 //  Upload new images to Cloudinary, paste URL here
 // ─────────────────────────────────────────────
+
+// `image` doubles as a video URL when `video: true`. This union keeps that
+// pairing honest: video products must carry an image (their .mp4 URL),
+// and a product with no media at all can't accidentally claim video: true.
+export type ProductMedia =
+  | { image: string; video?: false }
+  | { image: string; video: true }
+  | { image?: undefined; video?: undefined };
 
 export type Product = {
   id: string;
@@ -10,14 +18,9 @@ export type Product = {
   desc: string;
   longDesc: string;
   slug: string;
-  // TODO: upload photos to Cloudinary and paste URLs for the
-  // categories below that don't have one yet. Until then a
-  // styled placeholder is shown automatically.
-  image?: string;
-  video?: boolean;
   color: string;
   features: string[];
-};
+} & ProductMedia;
 
 export const products: Product[] = [
   {
@@ -267,81 +270,5 @@ export const products: Product[] = [
   },
 ];
 
-// Homepage hero slider: full-bleed category shots.
-// Cloudinary c_fill crop keeps the subject centred at hero aspect ratios.
-export type HeroSlide = { name: string; slug: string; image: string };
-
-const heroCrop = "c_fill,g_auto,w_1920,h_1280";
-const heroImg = (path: string) =>
-  `https://res.cloudinary.com/deh394y0h/image/upload/${heroCrop}/${path}`;
-
-export const heroSlides: HeroSlide[] = [
-  {
-    name: "Retail POP Displays",
-    slug: "retail-pop-displays",
-    image: heroImg("v1779649957/LiteratureHolder_fpbz6y.png"),
-  },
-  {
-    name: "Floor Standing Displays",
-    slug: "floor-standing-displays",
-    image: heroImg("v1779899150/FloorStandingDisplays_k43oyj.png"),
-  },
-  {
-    name: "Static Signages",
-    slug: "static-signages",
-    image: heroImg("v1779711816/StaticSignage_cdmsko.png"),
-  },
-  {
-    name: "Charging Stations",
-    slug: "mobile-charging-stations",
-    image: heroImg("v1779903523/Charging_ongamy.png"),
-  },
-  {
-    name: "Acrylic Risers",
-    slug: "acrylic-risers",
-    image: heroImg("v1779899888/AcrylicRisersB_B_uicnrb.png"),
-  },
-];
-
 export const getProduct = (slug: string) =>
   products.find((p) => p.slug === slug);
-
-// Categories we manufacture but don't list as full products yet,
-// shown as quote-linked entries on /products.
-export const moreCategories = [
-  "Menu & Card Holders",
-  "Protective Screens & Shields",
-  "Acrylic Trays",
-  "Sign & Poster Frames",
-];
-
-export const industries = [
-  "Telecom",
-  "Banking & Insurance",
-  "Pharma & Healthcare",
-  "FMCG",
-  "Cosmetics & Beauty",
-  "Hospitality",
-  "Automobile",
-  "Electronics",
-  "Retail",
-  "Education",
-  "Real Estate",
-  "Government",
-  "Petroleum",
-];
-
-//Trustbar ka hai
-export const stats = [
-  { value: 35, suffix: "+", label: "Years of Manufacturing" },
-  { value: 500, suffix: "+", label: "Brands Served" },
-  { value: 13, suffix: "+", label: "Industries" },
-  { value: 15, suffix: "+", label: "Categories" },
-];
-
-export const processSteps = [
-  { step: "01", title: "Browse", desc: "Explore our product categories and find what fits your need." },
-  { step: "02", title: "Quote", desc: "Submit a quote request with your specs, quantity, and timeline." },
-  { step: "03", title: "Manufacture", desc: "We fabricate at our facility with 35 years of precision." },
-  { step: "04", title: "Deliver", desc: "Pan-India delivery. Your displays, on time, every time." },
-];

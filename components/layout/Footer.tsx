@@ -11,7 +11,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A1A1A] text-white">
+    <footer className="bg-text-primary text-white">
       <div className="container-wide" style={{ paddingTop: '2rem', paddingBottom: '0.1rem' }}>
 
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12">

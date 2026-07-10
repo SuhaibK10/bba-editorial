@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 
 export default function NotFound() {
   return (
@@ -18,10 +19,7 @@ export default function NotFound() {
           </Link>
           <Link href="/products" className="btn-text group" style={{ height: "40px" }}>
             Browse products
-            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"
-              className="group-hover:translate-x-1 transition-transform duration-200">
-              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </div>
       </div>

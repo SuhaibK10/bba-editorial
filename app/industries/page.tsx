@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/shared/PageHeader";
-import { industryList } from "@/components/shared/industries";
+import { industryList } from "@/data/industries";
+import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 
 export const metadata: Metadata = {
   title: "Industries",
@@ -52,10 +53,7 @@ export default function IndustriesPage() {
           </p>
           <Link href="/quote" className="btn-text group">
             Talk to us
-            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"
-              className="group-hover:translate-x-1 transition-transform duration-200">
-              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </div>
       </div>
