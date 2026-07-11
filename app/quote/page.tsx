@@ -18,7 +18,7 @@ export default async function QuotePage({ searchParams }: Props) {
   const { product } = await searchParams;
 
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <PageHeader
         label="Request a quote"
         title={

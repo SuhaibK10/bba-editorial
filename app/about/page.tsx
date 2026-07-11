@@ -37,7 +37,7 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <PageHeader
         label={`Est. ${site.foundingYear} · ${site.address.city}`}
         title={

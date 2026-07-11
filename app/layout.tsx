@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { MotionConfig } from "framer-motion";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
@@ -10,11 +10,13 @@ import WhatsAppFloatingButton from "@/components/layout/WhatsAppFloatingButton";
 import { site } from "@/data/site";
 import { theme } from "@/lib/theme";
 
-const sora = Sora({
+// Display serif: warm, characterful, "optical size" axis makes it read
+// engraved at heading sizes. Keeps Inter for body copy.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-fraunces",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  axes: ["opsz"],
 });
 
 const inter = Inter({
@@ -82,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sora.variable} ${inter.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="font-body antialiased">
         <script
           type="application/ld+json"

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function IndustriesPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <PageHeader
         label="Industries we serve"
         title={

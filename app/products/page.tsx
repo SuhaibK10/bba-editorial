@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <PageHeader
         label="Our products"
         title={

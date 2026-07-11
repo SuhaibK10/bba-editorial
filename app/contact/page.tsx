@@ -34,7 +34,7 @@ const channels = [
 
 export default function ContactPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <PageHeader
         label="Contact"
         title={

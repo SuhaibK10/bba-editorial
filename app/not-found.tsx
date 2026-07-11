@@ -3,7 +3,7 @@ import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 
 export default function NotFound() {
   return (
-    <div className="bg-white min-h-screen flex items-center">
+    <div className="bg-background min-h-screen flex items-center">
       <div className="container-wide py-32">
         <p className="section-label">404</p>
         <h1 className="section-heading-lg mb-6">

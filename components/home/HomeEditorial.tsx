@@ -10,7 +10,7 @@ import CtaSection from "./sections/CtaSection";
 
 export default function HomeEditorial() {
   return (
-    <div className="bg-white">
+    <div className="bg-background">
         <HeroSection />
         <AboutSection />
         <ProductCarousel />

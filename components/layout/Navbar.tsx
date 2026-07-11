@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useSpring } from "framer-motion";
-import ArrowIcon from "@/components/shared/icons/ArrowIcon";
-import MobileMenuOverlay from "@/components/layout/MobileMenuOverlay";
+import { useWishlistStore } from "@/lib/wishlist-store";
+import HeartIcon from "@/components/shared/icons/HeartIcon";
+import MenuOverlay from "@/components/layout/MenuOverlay";
+import SearchBar from "@/components/layout/SearchBar";
 
 const navLinks = [
   { label: "Products", href: "/products" },
@@ -16,6 +18,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const wishlistCount = useWishlistStore((s) => s.slugs.length);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 
@@ -47,19 +50,48 @@ const { scrollYProgress } = useScroll();
       <header className="fixed top-3 md:top-4 inset-x-0 z-50 px-3 md:px-6">
         <div className="relative mx-auto max-w-5xl">
         <div
-          className="flex items-center justify-between
-                     h-14 rounded-full pl-3 pr-2 md:pl-5 md:pr-2
+          className="relative flex items-center justify-between
+                     h-14 rounded-full px-2 md:px-3
                      border backdrop-blur-md bg-surface/95 border-border shadow-card"
         >
 
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group" aria-label="B & B Appliances">
+            {/* Hamburger: opens the full-screen menu on every viewport */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex flex-col gap-1.25 w-10 h-10 items-center justify-center
+                         rounded-full transition-colors duration-200 hover:bg-surface"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+            >
+              <span
+                className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
+                            bg-text-primary`}
+                style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
+              />
+              <span
+                className={`block w-5 h-[1.5px] origin-center transition-all duration-200
+                            bg-text-primary`}
+                style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
+              />
+              <span
+                className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
+                            bg-text-primary`}
+                style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
+              />
+            </button>
+
+            {/* Logo: absolutely centered so left/right group widths don't shift it */}
+            <Link
+              href="/"
+              className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2.5 group"
+              aria-label="B & B Appliances"
+            >
               <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center
                               group-hover:scale-105 transition-transform duration-200">
                 <span className="text-white font-display font-bold text-sm leading-none">B</span>
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-display font-bold text-sm tracking-tight text-text-primary">
+                <span className="font-display font-bold text-sm tracking-tight text-text-primary whitespace-nowrap">
                   B & B Appliances
                 </span>
                 <span className="text-[10px] font-body tracking-wide text-text-faint">
@@ -68,65 +100,29 @@ const { scrollYProgress } = useScroll();
               </div>
             </Link>
 
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`
-                    relative font-body text-sm font-medium
-                    transition-colors duration-200
-                    after:absolute after:bottom-[-3px] after:left-0 after:h-[1.5px]
-                    after:bg-accent after:transition-all after:duration-300
-                    ${pathname === link.href
-                      ? "text-accent after:w-full"
-                      : "text-text-secondary hover:text-text-primary after:w-0 hover:after:w-full"
-                    }
-                  `}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            {/* Right: search + wishlist */}
+            <div className="flex items-center gap-1">
 
-            {/* CTA + Hamburger */}
-            <div className="flex items-center gap-4">
+              <SearchBar />
 
-              {/* Navbar CTA: uses btn-primary, slightly smaller via style override */}
               <Link
-                href="/quote"
-                className="hidden md:inline-flex btn-primary"
-                style={{ height: "40px", fontSize: "0.875rem", padding: "0 1.25rem", borderRadius: "9999px" }}
+                href="/wishlist"
+                aria-label={wishlistCount > 0 ? `Wishlist, ${wishlistCount} items` : "Wishlist"}
+                className="relative w-9 h-9 flex items-center justify-center rounded-full
+                           text-text-secondary hover:text-text-primary transition-colors duration-200"
               >
-                Get a Quote
-                <ArrowIcon size={12} />
+                <HeartIcon size={17} />
+                {wishlistCount > 0 && (
+                  <span
+                    className="absolute top-0.5 right-0.5 min-w-3.75 h-3.75 px-0.75 rounded-full
+                               bg-accent text-white text-[9px] font-bold flex items-center justify-center
+                               tabular-nums"
+                    aria-hidden="true"
+                  >
+                    {wishlistCount > 9 ? "9+" : wishlistCount}
+                  </span>
+                )}
               </Link>
-
-              {/* Hamburger */}
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="md:hidden flex flex-col gap-1.25 w-10 h-10 items-center justify-center
-                           rounded-full transition-colors duration-200 hover:bg-surface"
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={menuOpen}
-              >
-                <span
-                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              bg-text-primary`}
-                  style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
-                />
-                <span
-                  className={`block w-5 h-[1.5px] origin-center transition-all duration-200
-                              bg-text-primary`}
-                  style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
-                />
-                <span
-                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              bg-text-primary`}
-                  style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
-                />
-              </button>
             </div>
 
         </div>
@@ -142,7 +138,7 @@ const { scrollYProgress } = useScroll();
         </div>
       </header>
 
-      <MobileMenuOverlay
+      <MenuOverlay
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         navLinks={navLinks}

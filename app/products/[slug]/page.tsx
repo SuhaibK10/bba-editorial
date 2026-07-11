@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ProductMedia from "@/components/products/ProductMedia";
 import ProductCard from "@/components/products/ProductCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
+import WishlistButton from "@/components/wishlist/WishlistButton";
 import { products, getProduct } from "@/data/products";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
 
@@ -37,7 +38,7 @@ export default async function ProductPage({ params }: Props) {
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
 
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <div className="container-wide pt-28 md:pt-36 pb-20 md:pb-28">
 
         {/* Breadcrumb */}
@@ -89,7 +90,10 @@ export default async function ProductPage({ params }: Props) {
               ))}
             </ul>
 
-            <AddToQuoteButton slug={product.slug} name={product.name} />
+            <div className="flex flex-wrap items-center gap-3">
+              <AddToQuoteButton slug={product.slug} name={product.name} />
+              <WishlistButton slug={product.slug} />
+            </div>
           </div>
         </div>
 

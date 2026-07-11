@@ -3,19 +3,21 @@
 @source "../app/**/*.{ts,tsx}";
 
 @theme {
-  --font-display: var(--font-sora), sans-serif;
+  --font-display: var(--font-fraunces), serif;
   --font-body: var(--font-inter), sans-serif;
 
-  --color-background: #FFFFFF;
-  --color-surface: #F5F5F7;
-  --color-surface-2: #EBEBED;
-  --color-text-primary: #1D1D1F;
-  --color-text-secondary: #86868B;
-  --color-text-faint: #AEAEB2;
-  --color-accent: #1D1D1F;
-  --color-accent-hover: #424245;
-  --color-border: #E0E0E0;
-  --color-border-strong: #C7C7CC;
+  /* "Warm gallery" palette: paper canvas + warm ink + heritage green.
+     Deliberately not pure white/grey — the warmth is the signature. */
+  --color-background: #FBF9F5;
+  --color-surface: #F4F0E8;
+  --color-surface-2: #EAE4D8;
+  --color-text-primary: #23201B;
+  --color-text-secondary: #7D766B;
+  --color-text-faint: #A8A093;
+  --color-accent: #1D5C3F;
+  --color-accent-hover: #164A32;
+  --color-border: #E7E0D4;
+  --color-border-strong: #D4CBBB;
 
   /* Dark backdrop behind the hero photo (letterboxing / load-in flash). Not
      a brand accent, so it doesn't move when --color-accent is rethemed. */
@@ -84,7 +86,7 @@
 
   /* ── Typography ─────────────────────────────────────────── */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sora), sans-serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -240,7 +242,7 @@
   }
 
   .section-heading-lg {
-    font-family: var(--font-sora), sans-serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700;
     font-size: clamp(2rem, 4vw, 3.5rem);
     color: var(--color-text-primary);
@@ -249,7 +251,7 @@
   }
 
   .section-heading-md {
-    font-family: var(--font-sora), sans-serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700;
     font-size: clamp(1.75rem, 3.5vw, 3rem);
     color: var(--color-text-primary);
@@ -292,7 +294,7 @@
 
 /* ── Process steps (dark section) ────────────────────────── */
 .process-step-number {
-  font-family: var(--font-sora), sans-serif;
+  font-family: var(--font-fraunces), serif;
   font-weight: 700;
   font-size: 3.5rem;
   line-height: 1;
@@ -300,7 +302,7 @@
   margin-bottom: 2rem;
 }
 .process-step-title {
-  font-family: var(--font-sora), sans-serif;
+  font-family: var(--font-fraunces), serif;
   font-weight: 700;
   font-size: 1.375rem;
   color: #FFFFFF;
