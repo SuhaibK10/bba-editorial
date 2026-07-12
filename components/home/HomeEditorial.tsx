@@ -1,5 +1,6 @@
 import HeroSection from "./sections/HeroSection";
 import AboutSection from "./sections/AboutSection";
+import ClientsSection from "./sections/ClientsSection";
 import ProductCarousel from "./sections/ProductCarousel";
 import LegacySection from "./sections/LegacySection";
 import IndustriesSection from "./sections/IndustriesSection";
@@ -13,6 +14,7 @@ export default function HomeEditorial() {
     <div className="bg-background">
         <HeroSection />
         <AboutSection />
+        <ClientsSection />
         <ProductCarousel />
         <LegacySection />
         <IndustriesSection />

@@ -20,6 +20,23 @@ export const stats: Stat[] = [
   { value: 15, suffix: "+", label: "Categories" },
 ];
 
+// Client brands shown in the marquee strip. Entries with a `logo` render
+// the image (drop SVG/PNG files in public/logos/); the rest render as
+// styled text wordmarks until their logo file is supplied. `logoSize`
+// bumps the render height for logo files with a lot of built-in padding
+// around the mark (e.g. Airtel), so every wordmark reads as the same
+// visual weight in the strip despite differing source-file crops.
+export type Client = { name: string; logo?: string; logoSize?: "base" | "lg" };
+
+export const clients: Client[] = [
+  { name: "Airtel", logo: "/logos/airtel.png", logoSize: "lg" },
+  { name: "Aircel", logo: "/logos/aircel.png", logoSize: "lg" },
+  { name: "Idea", logo: "/logos/idea.png", logoSize: "lg" },
+  { name: "Subway", logo: "/logos/subway.png", logoSize: "lg" },
+  { name: "Fossil", logo: "/logos/fossil.svg" },
+  { name: "Michael Kors", logo: "/logos/michael-kors.webp" },
+];
+
 export type ProcessStep = { step: string; title: string; desc: string };
 
 export const processSteps: ProcessStep[] = [

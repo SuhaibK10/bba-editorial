@@ -8,13 +8,29 @@ import { useWishlistStore } from "@/lib/wishlist-store";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
 import MenuOverlay from "@/components/layout/MenuOverlay";
 import SearchBar from "@/components/layout/SearchBar";
+import CategoryDropdown from "@/components/layout/CategoryDropdown";
 
 const navLinks = [
   { label: "Products", href: "/products" },
   { label: "Industries", href: "/industries" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "B2B Enquiry", href: "/b2b-enquiry" },
 ];
+
+// Products is covered by the Categories dropdown on desktop. B2B Enquiry
+// renders on the right (near search/wishlist) instead of the left group —
+// five plain links plus Categories don't fit the fixed-width pill without
+// colliding with the centered logo.
+const desktopNavLinks = navLinks.filter(
+  (l) => l.label !== "Products" && l.label !== "B2B Enquiry"
+);
+// Reveal at xl (1280px), not md — below that, Home + Categories + the plain
+// links + the B2B CTA don't fit the pill (capped at max-w-5xl) without
+// colliding with the centered logo. The hamburger covers everything below xl.
+const linkClass =
+  "hidden xl:flex items-center h-9 px-3 rounded-full font-body text-sm font-medium " +
+  "text-text-primary hover:text-accent transition-colors duration-200";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,30 +71,44 @@ const { scrollYProgress } = useScroll();
                      border backdrop-blur-md bg-surface/95 border-border shadow-card"
         >
 
-            {/* Hamburger: opens the full-screen menu on every viewport */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-1.25 w-10 h-10 items-center justify-center
-                         rounded-full transition-colors duration-200 hover:bg-surface"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-            >
-              <span
-                className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                            bg-text-primary`}
-                style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
-              />
-              <span
-                className={`block w-5 h-[1.5px] origin-center transition-all duration-200
-                            bg-text-primary`}
-                style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
-              />
-              <span
-                className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                            bg-text-primary`}
-                style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
-              />
-            </button>
+            {/* Left: hamburger (mobile only) + categories dropdown & inline links (desktop) */}
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="flex xl:hidden flex-col gap-1.25 w-10 h-10 items-center justify-center
+                           rounded-full transition-colors duration-200 hover:bg-surface"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+              >
+                <span
+                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
+                              bg-text-primary`}
+                  style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
+                />
+                <span
+                  className={`block w-5 h-[1.5px] origin-center transition-all duration-200
+                              bg-text-primary`}
+                  style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
+                />
+                <span
+                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
+                              bg-text-primary`}
+                  style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
+                />
+              </button>
+
+              <Link href="/" className={linkClass}>
+                Home
+              </Link>
+
+              <CategoryDropdown />
+
+              {desktopNavLinks.map((link) => (
+                <Link key={link.href} href={link.href} className={linkClass}>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
 
             {/* Logo: absolutely centered so left/right group widths don't shift it */}
             <Link
@@ -100,8 +130,12 @@ const { scrollYProgress } = useScroll();
               </div>
             </Link>
 
-            {/* Right: search + wishlist */}
+            {/* Right: B2B Enquiry (desktop) + search + wishlist */}
             <div className="flex items-center gap-1">
+
+              <Link href="/b2b-enquiry" className={linkClass}>
+                B2B Enquiry
+              </Link>
 
               <SearchBar />
 

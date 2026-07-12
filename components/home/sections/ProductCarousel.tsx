@@ -221,19 +221,6 @@ export default function ProductCarousel() {
         </div>
       </div>
 
-      {/* CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.35, ease: EASE_OUT_EXPO }}
-        className="flex items-center justify-center gap-5 flex-wrap mb-6"
-      >
-        
-        <Link href="/quote" className="btn-primary ">
-          Get a Quote
-        </Link>
-      </motion.div>
-
     </section>
   );
 }

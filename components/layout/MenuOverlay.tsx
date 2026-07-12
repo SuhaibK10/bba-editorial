@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { EASE_OUT_EXPO } from "@/lib/motion";
+import { products } from "@/data/products";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
+import ChevronIcon from "@/components/shared/icons/ChevronIcon";
 import { site, whatsappUrl } from "@/data/site";
 
-// Full-screen nav overlay, opened from the Navbar hamburger on every
-// viewport (the pill nav has no inline links — hamburger left, logo center).
+// Full-screen nav overlay, opened from the Navbar hamburger (shown below
+// the xl breakpoint — the inline pill links only fit at xl and above).
 // Distinct from MobileNav.tsx, the persistent mobile bottom tab bar.
 export default function MenuOverlay({
   open,
@@ -18,6 +21,8 @@ export default function MenuOverlay({
   onClose: () => void;
   navLinks: { label: string; href: string }[];
 }) {
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
+
   return (
     <AnimatePresence>
       {open && (
@@ -38,16 +43,57 @@ export default function MenuOverlay({
                   exit={{ opacity: 0, x: -24 }}
                   transition={{ delay: 0.1 + i * 0.07, duration: 0.4, ease: EASE_OUT_EXPO }}
                 >
-                  <Link
-                    href={link.href}
-                    className="block py-4 border-b border-border"
-                    onClick={onClose}
-                  >
-                    <span className="font-display font-bold text-3xl md:text-4xl text-text-primary
-                                     hover:text-accent transition-colors duration-200">
-                      {link.label}
-                    </span>
-                  </Link>
+                  {link.label === "Products" ? (
+                    <div className="border-b border-border">
+                      <div className="flex items-center justify-between py-4">
+                        <Link href={link.href} onClick={onClose}>
+                          <span className="font-display font-bold text-3xl md:text-4xl text-text-primary
+                                           hover:text-accent transition-colors duration-200">
+                            {link.label}
+                          </span>
+                        </Link>
+                        <button
+                          onClick={() => setCategoriesOpen((v) => !v)}
+                          aria-expanded={categoriesOpen}
+                          aria-label={categoriesOpen ? "Hide categories" : "Show categories"}
+                          className="w-10 h-10 rounded-full border border-border flex items-center justify-center
+                                     text-text-secondary hover:border-text-primary hover:text-text-primary
+                                     transition-colors duration-200"
+                        >
+                          <ChevronIcon
+                            size={14}
+                            className={`transition-transform duration-200 ${categoriesOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
+                      </div>
+                      {categoriesOpen && (
+                        <div className="grid grid-cols-2 gap-x-6 pb-5">
+                          {products.map((p) => (
+                            <Link
+                              key={p.slug}
+                              href={`/products/${p.slug}`}
+                              onClick={onClose}
+                              className="py-2 font-body text-sm text-text-secondary hover:text-accent
+                                         transition-colors duration-150"
+                            >
+                              {p.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="block py-4 border-b border-border"
+                      onClick={onClose}
+                    >
+                      <span className="font-display font-bold text-3xl md:text-4xl text-text-primary
+                                       hover:text-accent transition-colors duration-200">
+                        {link.label}
+                      </span>
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>

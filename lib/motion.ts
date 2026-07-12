@@ -4,7 +4,8 @@
 
 export const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
-// Drag-release spring used by the homepage product carousel.
+// Drag-release spring shared by the homepage's draggable carousels
+// (best-sellers product carousel, testimonials carousel).
 export const CAROUSEL_SPRING = {
   type: "spring",
   stiffness: 110,
