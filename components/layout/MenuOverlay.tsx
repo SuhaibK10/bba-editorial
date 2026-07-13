@@ -47,7 +47,7 @@ export default function MenuOverlay({
                     <div className="border-b border-border">
                       <div className="flex items-center justify-between py-4">
                         <Link href={link.href} onClick={onClose}>
-                          <span className="font-display font-bold text-3xl md:text-4xl text-text-primary
+                          <span className="font-display font-normal text-2xl md:text-3xl text-text-primary
                                            hover:text-accent transition-colors duration-200">
                             {link.label}
                           </span>
@@ -56,12 +56,12 @@ export default function MenuOverlay({
                           onClick={() => setCategoriesOpen((v) => !v)}
                           aria-expanded={categoriesOpen}
                           aria-label={categoriesOpen ? "Hide categories" : "Show categories"}
-                          className="w-10 h-10 rounded-full border border-border flex items-center justify-center
+                          className="w-8 h-8 rounded-full border border-border flex items-center justify-center
                                      text-text-secondary hover:border-text-primary hover:text-text-primary
                                      transition-colors duration-200"
                         >
                           <ChevronIcon
-                            size={14}
+                            size={12}
                             className={`transition-transform duration-200 ${categoriesOpen ? "rotate-180" : ""}`}
                           />
                         </button>
@@ -88,7 +88,7 @@ export default function MenuOverlay({
                       className="block py-4 border-b border-border"
                       onClick={onClose}
                     >
-                      <span className="font-display font-bold text-3xl md:text-4xl text-text-primary
+                      <span className="font-display font-normal text-2xl md:text-3xl text-text-primary
                                        hover:text-accent transition-colors duration-200">
                         {link.label}
                       </span>
@@ -108,7 +108,10 @@ export default function MenuOverlay({
               <Link
                 href="/quote"
                 onClick={onClose}
-                className="btn-primary w-full justify-center"
+                className="inline-flex items-center justify-center gap-2 h-13 w-full
+                           px-8 rounded-full bg-accent/45 backdrop-blur-sm border border-white/20
+                           text-white text-[0.9375rem] font-body font-semibold whitespace-nowrap
+                           hover:bg-accent/65 transition-colors duration-200"
               >
                 Get a Quote
               </Link>

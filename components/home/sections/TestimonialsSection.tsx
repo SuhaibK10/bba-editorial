@@ -6,7 +6,7 @@ import { EASE_OUT_EXPO, CAROUSEL_SPRING, VIEWPORT_ONCE } from "@/lib/motion";
 import { testimonials } from "@/data/testimonials";
 
 const MAX_CARD_WIDTH = 380;
-const GAP = 24;
+const GAP = 16;
 // How much of the next card peeks in at the right edge — a visible hint
 // that the strip is swipeable. Matters most on mobile, where a fixed
 // MAX_CARD_WIDTH card would otherwise fill (or overflow) the viewport
@@ -77,58 +77,25 @@ export default function TestimonialsSection() {
   return (
     <section className="section-pad section-pad-md bg-surface overflow-hidden">
       <div className="container-wide mb-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          className="section-label"
+        >
+          What clients say
+        </motion.p>
 
-          <div>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT_ONCE}
-              className="section-label"
-            >
-              What clients say
-            </motion.p>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT_ONCE}
-              transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
-              className="section-heading-md"
-            >
-              Trusted by the people <br />
-              <span className="text-accent">who buy in bulk.</span>
-            </motion.h2>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => goTo(current - 1)}
-              disabled={current === 0}
-              aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center
-                         text-text-secondary hover:border-text-primary hover:text-text-primary
-                         disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
-            >
-              <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            <button
-              onClick={() => goTo(current + 1)}
-              disabled={current === testimonials.length - 1}
-              aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center
-                         text-text-secondary hover:border-text-primary hover:text-text-primary
-                         disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
-            >
-              <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-
-        </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
+          className="section-heading-md"
+        >
+          Trusted by the people <br />
+          <span className="text-accent">who buy in bulk.</span>
+        </motion.h2>
       </div>
 
       <div className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none">
@@ -147,7 +114,7 @@ export default function TestimonialsSection() {
                 key={t.quote}
                 animate={{ scale: isActive ? 1 : 0.97, opacity: isActive ? 1 : 0.6 }}
                 transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-                className="bg-white rounded-2xl border border-border-strong p-8 flex flex-col justify-between gap-8 shrink-0"
+                className="bg-white rounded-2xl border-[1.5px] border-text-primary p-8 flex flex-col justify-between gap-8 shrink-0"
                 style={{ width: cardWidth }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
@@ -162,7 +129,7 @@ export default function TestimonialsSection() {
                     {t.name}
                   </div>
                   <div className="font-body text-xs text-text-faint mt-1">
-                    {t.company} · {t.location}
+                    {t.role}, {t.company} · {t.location}
                   </div>
                 </figcaption>
               </motion.figure>
@@ -172,7 +139,19 @@ export default function TestimonialsSection() {
       </div>
 
       <div className="container-wide mt-8">
-        <div className="flex items-center gap-1.5 font-body text-sm text-text-faint tabular-nums">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          {testimonials.map((t, i) => (
+            <button
+              key={t.quote}
+              onClick={() => goTo(i)}
+              aria-label={`Show testimonial ${i + 1}`}
+              aria-current={i === current}
+              className={`h-1.5 rounded-full transition-all duration-300
+                          ${i === current ? "w-6 bg-accent" : "w-1.5 bg-border-strong hover:bg-text-faint"}`}
+            />
+          ))}
+        </div>
+        <div className="flex items-center justify-center gap-1.5 font-body text-sm text-text-faint tabular-nums">
           <AnimatePresence mode="wait">
             <motion.span
               key={current}

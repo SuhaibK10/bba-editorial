@@ -17,7 +17,7 @@ export default function IndustriesSection() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
-            className="section-label"
+            className="section-label text-center"
           >
             Where we work
           </motion.p>
@@ -26,7 +26,7 @@ export default function IndustriesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
-            className="section-heading-md"
+            className="section-heading-md text-center"
           >
             Multiple
             <span className="text-accent"> Industries.</span> <br/>

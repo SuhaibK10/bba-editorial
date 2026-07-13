@@ -3,7 +3,7 @@
 @source "../app/**/*.{ts,tsx}";
 
 @theme {
-  --font-display: var(--font-fraunces), serif;
+  --font-display: var(--font-newsreader), serif;
   --font-body: var(--font-inter), sans-serif;
 
   /* "Warm gallery" palette: paper canvas + warm ink + heritage green.
@@ -86,7 +86,7 @@
 
   /* ── Typography ─────────────────────────────────────────── */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-fraunces), serif;
+    font-family: var(--font-newsreader), serif;
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -272,7 +272,7 @@
   }
 
   .section-heading-lg {
-    font-family: var(--font-fraunces), serif;
+    font-family: var(--font-newsreader), serif;
     font-weight: 700;
     font-size: clamp(2rem, 4vw, 3.5rem);
     color: var(--color-text-primary);
@@ -281,7 +281,7 @@
   }
 
   .section-heading-md {
-    font-family: var(--font-fraunces), serif;
+    font-family: var(--font-newsreader), serif;
     font-weight: 700;
     font-size: clamp(1.75rem, 3.5vw, 3rem);
     color: var(--color-text-primary);
@@ -324,19 +324,19 @@
 
 /* ── Process steps (dark section) ────────────────────────── */
 .process-step-number {
-  font-family: var(--font-fraunces), serif;
+  font-family: var(--font-newsreader), serif;
   font-weight: 700;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.12);
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 .process-step-title {
-  font-family: var(--font-fraunces), serif;
+  font-family: var(--font-newsreader), serif;
   font-weight: 700;
   font-size: 1.375rem;
   color: #FFFFFF;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 .process-step-desc {
   font-family: var(--font-inter), sans-serif;
@@ -371,14 +371,9 @@
 .trustbar::before { top: -1px; }
 .trustbar::after  { bottom: -1px; }
 
-/* ── Mobile bottom nav safe area ─────────────────────────────────────── */
-.mobile-nav-bar {
-  padding-bottom: max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px));
-}
-
 /* Spacer matching the nav height so page content doesn't hide behind it */
 .mobile-nav-spacer {
-  height: calc(56px + max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px)));
+  height: 56px;
 }
 
 /* ── Hide the floating WhatsApp button behind the open mobile menu ──────── */

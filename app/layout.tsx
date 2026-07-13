@@ -12,9 +12,9 @@ import { theme } from "@/lib/theme";
 
 // Display serif: warm literary/journal serif. "Optical size" axis makes
 // it read well at heading sizes. Keeps Inter for body copy.
-const fraunces = Newsreader({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-newsreader",
   display: "swap",
   axes: ["opsz"],
 });
@@ -84,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${newsreader.variable} ${inter.variable}`}>
       <body className="font-body antialiased">
         <script
           type="application/ld+json"
@@ -97,7 +97,7 @@ export default function RootLayout({
             <Footer />
             <MobileNav />
             <WhatsAppFloatingButton />
-            <div className="mobile-nav-spacer md:hidden" aria-hidden="true" />
+            <div className="mobile-nav-spacer xl:hidden" aria-hidden="true" />
           </SmoothScrollProvider>
         </MotionConfig>
       </body>

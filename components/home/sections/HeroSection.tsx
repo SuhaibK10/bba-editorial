@@ -81,20 +81,27 @@ export default function HeroSection() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Legibility gradients */}
-      <div className="absolute inset-0 z-1 bg-linear-to-t from-black/85 via-black/30 to-black/10" />
-      <div className="absolute inset-x-0 top-0 h-40 z-1 bg-linear-to-b from-black/50 to-transparent" />
+      {/* Legibility gradient: only the bottom CTAs/category link need
+          contrast now (the big headline moved to AboutSection), so this
+          is much lighter than a full-bleed darken. */}
+      <div className="absolute inset-0 z-1 bg-linear-to-t from-black/55 via-black/10 to-transparent" />
 
       {/* Bottom-centred text */}
-      <div className="container-wide relative z-10 pb-8 md:pb-24">
+      <div className="container-wide relative z-10 pb-2 md:pb-6">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE_OUT_EXPO }}
-            className="flex flex-wrap gap-3 justify-center mb-4 md:mb-8"
+            className="flex flex-wrap gap-3 justify-center mb-2 md:mb-8"
           >
-            <Link href="/quote" className="btn-primary">
+            <Link
+              href="/quote"
+              className="inline-flex items-center justify-center gap-2 h-10 min-w-40
+                         px-5 rounded-full bg-accent/45 backdrop-blur-sm border border-white/20
+                         text-white text-sm font-body font-semibold whitespace-nowrap
+                         hover:bg-accent/65 transition-colors duration-200"
+            >
               Get a Quote
               <ArrowIcon size={12} />
             </Link>
@@ -110,7 +117,7 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Mobile category name + indicators: centred below CTAs */}
-          <div className="flex md:hidden flex-col items-center gap-3 mt-6">
+          <div className="flex md:hidden flex-col items-center gap-3 mt-2">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}

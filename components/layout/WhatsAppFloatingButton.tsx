@@ -54,7 +54,7 @@ export default function WhatsAppFloatingButton() {
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="whatsapp-fixed md:hidden fixed bottom-24 right-4 z-40 w-12 h-12 rounded-full bg-whatsapp flex items-center justify-center"
+          className="whatsapp-fixed fixed bottom-24 xl:bottom-6 right-4 xl:right-6 z-40 w-12 h-12 rounded-full bg-whatsapp flex items-center justify-center"
           style={{ boxShadow: "0 0 0 2px var(--color-text-primary), 0 10px 15px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.1)" }}
         >
           <WhatsAppIcon size={28} color="white" />

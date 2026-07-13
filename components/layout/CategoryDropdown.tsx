@@ -33,7 +33,7 @@ export default function CategoryDropdown() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex items-center h-9 px-3 rounded-full font-body text-sm font-medium
+        className="flex items-center h-9 px-3 rounded-full font-body text-[13px] font-medium
                    text-text-primary hover:text-accent transition-colors duration-200 whitespace-nowrap"
       >
         Categories

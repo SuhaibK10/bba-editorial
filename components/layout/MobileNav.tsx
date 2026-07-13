@@ -86,17 +86,19 @@ const NAV = [
   { label: "Account", href: "/account", icon: AccountIcon },
 ] as const;
 
-// Fixed bottom tab bar, mobile only. Sits below the full-screen hamburger
-// menu (z-30 vs the menu's z-40) so opening the menu covers it, avoiding
-// two overlapping navigation surfaces at once. Each icon has an outline
-// (inactive) and filled (active) state, matching the dual-state pattern
-// used in most premium iOS/Android tab bars.
+// Fixed bottom tab bar, mobile + tablet (hidden at xl, matching the
+// breakpoint where Navbar reveals its full desktop pill — so this bar
+// stays visible through iPad-sized screens, not just phones). Sits below
+// the full-screen hamburger menu (z-30 vs the menu's z-40) so opening the
+// menu covers it, avoiding two overlapping navigation surfaces at once.
+// Each icon has an outline (inactive) and filled (active) state, matching
+// the dual-state pattern used in most premium iOS/Android tab bars.
 export default function MobileNav() {
   const pathname = usePathname();
   const cartCount = useCartStore((s) => s.items.length);
 
   return (
-    <nav className="mobile-nav-bar md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border">
+    <nav className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border">
       <div className="flex items-center h-14">
         {NAV.map(({ label, href, icon: Icon }) => {
           const isActive = href === "/" ? pathname === href : pathname.startsWith(href);

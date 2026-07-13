@@ -1,9 +1,13 @@
 import Image from "next/image";
-import { clients } from "@/data/home-content";
+import { clients, stats } from "@/data/home-content";
+import StatItem from "@/components/home/sections/StatItem";
 
-// Client marquee. Pure CSS animation (see .marquee in globals.css), so this
-// stays a server component. The list is duplicated for the seamless loop;
-// the second copy is aria-hidden. Logos render in full brand color.
+// Client marquee + stats. Pure CSS animation (see .marquee in globals.css),
+// so this stays a server component (StatItem is its own client boundary).
+// The list is duplicated for the seamless loop; the second copy is
+// aria-hidden. Logos render in full brand color. The stats row sits right
+// below the logos on purpose: the scale claim ("500+ brands") and the
+// recognizable names backing it up reinforce each other side by side.
 export default function ClientsSection() {
   return (
     <section className="section-pad-sm">
@@ -24,7 +28,9 @@ export default function ClientsSection() {
                   height={55}
                   unoptimized
                   className={
-                    client.logoSize === "xl"
+                    client.logoSize === "2xl"
+                      ? "h-20 md:h-24 w-auto"
+                      : client.logoSize === "xl"
                       ? "h-16 md:h-20 w-auto"
                       : client.logoSize === "lg"
                       ? "h-14 md:h-16 w-auto"
@@ -37,6 +43,14 @@ export default function ClientsSection() {
                 </span>
               )}
             </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="container-wide mt-12 md:mt-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((stat, i) => (
+            <StatItem key={stat.label} {...stat} index={i} />
           ))}
         </div>
       </div>

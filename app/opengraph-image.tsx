@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
               letterSpacing: "-0.02em",
             }}
           >
-            {"India's most trusted"}
+            {"India's Most Trusted"}
           </div>
           <div
             style={{

@@ -24,7 +24,7 @@ export default function ProcessSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
           transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
-          className="section-heading-md mb-10"
+          className="section-heading-md mb-6"
           style={{ color: "white" }}
         >
           Simple. Fast. Reliable.
@@ -38,7 +38,7 @@ export default function ProcessSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_ONCE}
               transition={{ duration: 0.6, delay: i * 0.1, ease: EASE_OUT_EXPO }}
-              className="border-t border-white/10 pt-6 pb-6 md:pr-10"
+              className="border-t border-white/10 pt-4 pb-4 md:pr-10"
             >
               <div className="process-step-number">{item.step}</div>
               <h3 className="process-step-title">{item.title}</h3>

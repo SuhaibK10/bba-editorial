@@ -7,13 +7,13 @@ export default function AboutSection() {
   return (
     <section className="section-pad section-pad-tight">
       <div className="container-wide">
-        <div className="max-w-4xl">
+        <div className="max-w-4xl mx-auto text-center">
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
-            className="section-label"
+            className="section-label text-center"
           >
             Who we are
           </motion.p>
@@ -23,7 +23,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.6, delay: 0.05, ease: EASE_OUT_EXPO }}
-            className="font-display font-medium text-lg md:text-xl text-accent mb-3"
+            className="font-display font-medium text-2xl md:text-3xl text-accent mb-3 text-center"
           >
             India&apos;s most trusted acrylic manufacturer.
           </motion.p>
@@ -33,11 +33,11 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT_EXPO }}
-            className="section-heading-lg"
+            className="section-heading-md"
             style={{ marginBottom: '2.5rem' }}
           >
             B & B has been the{" "}
-            <span className="font-light text-accent">manufacturing backbone</span>
+            <span className="text-accent">manufacturing backbone</span>
             {" "}of India.
           </motion.h2>
 

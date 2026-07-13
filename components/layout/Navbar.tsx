@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { useWishlistStore } from "@/lib/wishlist-store";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
 import MenuOverlay from "@/components/layout/MenuOverlay";
@@ -13,17 +13,14 @@ import CategoryDropdown from "@/components/layout/CategoryDropdown";
 
 const navLinks = [
   { label: "Products", href: "/products" },
-  { label: "Industries", href: "/industries" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "B2B Enquiry", href: "/b2b-enquiry" },
 ];
 
-// Products is covered by the Categories dropdown on desktop. Links are
-// split across both sides of the centered logo — About/Contact/B2B Enquiry
-// sit on the right (near search/wishlist) rather than piling every plain
-// link on the left.
-const leftNavLinks = navLinks.filter((l) => l.label === "Industries");
+// Products is covered by the Categories dropdown on desktop. About/Contact/
+// B2B Enquiry sit on the right (near search/wishlist) rather than piling
+// every plain link on the left.
 const rightNavLinks = navLinks.filter(
   (l) => l.label === "About" || l.label === "Contact" || l.label === "B2B Enquiry"
 );
@@ -31,7 +28,7 @@ const rightNavLinks = navLinks.filter(
 // links + the B2B CTA don't fit the pill (capped at max-w-5xl) without
 // colliding with the centered logo. The hamburger covers everything below xl.
 const linkClass =
-  "hidden xl:flex items-center h-9 px-3 rounded-full font-body text-sm font-medium " +
+  "hidden xl:flex items-center h-9 px-3 rounded-full font-body text-[13px] font-medium " +
   "text-text-primary hover:text-accent transition-colors duration-200";
 
 export default function Navbar() {
@@ -65,7 +62,7 @@ const { scrollYProgress } = useScroll();
 
   return (
     <>
-      <header className="fixed top-3 md:top-4 inset-x-0 z-50 px-3 md:px-6">
+      <header className="fixed top-2 md:top-3 inset-x-0 z-50 px-3 md:px-6">
         <div className="relative mx-auto max-w-5xl">
         <div
           className="relative flex items-center justify-between
@@ -101,12 +98,6 @@ const { scrollYProgress } = useScroll();
               </Link>
 
               <CategoryDropdown />
-
-              {leftNavLinks.map((link) => (
-                <Link key={link.href} href={link.href} className={linkClass}>
-                  {link.label}
-                </Link>
-              ))}
             </div>
 
             {/* Logo: absolutely centered so left/right group widths don't shift it */}
@@ -140,6 +131,15 @@ const { scrollYProgress } = useScroll();
 
               <div className="flex items-center gap-0.5">
                 <SearchBar />
+
+                <Link
+                  href="/account"
+                  aria-label="Account"
+                  className="hidden xl:flex w-9 h-9 items-center justify-center rounded-full
+                             text-text-secondary hover:text-text-primary transition-colors duration-200"
+                >
+                  <User size={19} />
+                </Link>
 
                 <Link
                   href="/wishlist"

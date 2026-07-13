@@ -35,6 +35,19 @@ export const industryList: Industry[] = [
     ),
   },
   {
+    label: "FMCG",
+    desc: "POP displays, shelf risers and floor units engineered to drive impulse purchase at scale across distribution networks.",
+    color: "#FFF7ED",
+    iconColor: "#EA580C",
+    icon: (
+      <svg {...iconProps} aria-hidden="true">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 01-8 0" />
+      </svg>
+    ),
+  },
+  {
     label: "Banking & Insurance",
     desc: "Literature holders, rate boards and queue displays for branches that need durable, professional presentation.",
     color: "#EEF2FF",
@@ -54,19 +67,6 @@ export const industryList: Industry[] = [
     icon: (
       <svg {...iconProps} aria-hidden="true">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-      </svg>
-    ),
-  },
-  {
-    label: "FMCG",
-    desc: "POP displays, shelf risers and floor units engineered to drive impulse purchase at scale across distribution networks.",
-    color: "#FFF7ED",
-    iconColor: "#EA580C",
-    icon: (
-      <svg {...iconProps} aria-hidden="true">
-        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-        <line x1="3" y1="6" x2="21" y2="6" />
-        <path d="M16 10a4 4 0 01-8 0" />
       </svg>
     ),
   },
@@ -108,19 +108,6 @@ export const industryList: Industry[] = [
     ),
   },
   {
-    label: "Electronics",
-    desc: "Live-demo units, security stands and branded displays for consumer electronics retail.",
-    color: "#F5F3FF",
-    iconColor: "#7C3AED",
-    icon: (
-      <svg {...iconProps} aria-hidden="true">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
-    ),
-  },
-  {
     label: "Retail",
     desc: "End-caps, floor towers and counter units for supermarkets, department stores and franchise chains.",
     color: "#ECFDF5",
@@ -154,33 +141,6 @@ export const industryList: Industry[] = [
       <svg {...iconProps} aria-hidden="true">
         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
         <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
-  },
-  {
-    label: "Government",
-    desc: "Public-information displays, notice systems and signage for departments and public-sector offices.",
-    color: "#F8FAFC",
-    iconColor: "#334155",
-    icon: (
-      <svg {...iconProps} aria-hidden="true">
-        <line x1="12" y1="2" x2="12" y2="6" />
-        <path d="M3 10h18v2H3z" />
-        <rect x="4" y="12" width="3" height="8" />
-        <rect x="10.5" y="12" width="3" height="8" />
-        <rect x="17" y="12" width="3" height="8" />
-        <path d="M2 20h20v2H2z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Petroleum",
-    desc: "Weather-proof blow-moulded signage and forecourt displays for fuel-station networks.",
-    color: "#FEF2F2",
-    iconColor: "#DC2626",
-    icon: (
-      <svg {...iconProps} aria-hidden="true">
-        <path d="M12 2c-4 4-6 7-6 10a6 6 0 0012 0c0-3-2-6-6-10z" />
       </svg>
     ),
   },

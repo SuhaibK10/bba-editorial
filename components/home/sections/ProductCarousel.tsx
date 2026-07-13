@@ -66,7 +66,7 @@ export default function ProductCarousel() {
   };
 
   return (
-    <section className="section-pad section-pad-bottom-tight overflow-hidden">
+    <section className="section-pad section-pad-top-tight section-pad-bottom-tight overflow-hidden">
 
       <div className="container-wide mb-16 md:mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -77,7 +77,7 @@ export default function ProductCarousel() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_ONCE}
-              className="section-label"
+              className="section-label text-center"
             >
               Best sellers
             </motion.p>
