@@ -26,10 +26,10 @@ export const stats: Stat[] = [
 // bumps the render height for logo files with a lot of built-in padding
 // around the mark (e.g. Airtel), so every wordmark reads as the same
 // visual weight in the strip despite differing source-file crops.
-export type Client = { name: string; logo?: string; logoSize?: "base" | "lg" };
+export type Client = { name: string; logo?: string; logoSize?: "base" | "lg" | "xl" };
 
 export const clients: Client[] = [
-  { name: "Airtel", logo: "/logos/airtel.png", logoSize: "lg" },
+  { name: "Airtel", logo: "/logos/airtel.png", logoSize: "xl" },
   { name: "Aircel", logo: "/logos/aircel.png", logoSize: "lg" },
   { name: "Idea", logo: "/logos/idea.png", logoSize: "lg" },
   { name: "Subway", logo: "/logos/subway.png", logoSize: "lg" },

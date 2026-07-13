@@ -106,7 +106,7 @@ export default function SearchBar() {
           className="w-9 h-9 flex items-center justify-center shrink-0
                      text-text-secondary hover:text-text-primary transition-colors duration-200"
         >
-          <SearchIcon size={15} />
+          <SearchIcon size={17} />
         </button>
         {/* Desktop inline input; stays collapsed on mobile */}
         <input

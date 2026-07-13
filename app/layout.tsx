@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Newsreader, Inter } from "next/font/google";
 import "./globals.css";
 import { MotionConfig } from "framer-motion";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
@@ -10,9 +10,9 @@ import WhatsAppFloatingButton from "@/components/layout/WhatsAppFloatingButton";
 import { site } from "@/data/site";
 import { theme } from "@/lib/theme";
 
-// Display serif: warm, characterful, "optical size" axis makes it read
-// engraved at heading sizes. Keeps Inter for body copy.
-const fraunces = Fraunces({
+// Display serif: warm literary/journal serif. "Optical size" axis makes
+// it read well at heading sizes. Keeps Inter for body copy.
+const fraunces = Newsreader({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",

@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import { useWishlistStore } from "@/lib/wishlist-store";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
 import MenuOverlay from "@/components/layout/MenuOverlay";
@@ -18,12 +19,13 @@ const navLinks = [
   { label: "B2B Enquiry", href: "/b2b-enquiry" },
 ];
 
-// Products is covered by the Categories dropdown on desktop. B2B Enquiry
-// renders on the right (near search/wishlist) instead of the left group —
-// five plain links plus Categories don't fit the fixed-width pill without
-// colliding with the centered logo.
-const desktopNavLinks = navLinks.filter(
-  (l) => l.label !== "Products" && l.label !== "B2B Enquiry"
+// Products is covered by the Categories dropdown on desktop. Links are
+// split across both sides of the centered logo — About/Contact/B2B Enquiry
+// sit on the right (near search/wishlist) rather than piling every plain
+// link on the left.
+const leftNavLinks = navLinks.filter((l) => l.label === "Industries");
+const rightNavLinks = navLinks.filter(
+  (l) => l.label === "About" || l.label === "Contact" || l.label === "B2B Enquiry"
 );
 // Reveal at xl (1280px), not md — below that, Home + Categories + the plain
 // links + the B2B CTA don't fit the pill (capped at max-w-5xl) without
@@ -75,26 +77,23 @@ const { scrollYProgress } = useScroll();
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="flex xl:hidden flex-col gap-1.25 w-10 h-10 items-center justify-center
-                           rounded-full transition-colors duration-200 hover:bg-surface"
+                className="relative flex xl:hidden w-10 h-10 items-center justify-center
+                           rounded-full transition-colors duration-200 hover:bg-surface text-text-primary"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
-                <span
-                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              bg-text-primary`}
-                  style={{ transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none" }}
-                />
-                <span
-                  className={`block w-5 h-[1.5px] origin-center transition-all duration-200
-                              bg-text-primary`}
-                  style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? "translateX(-8px)" : "none" }}
-                />
-                <span
-                  className={`block w-5 h-[1.5px] origin-center transition-transform duration-300
-                              bg-text-primary`}
-                  style={{ transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }}
-                />
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={menuOpen ? "close" : "open"}
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    {menuOpen ? <X size={20} /> : <Menu size={20} />}
+                  </motion.span>
+                </AnimatePresence>
               </button>
 
               <Link href="/" className={linkClass}>
@@ -103,7 +102,7 @@ const { scrollYProgress } = useScroll();
 
               <CategoryDropdown />
 
-              {desktopNavLinks.map((link) => (
+              {leftNavLinks.map((link) => (
                 <Link key={link.href} href={link.href} className={linkClass}>
                   {link.label}
                 </Link>
@@ -130,33 +129,37 @@ const { scrollYProgress } = useScroll();
               </div>
             </Link>
 
-            {/* Right: B2B Enquiry (desktop) + search + wishlist */}
+            {/* Right: About/Contact/B2B Enquiry (desktop) + search + wishlist */}
             <div className="flex items-center gap-1">
 
-              <Link href="/b2b-enquiry" className={linkClass}>
-                B2B Enquiry
-              </Link>
+              {rightNavLinks.map((link) => (
+                <Link key={link.href} href={link.href} className={linkClass}>
+                  {link.label}
+                </Link>
+              ))}
 
-              <SearchBar />
+              <div className="flex items-center gap-0.5">
+                <SearchBar />
 
-              <Link
-                href="/wishlist"
-                aria-label={wishlistCount > 0 ? `Wishlist, ${wishlistCount} items` : "Wishlist"}
-                className="relative w-9 h-9 flex items-center justify-center rounded-full
-                           text-text-secondary hover:text-text-primary transition-colors duration-200"
-              >
-                <HeartIcon size={17} />
-                {wishlistCount > 0 && (
-                  <span
-                    className="absolute top-0.5 right-0.5 min-w-3.75 h-3.75 px-0.75 rounded-full
-                               bg-accent text-white text-[9px] font-bold flex items-center justify-center
-                               tabular-nums"
-                    aria-hidden="true"
-                  >
-                    {wishlistCount > 9 ? "9+" : wishlistCount}
-                  </span>
-                )}
-              </Link>
+                <Link
+                  href="/wishlist"
+                  aria-label={wishlistCount > 0 ? `Wishlist, ${wishlistCount} items` : "Wishlist"}
+                  className="relative w-9 h-9 flex items-center justify-center rounded-full
+                             text-text-secondary hover:text-text-primary transition-colors duration-200"
+                >
+                  <HeartIcon size={19} />
+                  {wishlistCount > 0 && (
+                    <span
+                      className="absolute top-0.5 right-0.5 min-w-3.75 h-3.75 px-0.75 rounded-full
+                                 bg-accent text-white text-[9px] font-bold flex items-center justify-center
+                                 tabular-nums"
+                      aria-hidden="true"
+                    >
+                      {wishlistCount > 9 ? "9+" : wishlistCount}
+                    </span>
+                  )}
+                </Link>
+              </div>
             </div>
 
         </div>

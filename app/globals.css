@@ -154,12 +154,17 @@
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marquee 32s linear infinite;
+  animation: marquee 10s linear infinite;
+  /* Keep the loop on the compositor thread — without this, some browsers
+     do a main-thread repaint right at the 0%/100% seam, which reads as a
+     visible "restart" hitch even though the two halves are pixel-identical. */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }

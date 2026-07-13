@@ -18,6 +18,16 @@ export default function AboutSection() {
             Who we are
           </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.6, delay: 0.05, ease: EASE_OUT_EXPO }}
+            className="font-display font-medium text-lg md:text-xl text-accent mb-3"
+          >
+            India&apos;s most trusted acrylic manufacturer.
+          </motion.p>
+
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

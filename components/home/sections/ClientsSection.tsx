@@ -24,7 +24,9 @@ export default function ClientsSection() {
                   height={55}
                   unoptimized
                   className={
-                    client.logoSize === "lg"
+                    client.logoSize === "xl"
+                      ? "h-16 md:h-20 w-auto"
+                      : client.logoSize === "lg"
                       ? "h-14 md:h-16 w-auto"
                       : "h-10 md:h-12 w-auto"
                   }

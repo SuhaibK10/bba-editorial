@@ -5,27 +5,46 @@ import { motion, useMotionValue, animate, AnimatePresence } from "framer-motion"
 import { EASE_OUT_EXPO, CAROUSEL_SPRING, VIEWPORT_ONCE } from "@/lib/motion";
 import { testimonials } from "@/data/testimonials";
 
-const CARD_WIDTH = 380;
+const MAX_CARD_WIDTH = 380;
 const GAP = 24;
-const STEP = CARD_WIDTH + GAP;
+// How much of the next card peeks in at the right edge — a visible hint
+// that the strip is swipeable. Matters most on mobile, where a fixed
+// MAX_CARD_WIDTH card would otherwise fill (or overflow) the viewport
+// with no neighbor in sight.
+const PEEK = 56;
 
-function getTargetX(index: number) {
+function getSidePadding() {
+  if (typeof window === "undefined") return 24;
+  return window.innerWidth >= 1280 ? 64 : window.innerWidth >= 768 ? 40 : 24;
+}
+
+function getCardWidth() {
+  if (typeof window === "undefined") return MAX_CARD_WIDTH;
+  const available = window.innerWidth - getSidePadding() - PEEK;
+  return Math.min(MAX_CARD_WIDTH, Math.max(240, available));
+}
+
+function getTargetX(index: number, cardWidth: number) {
   if (typeof window === "undefined") return 0;
   const maxWidth = 88 * 16;
-  const sidePadding = window.innerWidth >= 1280 ? 64 : window.innerWidth >= 768 ? 40 : 24;
+  const sidePadding = getSidePadding();
   const containerLeft = Math.max(0, (window.innerWidth - maxWidth) / 2) + sidePadding;
-  const centeredX = window.innerWidth / 2 - CARD_WIDTH / 2 - index * STEP;
+  const step = cardWidth + GAP;
+  const centeredX = window.innerWidth / 2 - cardWidth / 2 - index * step;
   return Math.min(centeredX, containerLeft);
 }
 
 export default function TestimonialsSection() {
   const [current, setCurrent] = useState(0);
+  const [cardWidth, setCardWidth] = useState(MAX_CARD_WIDTH);
   const isDragging = useRef(false);
   const x = useMotionValue(0);
 
   useEffect(() => {
     const update = () => {
-      animate(x, getTargetX(current), CAROUSEL_SPRING);
+      const w = getCardWidth();
+      setCardWidth(w);
+      animate(x, getTargetX(current, w), CAROUSEL_SPRING);
     };
     update();
     window.addEventListener("resize", update);
@@ -49,7 +68,7 @@ export default function TestimonialsSection() {
 
     const clamped = Math.max(0, Math.min(testimonials.length - 1, next));
 
-    animate(x, getTargetX(clamped), CAROUSEL_SPRING);
+    animate(x, getTargetX(clamped, cardWidth), CAROUSEL_SPRING);
 
     setCurrent(clamped);
     setTimeout(() => { isDragging.current = false; }, 50);
@@ -115,7 +134,7 @@ export default function TestimonialsSection() {
       <div className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none">
         <motion.div
           className="flex"
-          style={{ gap: GAP, width: testimonials.length * STEP, x }}
+          style={{ gap: GAP, width: testimonials.length * (cardWidth + GAP), x }}
           drag="x"
           dragElastic={0.1}
           onDragStart={() => { isDragging.current = true; }}
@@ -128,8 +147,8 @@ export default function TestimonialsSection() {
                 key={t.quote}
                 animate={{ scale: isActive ? 1 : 0.97, opacity: isActive ? 1 : 0.6 }}
                 transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-                className="bg-white rounded-2xl border border-border p-8 flex flex-col justify-between gap-8 shrink-0"
-                style={{ width: CARD_WIDTH }}
+                className="bg-white rounded-2xl border border-border-strong p-8 flex flex-col justify-between gap-8 shrink-0"
+                style={{ width: cardWidth }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
                 <blockquote className="font-body text-text-primary leading-relaxed">

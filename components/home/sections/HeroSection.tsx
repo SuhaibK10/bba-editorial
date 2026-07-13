@@ -88,18 +88,6 @@ export default function HeroSection() {
       {/* Bottom-centred text */}
       <div className="container-wide relative z-10 pb-8 md:pb-24">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: EASE_OUT_EXPO }}
-            className="font-display font-bold text-[clamp(1.75rem,5vw,3.75rem)] md:text-[clamp(2rem,5.5vw,4.25rem)]
-                       text-white leading-[1.08] tracking-tight mb-5 md:mb-8"
-          >
-            India&apos;s most trusted
-            <br />
-            acrylic manufacturer.
-          </motion.h1>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

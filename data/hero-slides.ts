@@ -22,7 +22,7 @@ export const heroSlides: HeroSlide[] = [
     name: "Retail POP Displays",
     slug: "retail-pop-displays",
     desktopImage: heroImg("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
-    mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
+    mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_08PM_tlbj4u.jpg"),
   },
   {
     name: "Floor Standing Displays",
