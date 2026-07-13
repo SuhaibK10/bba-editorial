@@ -19,8 +19,8 @@ const heroImgMobile = (path: string) =>
 
 export const heroSlides: HeroSlide[] = [
   {
-    name: "Retail POP Displays",
-    slug: "retail-pop-displays",
+    name: "Acrylic Lectern",
+    slug: "Acrylic Lectern",
     desktopImage: heroImg("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
     mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_08PM_tlbj4u.jpg"),
   },
@@ -28,19 +28,19 @@ export const heroSlides: HeroSlide[] = [
     name: "Floor Standing Displays",
     slug: "floor-standing-displays",
     desktopImage: heroImg("v1779899150/FloorStandingDisplays_k43oyj.png"),
-    mobileImage: heroImgMobile("v1779899150/FloorStandingDisplays_k43oyj.png"),
+    mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_36AM_eno12k.jpg"),
   },
   {
     name: "Static Signages",
     slug: "static-signages",
     desktopImage: heroImg("v1779711816/StaticSignage_cdmsko.png"),
-    mobileImage: heroImgMobile("v1779711816/StaticSignage_cdmsko.png"),
+    mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_37AM_awy2bk.jpg"),
   },
   {
     name: "Charging Stations",
     slug: "mobile-charging-stations",
     desktopImage: heroImg("v1779903523/Charging_ongamy.png"),
-    mobileImage: heroImgMobile("v1779903523/Charging_ongamy.png"),
+    mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_40AM_wizkgo.jpg"),
   },
   {
     name: "Acrylic Risers",
