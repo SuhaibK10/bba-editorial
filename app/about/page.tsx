@@ -4,6 +4,7 @@ import PageHeader from "@/components/shared/PageHeader";
 import TrustBar from "@/components/home/sections/TrustBar";
 import ProcessSection from "@/components/home/sections/ProcessSection";
 import { site } from "@/data/site";
+import { capabilityGroups } from "@/data/facility";
 
 export const metadata: Metadata = {
   title: "About",
@@ -96,6 +97,48 @@ export default function AboutPage() {
       </section>
 
       <ProcessSection />
+
+      {/* Workshop capabilities */}
+      <section className="section-pad section-pad-md">
+        <div className="container-wide">
+          <p className="section-label">The workshop</p>
+          <h2 className="section-heading-md mb-4">
+            The machines behind <span className="text-accent">the range.</span>
+          </h2>
+          <p className="font-body text-text-secondary leading-relaxed max-w-2xl mb-12">
+            Owning the machinery is what lets us quote fast, prototype in days and
+            hold tolerances across production runs. This is the floor at GT Karnal
+            Road.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {capabilityGroups.map((group) => (
+              <div key={group.title} className="border-t-2 border-accent pt-6">
+                <h3 className="font-display font-bold text-lg text-text-primary mb-2">
+                  {group.title}
+                </h3>
+                <p className="font-body text-sm text-text-secondary leading-relaxed mb-5">
+                  {group.desc}
+                </p>
+                <ul className="flex flex-col gap-2">
+                  {group.machines.map((machine) => (
+                    <li
+                      key={machine}
+                      className="font-body text-sm text-text-secondary flex items-start gap-2.5"
+                    >
+                      <span
+                        className="w-1 h-1 rounded-full bg-accent mt-2 shrink-0"
+                        aria-hidden="true"
+                      />
+                      {machine}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="section-pad section-pad-lg">

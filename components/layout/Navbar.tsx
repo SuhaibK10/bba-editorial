@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, ClipboardList } from "lucide-react";
 import { useWishlistStore } from "@/lib/wishlist-store";
+import { useCartStore } from "@/lib/cart-store";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
 import MenuOverlay from "@/components/layout/MenuOverlay";
 import SearchBar from "@/components/layout/SearchBar";
@@ -34,6 +35,7 @@ const linkClass =
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const wishlistCount = useWishlistStore((s) => s.slugs.length);
+  const quoteCount = useCartStore((s) => s.items.length);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 
@@ -156,6 +158,25 @@ const { scrollYProgress } = useScroll();
                       aria-hidden="true"
                     >
                       {wishlistCount > 9 ? "9+" : wishlistCount}
+                    </span>
+                  )}
+                </Link>
+
+                <Link
+                  href="/quote"
+                  aria-label={quoteCount > 0 ? `Quote list, ${quoteCount} items` : "Quote list"}
+                  className="relative w-9 h-9 flex items-center justify-center rounded-full
+                             text-text-secondary hover:text-text-primary transition-colors duration-200"
+                >
+                  <ClipboardList size={19} />
+                  {quoteCount > 0 && (
+                    <span
+                      className="absolute top-0.5 right-0.5 min-w-3.75 h-3.75 px-0.75 rounded-full
+                                 bg-accent text-white text-[9px] font-bold flex items-center justify-center
+                                 tabular-nums"
+                      aria-hidden="true"
+                    >
+                      {quoteCount > 9 ? "9+" : quoteCount}
                     </span>
                   )}
                 </Link>

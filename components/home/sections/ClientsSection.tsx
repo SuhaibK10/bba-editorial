@@ -34,6 +34,8 @@ export default function ClientsSection() {
                       ? "h-16 md:h-20 w-auto"
                       : client.logoSize === "lg"
                       ? "h-14 md:h-16 w-auto"
+                      : client.logoSize === "sm"
+                      ? "h-7 md:h-8 w-auto"
                       : "h-10 md:h-12 w-auto"
                   }
                 />

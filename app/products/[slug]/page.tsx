@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductMedia from "@/components/products/ProductMedia";
 import ProductCard from "@/components/products/ProductCard";
+import CatalogItemCard from "@/components/products/CatalogItemCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
 import WishlistButton from "@/components/wishlist/WishlistButton";
 import { products, getProduct } from "@/data/products";
+import { getItemsByCategory } from "@/data/catalog";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,6 +37,7 @@ export default async function ProductPage({ params }: Props) {
   const product = getProduct(slug);
   if (!product) notFound();
 
+  const items = getItemsByCategory(product.slug);
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
 
   return (
@@ -96,6 +99,27 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        {/* Items in this category */}
+        {items.length > 0 && (
+          <div className="mt-24">
+            <p className="section-label">In this range</p>
+            <h2 className="section-heading-md mb-8">
+              Popular {product.name.toLowerCase()}
+              <span className="text-accent">.</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {items.map((item) => (
+                <CatalogItemCard
+                  key={item.sku}
+                  item={item}
+                  color={product.color}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Related */}
         <div className="mt-24">

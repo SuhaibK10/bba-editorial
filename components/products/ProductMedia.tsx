@@ -1,16 +1,18 @@
 import Image from "next/image";
 import { videoPoster } from "@/lib/media";
-import type { Product } from "@/data/products";
+import type { ProductMedia as ProductMediaFields } from "@/data/products";
 
 // Shared media block: Cloudinary video with poster, next/image,
 // or a styled placeholder for categories awaiting photography.
+// Accepts anything with a name plus the media fields, so both
+// category entries (products.ts) and catalog items (catalog.ts) work.
 export default function ProductMedia({
   product,
   sizes,
   priority = false,
   className = "",
 }: {
-  product: Product;
+  product: { name: string } & ProductMediaFields;
   sizes: string;
   priority?: boolean;
   className?: string;

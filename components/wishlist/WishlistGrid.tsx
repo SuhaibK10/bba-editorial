@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { getProduct } from "@/data/products";
+import { getCatalogItem } from "@/data/catalog";
 import { useWishlistStore } from "@/lib/wishlist-store";
 import ProductCard from "@/components/products/ProductCard";
+import CatalogItemCard from "@/components/products/CatalogItemCard";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
+
+const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
 
 export default function WishlistGrid() {
   const slugs = useWishlistStore((s) => s.slugs);
@@ -20,9 +24,17 @@ export default function WishlistGrid() {
   );
   if (!hydrated) return null;
 
+  // A saved slug is either a category (products.ts) or a catalog item
+  // (catalog.ts); resolve against both and drop anything stale.
   const saved = slugs
-    .map((slug) => getProduct(slug))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+    .map((slug) => {
+      const category = getProduct(slug);
+      if (category) return { kind: "category" as const, category };
+      const item = getCatalogItem(slug);
+      if (item) return { kind: "item" as const, item };
+      return null;
+    })
+    .filter((e): e is NonNullable<typeof e> => e !== null);
 
   if (saved.length === 0) {
     return (
@@ -40,24 +52,33 @@ export default function WishlistGrid() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {saved.map((product) => (
-        <div key={product.id} className="relative">
-          <ProductCard
-            product={product}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-          <button
-            type="button"
-            onClick={() => toggle(product.slug)}
-            aria-label={`Remove ${product.name} from wishlist`}
-            className="absolute top-7 right-7 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm
-                       shadow-sm flex items-center justify-center text-accent
-                       hover:bg-accent hover:text-white transition-colors duration-200"
-          >
-            <HeartIcon size={16} filled />
-          </button>
-        </div>
-      ))}
+      {saved.map((entry) => {
+        const slug = entry.kind === "category" ? entry.category.slug : entry.item.slug;
+        const name = entry.kind === "category" ? entry.category.name : entry.item.name;
+        return (
+          <div key={slug} className="relative">
+            {entry.kind === "category" ? (
+              <ProductCard product={entry.category} sizes={cardSizes} />
+            ) : (
+              <CatalogItemCard
+                item={entry.item}
+                color={getProduct(entry.item.categorySlug)?.color ?? "var(--color-surface-2)"}
+                sizes={cardSizes}
+              />
+            )}
+            <button
+              type="button"
+              onClick={() => toggle(slug)}
+              aria-label={`Remove ${name} from wishlist`}
+              className="absolute top-7 right-7 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm
+                         shadow-sm flex items-center justify-center text-accent
+                         hover:bg-accent hover:text-white transition-colors duration-200"
+            >
+              <HeartIcon size={16} filled />
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }

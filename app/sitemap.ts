@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/data/products";
+import { catalog } from "@/data/catalog";
 import { site } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,5 +19,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...productPages];
+  const itemPages: MetadataRoute.Sitemap = catalog.map((i) => ({
+    url: `${site.url}/products/${i.categorySlug}/${i.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...productPages, ...itemPages];
 }

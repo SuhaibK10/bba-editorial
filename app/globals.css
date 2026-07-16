@@ -154,7 +154,10 @@
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marquee 10s linear infinite;
+  /* Duration scales with the client list: -50% in one cycle means more
+     logos = faster px/s at a fixed time. 28s keeps roughly the pace the
+     strip had at 10s with a third of the logos. */
+  animation: marquee 28s linear infinite;
   /* Keep the loop on the compositor thread — without this, some browsers
      do a main-thread repaint right at the 0%/100% seam, which reads as a
      visible "restart" hitch even though the two halves are pixel-identical. */
