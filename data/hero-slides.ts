@@ -6,6 +6,7 @@ export type HeroSlide = {
   slug: string;
   desktopImage: string;
   mobileImage?: string;
+  tagline?: string; // selling line shown above the hero CTAs
 };
 
 const heroCrop = "c_fill,g_auto,w_1920,h_1280";
@@ -23,18 +24,21 @@ export const heroSlides: HeroSlide[] = [
     slug: "Acrylic Lectern",
     desktopImage: heroImg("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
     mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_08PM_tlbj4u.jpg"),
+    tagline: "Command the room before you say a word.",
   },
   {
     name: "Name Plates",
     slug: "floor-standing-displays",
     desktopImage: heroImg("v1779899150/FloorStandingDisplays_k43oyj.png"),
     mobileImage: heroImgMobile("Generated_Image_July_17_2026_-_6_08PM_wwez7y"),
+    tagline: "Your name, made impossible to forget.",
   },
   {
     name: "Literature Holder",
     slug: "literature-holder",
     desktopImage: heroImg("v1779711816/StaticSignage_cdmsko.png"),
     mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
+    tagline: "Put your story in their hands.",
   },
   {
     name: "Charging Stations",
