@@ -44,7 +44,7 @@ export const heroSlides: HeroSlide[] = [
     name: "Charging Stations",
     slug: "mobile-charging-stations",
     desktopImage: heroImg("v1779903523/Charging_ongamy.png"),
-    mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_40AM_wizkgo.jpg"),
+    mobileImage: heroImgMobile("Generated_Image_July_17_2026_-_6_32PM_qmxol0.jpg"),
   },
   {
     name: "Acrylic Risers",
