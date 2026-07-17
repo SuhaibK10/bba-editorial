@@ -109,7 +109,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE_OUT_EXPO }}
-            className="flex flex-wrap gap-3 justify-center mb-2 md:mb-8"
+            className="flex flex-wrap gap-3 justify-center mt-5 md:mt-8 mb-2 md:mb-8"
           >
             <Link
               href="/quote"
@@ -132,24 +132,8 @@ export default function HeroSection() {
             </Link>
           </motion.div>
 
-          {/* Mobile category name + indicators: centred below CTAs */}
+          {/* Mobile indicators: centred below CTAs */}
           <div className="flex md:hidden flex-col items-center gap-3 mt-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
-              >
-                <Link
-                  href={`/products/${slide.slug}`}
-                  className="font-display font-bold text-sm text-white hover:text-accent transition-colors duration-200"
-                >
-                  {slide.name}
-                </Link>
-              </motion.div>
-            </AnimatePresence>
             <HeroDots
               slides={heroSlides}
               current={current}
@@ -161,24 +145,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Desktop category name + indicators: bottom-right corner */}
+      {/* Desktop indicators: bottom-right corner */}
       <div className="hidden md:flex absolute bottom-8 right-8 z-10 items-center gap-4">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
-          >
-            <Link
-              href={`/products/${slide.slug}`}
-              className="font-display font-bold text-sm text-white hover:text-accent transition-colors duration-200"
-            >
-              {slide.name}
-            </Link>
-          </motion.div>
-        </AnimatePresence>
         <HeroDots
           slides={heroSlides}
           current={current}

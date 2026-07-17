@@ -377,9 +377,24 @@
 .trustbar::before { top: -1px; }
 .trustbar::after  { bottom: -1px; }
 
-/* Spacer matching the nav height so page content doesn't hide behind it */
+/* Spacer matching the nav height (+ safe area) so page content doesn't hide behind it */
 .mobile-nav-spacer {
-  height: 56px;
+  height: calc(56px + max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px)));
+}
+
+/* Pin the bottom tab bar to its own compositor layer. Reduces jank as iOS/
+   Android repaint `fixed; bottom-0` elements while the address bar
+   collapses/expands on scroll — it smooths that motion but can't cancel
+   it outright, since the browser is intentionally tracking the toolbar. */
+.mobile-nav-bar {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  /* iPhone home-indicator clearance, matching louispolo's formula: the
+     bar's own pb-2.5 already covers ~8px, so only add the excess. */
+  padding-bottom: max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px));
 }
 
 /* ── Hide the floating WhatsApp button behind the open mobile menu ──────── */

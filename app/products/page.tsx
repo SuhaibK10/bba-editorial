@@ -28,6 +28,13 @@ export default function ProductsPage() {
         description="Every unit is fabricated at our New Delhi facility. Don't see exactly what you need? We build custom, and that's most of what we do."
       />
 
+      <div className="container-wide -mt-4 mb-12 md:-mt-8 md:mb-16">
+        <Link href="/products/all" className="btn-text group">
+          Shop all products with filters
+          <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+        </Link>
+      </div>
+
       <div className="container-wide pb-20 md:pb-28">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, i) => (

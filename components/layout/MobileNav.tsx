@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "@/lib/cart-store";
+import { useVisualViewportBottomOffset } from "@/lib/use-visual-viewport-offset";
 import CartIcon from "@/components/shared/icons/CartIcon";
 
 type IconProps = { size?: number; active?: boolean };
@@ -78,9 +79,13 @@ const NAV = [
 export default function MobileNav() {
   const pathname = usePathname();
   const cartCount = useCartStore((s) => s.items.length);
+  const navRef = useVisualViewportBottomOffset<HTMLElement>();
 
   return (
-    <nav className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border">
+    <nav
+      ref={navRef}
+      className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border"
+    >
       <div className="flex items-center h-14">
         {NAV.map(({ label, href, icon: Icon }) => {
           const isActive = href === "/" ? pathname === href : pathname.startsWith(href);

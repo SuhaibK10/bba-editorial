@@ -20,11 +20,12 @@ const navLinks = [
   { label: "B2B Enquiry", href: "/b2b-enquiry" },
 ];
 
-// Products is covered by the Categories dropdown on desktop. About/Contact/
-// B2B Enquiry sit on the right (near search/wishlist) rather than piling
-// every plain link on the left.
+// Products is covered by the Categories dropdown on desktop. About sits on
+// the left (with Home + Categories) to balance the pill's two sides around
+// the centered logo; Contact/B2B Enquiry stay on the right, near search/wishlist.
+const leftNavLinks = navLinks.filter((l) => l.label === "About");
 const rightNavLinks = navLinks.filter(
-  (l) => l.label === "About" || l.label === "Contact" || l.label === "B2B Enquiry"
+  (l) => l.label === "Contact" || l.label === "B2B Enquiry"
 );
 // Reveal at xl (1280px), not md — below that, Home + Categories + the plain
 // links + the B2B CTA don't fit the pill (capped at max-w-5xl) without
@@ -108,6 +109,12 @@ const { scrollYProgress } = useScroll();
               </Link>
 
               <CategoryDropdown />
+
+              {leftNavLinks.map((link) => (
+                <Link key={link.href} href={link.href} className={linkClass}>
+                  {link.label}
+                </Link>
+              ))}
             </div>
 
             {/* Logo: absolutely centered so left/right group widths don't shift it */}
@@ -146,7 +153,7 @@ const { scrollYProgress } = useScroll();
                   href="/account"
                   aria-label="Account"
                   className="hidden xl:flex w-9 h-9 items-center justify-center rounded-full
-                             text-text-secondary hover:text-text-primary transition-colors duration-200"
+                             text-text-primary hover:text-accent transition-colors duration-200"
                 >
                   <User size={19} />
                 </Link>

@@ -17,6 +17,12 @@ export type CatalogItem = {
   highlights: string[];
   specs: { label: string; value: string }[];
   leadTime?: string; // overrides DEFAULT_LEAD_TIME on the item page
+  // Controlled-vocabulary facets for the /products/all filter sidebar.
+  // Kept separate from `specs` (free-form, for the item page's prose table)
+  // so filtering never breaks on a mismatched label string.
+  type: string;
+  color: string;
+  placement: string;
 } & ProductMedia;
 
 // Shown as the "Lead time" spec on every item page unless the item
@@ -45,6 +51,9 @@ export const catalog: CatalogItem[] = [
       { label: "Material", value: "12–15mm cast acrylic" },
       { label: "Assembly", value: "Delivered assembled" },
     ],
+    type: "Full-Height Lectern",
+    color: "Clear",
+    placement: "Floor standing",
   },
   {
     sku: "CALT001ACS",
@@ -66,6 +75,9 @@ export const catalog: CatalogItem[] = [
       { label: "Reading surface", value: "600 × 400mm" },
       { label: "Material", value: "12mm acrylic, aluminium" },
     ],
+    type: "Column Lectern",
+    color: "Silver",
+    placement: "Floor standing",
   },
   {
     sku: "CALT0012ACB",
@@ -87,6 +99,9 @@ export const catalog: CatalogItem[] = [
       { label: "Reading surface", value: "600 × 400mm" },
       { label: "Material", value: "12mm acrylic, aluminium" },
     ],
+    type: "Column Lectern",
+    color: "Black",
+    placement: "Floor standing",
   },
 
   // ── Donation & Ballot Boxes ─────────────────
@@ -110,6 +125,9 @@ export const catalog: CatalogItem[] = [
       { label: "Header", value: "A6, landscape" },
       { label: "Security", value: "Built-in lock, 2 keys" },
     ],
+    type: "Lockable Box",
+    color: "Clear",
+    placement: "Counter top",
   },
   {
     sku: "CADB002",
@@ -131,6 +149,9 @@ export const catalog: CatalogItem[] = [
       { label: "Header", value: "A6, landscape" },
       { label: "Security", value: "Built-in lock, keys included" },
     ],
+    type: "Lockable Box",
+    color: "Tinted",
+    placement: "Counter top",
   },
 
   // ── Raffle Drums & Spinners ─────────────────
@@ -154,6 +175,9 @@ export const catalog: CatalogItem[] = [
       { label: "Barrel", value: "355 × 302mm" },
       { label: "Security", value: "Built-in lock" },
     ],
+    type: "Printed Spinner",
+    color: "Clear",
+    placement: "Counter top",
   },
   {
     sku: "CARD002",
@@ -175,6 +199,9 @@ export const catalog: CatalogItem[] = [
       { label: "Barrel", value: "310mm" },
       { label: "Security", value: "Built-in lock" },
     ],
+    type: "Standard Spinner",
+    color: "Clear",
+    placement: "Counter top",
   },
 
   // ── Literature Holders ──────────────────────
@@ -198,6 +225,9 @@ export const catalog: CatalogItem[] = [
       { label: "Media size", value: "A4, portrait" },
       { label: "Pocket depth", value: "41mm" },
     ],
+    type: "Single Pocket",
+    color: "Clear",
+    placement: "Counter top / Wall mount",
   },
   {
     sku: "CABH002",
@@ -219,6 +249,9 @@ export const catalog: CatalogItem[] = [
       { label: "Media size", value: "A4" },
       { label: "Capacity", value: "9 pockets" },
     ],
+    type: "Multi Pocket",
+    color: "Clear",
+    placement: "Floor standing",
   },
 
   // ── Acrylic Risers ──────────────────────────
@@ -242,6 +275,9 @@ export const catalog: CatalogItem[] = [
       { label: "Pieces", value: "7" },
       { label: "Shape", value: "U-shaped, nesting" },
     ],
+    type: "Riser Set",
+    color: "Clear",
+    placement: "Counter top",
   },
   {
     sku: "CARS002",
@@ -263,6 +299,9 @@ export const catalog: CatalogItem[] = [
       { label: "Pieces", value: "5" },
       { label: "Shape", value: "U-shaped, graduated" },
     ],
+    type: "Riser Set",
+    color: "Black",
+    placement: "Counter top",
   },
 
   // ── Display Pedestals ───────────────────────
@@ -286,6 +325,9 @@ export const catalog: CatalogItem[] = [
       { label: "Construction", value: "5-sided, open bottom" },
       { label: "Sizes", value: "Multiple, made to order" },
     ],
+    type: "Mirrored Pedestal",
+    color: "Silver",
+    placement: "Floor standing",
   },
   {
     sku: "CADP002",
@@ -307,6 +349,9 @@ export const catalog: CatalogItem[] = [
       { label: "Construction", value: "5-sided, open bottom" },
       { label: "Sizes", value: "Multiple, made to order" },
     ],
+    type: "Mirrored Pedestal",
+    color: "Gold",
+    placement: "Floor standing",
   },
 
   // ── Table Top Displays ──────────────────────
@@ -330,6 +375,9 @@ export const catalog: CatalogItem[] = [
       { label: "Media size", value: '4" × 6", portrait' },
       { label: "Loading", value: "Side insert" },
     ],
+    type: "Sign Holder",
+    color: "Clear",
+    placement: "Counter top",
   },
 ];
 

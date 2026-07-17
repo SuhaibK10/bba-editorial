@@ -57,7 +57,7 @@ export default function CategoryDropdown() {
               </Link>
             ))}
           </div>
-          <div className="border-t border-border mt-3 pt-3 px-4 pb-1">
+          <div className="border-t border-border mt-3 pt-3 px-4 pb-1 flex items-center justify-between">
             <Link
               href="/products"
               onClick={() => setOpen(false)}
@@ -65,6 +65,13 @@ export default function CategoryDropdown() {
             >
               View all products
               <ArrowIcon size={12} className="group-hover:translate-x-1 transition-transform duration-200" />
+            </Link>
+            <Link
+              href="/products/all"
+              onClick={() => setOpen(false)}
+              className="font-body text-sm text-text-faint hover:text-text-primary transition-colors duration-200"
+            >
+              Shop with filters
             </Link>
           </div>
         </div>
