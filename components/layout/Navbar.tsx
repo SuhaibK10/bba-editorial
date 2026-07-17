@@ -65,11 +65,11 @@ const { scrollYProgress } = useScroll();
 
   return (
     <>
-      <header className="fixed top-1 md:top-1.5 inset-x-0 z-50 px-3 md:px-6">
+      <header className="fixed top-2 md:top-3 inset-x-0 z-50 px-3 md:px-6">
         <div className="relative mx-auto max-w-5xl">
         <div
           className="relative flex items-center justify-between
-                     h-12 rounded-full px-2 md:px-3
+                     h-12.5 md:h-12 rounded-full px-2 md:px-3
                      border backdrop-blur-md bg-surface/95 border-border shadow-card"
         >
 
@@ -79,8 +79,8 @@ const { scrollYProgress } = useScroll();
                   the circle fills accent green on hover, turning the bars white. */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="group flex xl:hidden w-10 h-10 flex-col items-center justify-center gap-[3.5px]
-                           rounded-full border border-text-primary text-text-primary
+                className="group flex xl:hidden w-9 h-9 flex-col items-center justify-center gap-0.75
+                           rounded-full border border-text-primary/25 text-text-primary
                            hover:border-accent hover:bg-accent hover:text-white
                            active:scale-95 transition-all duration-300"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -89,7 +89,7 @@ const { scrollYProgress } = useScroll();
                 <span
                   aria-hidden="true"
                   className={`w-4 h-[1.5px] rounded-full bg-current transition-transform duration-300 ease-out
-                              ${menuOpen ? "translate-y-1.25 rotate-45" : ""}`}
+                              ${menuOpen ? "translate-y-[4.5px] rotate-45" : ""}`}
                 />
                 <span
                   aria-hidden="true"
@@ -99,7 +99,7 @@ const { scrollYProgress } = useScroll();
                 <span
                   aria-hidden="true"
                   className={`w-4 h-[1.5px] rounded-full bg-current transition-transform duration-300 ease-out
-                              ${menuOpen ? "-translate-y-1.25 -rotate-45" : ""}`}
+                              ${menuOpen ? "translate-y-[-4.5px] -rotate-45" : ""}`}
                 />
               </button>
 

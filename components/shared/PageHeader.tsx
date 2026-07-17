@@ -8,24 +8,26 @@ export default function PageHeader({
   title,
   description,
   compact = false,
+  centered = false,
 }: {
   label?: string;
   title: React.ReactNode;
   description?: string;
   compact?: boolean;
+  centered?: boolean;
 }) {
   return (
     <div
       className={`container-wide pb-12 md:pb-16 ${
         compact ? "pt-24 md:pt-28" : "pt-32 md:pt-40"
-      }`}
+      } ${centered ? "text-center" : ""}`}
     >
       {label && (
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-          className="flex items-center gap-3 mb-8"
+          className={`flex items-center gap-3 mb-8 ${centered ? "justify-center" : ""}`}
         >
           <div className="w-8 h-[1.5px] bg-accent" />
           <span className="section-label mb-0">{label}</span>
@@ -36,7 +38,7 @@ export default function PageHeader({
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT_EXPO }}
-        className="section-heading-lg max-w-4xl"
+        className={`section-heading-lg max-w-4xl ${centered ? "mx-auto" : ""}`}
       >
         {title}
       </motion.h1>
@@ -46,7 +48,9 @@ export default function PageHeader({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: EASE_OUT_EXPO }}
-          className="font-body text-lg text-text-secondary max-w-xl leading-relaxed mt-6"
+          className={`font-body text-lg text-text-secondary max-w-xl leading-relaxed mt-6 ${
+            centered ? "mx-auto" : ""
+          }`}
         >
           {description}
         </motion.p>

@@ -24,6 +24,7 @@ export default async function SignupPage({ searchParams }: Props) {
     <div className="bg-background">
       <PageHeader
         compact
+        centered
         title={
           <>
             Start ordering
@@ -35,10 +36,10 @@ export default async function SignupPage({ searchParams }: Props) {
       />
 
       <div className="container-wide pb-20 md:pb-28">
-        <div className="max-w-md mb-6">
+        <div className="max-w-md mx-auto mb-6">
           <GoogleButton />
         </div>
-        <form action={signup} className="flex flex-col gap-5 max-w-md">
+        <form action={signup} className="flex flex-col gap-5 max-w-md mx-auto">
           {error && (
             <p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 font-body text-sm text-red-700">
               {error}

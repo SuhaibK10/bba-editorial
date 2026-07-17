@@ -25,10 +25,10 @@ export const heroSlides: HeroSlide[] = [
     mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_08PM_tlbj4u.jpg"),
   },
   {
-    name: "Floor Standing Displays",
+    name: "Name Plates",
     slug: "floor-standing-displays",
     desktopImage: heroImg("v1779899150/FloorStandingDisplays_k43oyj.png"),
-    mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_36AM_eno12k.jpg"),
+    mobileImage: heroImgMobile("Generated_Image_July_17_2026_-_6_08PM_wwez7y"),
   },
   {
     name: "Literature Holder",

@@ -43,7 +43,6 @@ export const clients: Client[] = [
   { name: "Tim Hortons", logo: "/logos/tim-hortons.png", logoSize: "sm" },
   { name: "Giorgio Armani", logo: "/logos/armani.png", logoSize: "md" },
   { name: "Assa Abloy", logo: "/logos/assa-abloy.png", logoSize: "sm" },
-  { name: "Shri Mata Vaishno Devi Shrine Board", logo: "/logos/smvdsb.png" },
   { name: "Ambrane" },
   { name: "100 Pipers" },
   { name: "Blenders Pride" },
