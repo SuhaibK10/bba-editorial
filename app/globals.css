@@ -99,14 +99,17 @@
 }
 
 /* ── Container ───────────────────────────────────────────── */
+/* padding-inline only: this class is unlayered, so a `padding` shorthand
+   here would zero out padding-top/bottom utilities (pt-32 etc.) that pages
+   stack on top of it — Tailwind's layered utilities lose to unlayered CSS. */
 .container-wide {
   width: 100%;
   max-width: 88rem;
   margin-inline: auto;
-  padding: 0 1.5rem;
+  padding-inline: 1.5rem;
 }
-@media (min-width: 768px)  { .container-wide { padding: 0 2.5rem; } }
-@media (min-width: 1280px) { .container-wide { padding: 0 4rem; } }
+@media (min-width: 768px)  { .container-wide { padding-inline: 2.5rem; } }
+@media (min-width: 1280px) { .container-wide { padding-inline: 4rem; } }
 
 /* ──────────────────────────────────────────────────────────
    SECTION SPACING: outside @layer so media queries work

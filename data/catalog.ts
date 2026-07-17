@@ -16,7 +16,12 @@ export type CatalogItem = {
   longDesc: string;
   highlights: string[];
   specs: { label: string; value: string }[];
+  leadTime?: string; // overrides DEFAULT_LEAD_TIME on the item page
 } & ProductMedia;
+
+// Shown as the "Lead time" spec on every item page unless the item
+// carries its own. Confirm the number with the workshop before launch.
+export const DEFAULT_LEAD_TIME = "Made to order · despatched in 5–7 business days";
 
 export const catalog: CatalogItem[] = [
   // ── Acrylic Lecterns & Podiums ──────────────

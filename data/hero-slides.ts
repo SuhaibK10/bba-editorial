@@ -31,10 +31,10 @@ export const heroSlides: HeroSlide[] = [
     mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_36AM_eno12k.jpg"),
   },
   {
-    name: "Static Signages",
-    slug: "static-signages",
+    name: "Literature Holder",
+    slug: "literature-holder",
     desktopImage: heroImg("v1779711816/StaticSignage_cdmsko.png"),
-    mobileImage: heroImgMobile("Generated_Image_July_14_2026_-_2_37AM_awy2bk.jpg"),
+    mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
   },
   {
     name: "Charging Stations",

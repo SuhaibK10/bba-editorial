@@ -48,8 +48,8 @@ export default function AddToQuoteButton({
       </button>
 
       {items.length > 0 && (
-        <Link href="/quote" className="btn-text group">
-          Review quote list ({items.length})
+        <Link href="/cart" className="btn-text group">
+          View cart ({items.length})
           <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
         </Link>
       )}

@@ -104,7 +104,7 @@ export default function SearchBar() {
           aria-label={open ? "Close search" : "Search"}
           aria-expanded={open}
           className="w-9 h-9 flex items-center justify-center shrink-0
-                     text-text-secondary hover:text-text-primary transition-colors duration-200"
+                     text-text-primary hover:text-accent transition-colors duration-200"
         >
           <SearchIcon size={17} />
         </button>

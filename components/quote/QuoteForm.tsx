@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import { whatsappUrl, emailHref, site } from "@/data/site";
 import { products, getProduct } from "@/data/products";
+import { getCatalogItem } from "@/data/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import {
   validateQuoteForm,
@@ -34,12 +35,16 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
   const [pendingProduct, setPendingProduct] = useState("");
   const [errors, setErrors] = useState<QuoteFormErrors>({});
 
-  // Pre-fill from a deep link like /quote?product=<slug>. Runs once on mount.
+  // Pre-fill from a deep link like /quote?product=<slug>. The slug may be
+  // a category (products.ts) or a catalog item (catalog.ts). Runs once on mount.
   useEffect(() => {
     if (!initialProduct) return;
     const product = getProduct(initialProduct);
+    const item = product ? undefined : getCatalogItem(initialProduct);
     if (product) {
       addItem({ productSlug: product.slug, name: product.name });
+    } else if (item) {
+      addItem({ productSlug: item.slug, name: item.name });
     } else if (initialProduct === "custom-requirement") {
       addItem({ name: "Custom requirement" });
     }

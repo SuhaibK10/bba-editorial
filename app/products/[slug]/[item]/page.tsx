@@ -6,7 +6,7 @@ import CatalogItemCard from "@/components/products/CatalogItemCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
 import WishlistButton from "@/components/wishlist/WishlistButton";
 import { getProduct } from "@/data/products";
-import { catalog, getCatalogItem, getItemsByCategory } from "@/data/catalog";
+import { catalog, getCatalogItem, getItemsByCategory, DEFAULT_LEAD_TIME } from "@/data/catalog";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
 
 type Props = { params: Promise<{ slug: string; item: string }> };
@@ -106,7 +106,7 @@ export default async function CatalogItemPage({ params }: Props) {
               Specifications
             </h2>
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-12">
-              {item.specs.map((spec) => (
+              {[...item.specs, { label: "Lead time", value: item.leadTime ?? DEFAULT_LEAD_TIME }].map((spec) => (
                 <div
                   key={spec.label}
                   className="flex items-baseline justify-between gap-4 border-b border-border pb-2"
@@ -123,6 +123,17 @@ export default async function CatalogItemPage({ params }: Props) {
               <AddToQuoteButton slug={item.slug} name={item.name} />
               <WishlistButton slug={item.slug} />
             </div>
+
+            <p className="font-body text-sm text-text-secondary mt-6">
+              Need a different size, colour or branding?{" "}
+              <Link
+                href={`/quote?product=${item.slug}`}
+                className="text-accent hover:text-accent-hover font-medium transition-colors duration-200"
+              >
+                Customize this product
+              </Link>{" "}
+              — volume pricing available on request.
+            </p>
           </div>
         </div>
 

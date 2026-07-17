@@ -7,22 +7,30 @@ export default function PageHeader({
   label,
   title,
   description,
+  compact = false,
 }: {
-  label: string;
+  label?: string;
   title: React.ReactNode;
   description?: string;
+  compact?: boolean;
 }) {
   return (
-    <div className="container-wide pt-32 md:pt-40 pb-12 md:pb-16">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-        className="flex items-center gap-3 mb-8"
-      >
-        <div className="w-8 h-[1.5px] bg-accent" />
-        <span className="section-label mb-0">{label}</span>
-      </motion.div>
+    <div
+      className={`container-wide pb-12 md:pb-16 ${
+        compact ? "pt-24 md:pt-28" : "pt-32 md:pt-40"
+      }`}
+    >
+      {label && (
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+          className="flex items-center gap-3 mb-8"
+        >
+          <div className="w-8 h-[1.5px] bg-accent" />
+          <span className="section-label mb-0">{label}</span>
+        </motion.div>
+      )}
 
       <motion.h1
         initial={{ opacity: 0, y: 24 }}

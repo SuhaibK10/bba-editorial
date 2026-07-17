@@ -77,7 +77,7 @@ export default function ProductCarousel() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_ONCE}
-              className="section-label text-center"
+              className="section-label"
             >
               Best sellers
             </motion.p>
@@ -88,9 +88,10 @@ export default function ProductCarousel() {
               transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
               className="section-heading-lg"
             >
-              The Displays<br />
-              <span className="text-accent">Clients</span><br />
-              Buy <span className="text-accent">Again.</span>
+              Just Buy <span className="text-accent">Once,</span><br />
+              <span className="md:whitespace-nowrap">
+                You Will Keep <span className="text-accent">Repeating.</span>
+              </span>
             </motion.h2>
           </div>
 

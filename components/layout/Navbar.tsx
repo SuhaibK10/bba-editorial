@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X, User, ClipboardList } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { User } from "lucide-react";
 import { useWishlistStore } from "@/lib/wishlist-store";
 import { useCartStore } from "@/lib/cart-store";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
+import CartIcon from "@/components/shared/icons/CartIcon";
 import MenuOverlay from "@/components/layout/MenuOverlay";
 import SearchBar from "@/components/layout/SearchBar";
 import CategoryDropdown from "@/components/layout/CategoryDropdown";
@@ -35,7 +36,7 @@ const linkClass =
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const wishlistCount = useWishlistStore((s) => s.slugs.length);
-  const quoteCount = useCartStore((s) => s.items.length);
+  const cartCount = useCartStore((s) => s.items.length);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 
@@ -64,35 +65,42 @@ const { scrollYProgress } = useScroll();
 
   return (
     <>
-      <header className="fixed top-2 md:top-3 inset-x-0 z-50 px-3 md:px-6">
+      <header className="fixed top-1 md:top-1.5 inset-x-0 z-50 px-3 md:px-6">
         <div className="relative mx-auto max-w-5xl">
         <div
           className="relative flex items-center justify-between
-                     h-14 rounded-full px-2 md:px-3
+                     h-12 rounded-full px-2 md:px-3
                      border backdrop-blur-md bg-surface/95 border-border shadow-card"
         >
 
             {/* Left: hamburger (mobile only) + categories dropdown & inline links (desktop) */}
             <div className="flex items-center gap-1">
+              {/* Circled hamburger: three real bars morph into an X when open;
+                  the circle fills accent green on hover, turning the bars white. */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="relative flex xl:hidden w-10 h-10 items-center justify-center
-                           rounded-full transition-colors duration-200 hover:bg-surface text-text-primary"
+                className="group flex xl:hidden w-10 h-10 flex-col items-center justify-center gap-[3.5px]
+                           rounded-full border border-text-primary text-text-primary
+                           hover:border-accent hover:bg-accent hover:text-white
+                           active:scale-95 transition-all duration-300"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={menuOpen ? "close" : "open"}
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    {menuOpen ? <X size={20} /> : <Menu size={20} />}
-                  </motion.span>
-                </AnimatePresence>
+                <span
+                  aria-hidden="true"
+                  className={`w-4 h-[1.5px] rounded-full bg-current transition-transform duration-300 ease-out
+                              ${menuOpen ? "translate-y-1.25 rotate-45" : ""}`}
+                />
+                <span
+                  aria-hidden="true"
+                  className={`w-4 h-[1.5px] rounded-full bg-current transition-all duration-200
+                              ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
+                />
+                <span
+                  aria-hidden="true"
+                  className={`w-4 h-[1.5px] rounded-full bg-current transition-transform duration-300 ease-out
+                              ${menuOpen ? "-translate-y-1.25 -rotate-45" : ""}`}
+                />
               </button>
 
               <Link href="/" className={linkClass}>
@@ -147,7 +155,7 @@ const { scrollYProgress } = useScroll();
                   href="/wishlist"
                   aria-label={wishlistCount > 0 ? `Wishlist, ${wishlistCount} items` : "Wishlist"}
                   className="relative w-9 h-9 flex items-center justify-center rounded-full
-                             text-text-secondary hover:text-text-primary transition-colors duration-200"
+                             text-text-primary hover:text-accent transition-colors duration-200"
                 >
                   <HeartIcon size={19} />
                   {wishlistCount > 0 && (
@@ -163,20 +171,20 @@ const { scrollYProgress } = useScroll();
                 </Link>
 
                 <Link
-                  href="/quote"
-                  aria-label={quoteCount > 0 ? `Quote list, ${quoteCount} items` : "Quote list"}
-                  className="relative w-9 h-9 flex items-center justify-center rounded-full
-                             text-text-secondary hover:text-text-primary transition-colors duration-200"
+                  href="/cart"
+                  aria-label={cartCount > 0 ? `Cart, ${cartCount} items` : "Cart"}
+                  className="relative w-9 h-9 hidden xl:flex items-center justify-center rounded-full
+                             text-text-primary hover:text-accent transition-colors duration-200"
                 >
-                  <ClipboardList size={19} />
-                  {quoteCount > 0 && (
+                  <CartIcon size={19} />
+                  {cartCount > 0 && (
                     <span
                       className="absolute top-0.5 right-0.5 min-w-3.75 h-3.75 px-0.75 rounded-full
                                  bg-accent text-white text-[9px] font-bold flex items-center justify-center
                                  tabular-nums"
                       aria-hidden="true"
                     >
-                      {quoteCount > 9 ? "9+" : quoteCount}
+                      {cartCount > 9 ? "9+" : cartCount}
                     </span>
                   )}
                 </Link>
@@ -185,13 +193,16 @@ const { scrollYProgress } = useScroll();
 
         </div>
 
-        {/* Scroll progress: thin track attached to the pill's bottom edge */}
-        <div className="absolute left-6 right-6 md:left-8 md:right-8 top-full h-0.5 rounded-full bg-black/10 overflow-hidden">
-          <motion.div
-            className="h-full origin-left bg-accent"
-            style={{ scaleX }}
-          />
-        </div>
+        {/* Scroll progress: thin track attached to the pill's bottom edge.
+            Hidden on the short auth pages, where a progress bar is noise. */}
+        {!["/account", "/login", "/signup"].includes(pathname) && (
+          <div className="absolute left-6 right-6 md:left-8 md:right-8 top-full h-0.5 rounded-full bg-black/10 overflow-hidden">
+            <motion.div
+              className="h-full origin-left bg-accent"
+              style={{ scaleX }}
+            />
+          </div>
+        )}
 
         </div>
       </header>

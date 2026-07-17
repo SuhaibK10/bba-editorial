@@ -1,6 +1,20 @@
 import Image from "next/image";
-import { clients, stats } from "@/data/home-content";
+import { clients, stats, type Client } from "@/data/home-content";
 import StatItem from "@/components/home/sections/StatItem";
+
+// Height per tier, plus a width cap on "sm": that tier holds the very wide
+// wordmarks (Armani ~9:1, Assa Abloy ~7:1, Lava, Oppo, Vivo, SBI, Tim
+// Hortons) whose height-only sizing let them stretch 130–290px and dominate
+// the strip. object-contain keeps the aspect ratio inside the capped box.
+const logoSizeClasses: Record<NonNullable<Client["logoSize"]>, string> = {
+  "2xl": "h-20 md:h-24",
+  xl: "h-16 md:h-20",
+  lg: "h-14 md:h-16",
+  base: "h-10 md:h-12",
+  md: "h-8 md:h-9 max-w-36 md:max-w-44",
+  sm: "h-6 md:h-7 max-w-28 md:max-w-32",
+  xs: "h-5 md:h-6 max-w-24 md:max-w-28",
+};
 
 // Client marquee + stats. Pure CSS animation (see .marquee in globals.css),
 // so this stays a server component (StatItem is its own client boundary).
@@ -27,17 +41,7 @@ export default function ClientsSection() {
                   width={96}
                   height={55}
                   unoptimized
-                  className={
-                    client.logoSize === "2xl"
-                      ? "h-20 md:h-24 w-auto"
-                      : client.logoSize === "xl"
-                      ? "h-16 md:h-20 w-auto"
-                      : client.logoSize === "lg"
-                      ? "h-14 md:h-16 w-auto"
-                      : client.logoSize === "sm"
-                      ? "h-7 md:h-8 w-auto"
-                      : "h-10 md:h-12 w-auto"
-                  }
+                  className={`w-auto object-contain ${logoSizeClasses[client.logoSize ?? "base"]}`}
                 />
               ) : (
                 <span className="font-display font-medium text-2xl md:text-3xl text-text-faint whitespace-nowrap">
