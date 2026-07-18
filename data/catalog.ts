@@ -23,6 +23,14 @@ export type CatalogItem = {
   type: string;
   color: string;
   placement: string;
+  // ── Checkout ──────────────────────────────────
+  // price: INR, tax-inclusive, whole rupees. PLACEHOLDER values below —
+  // confirm real pricing with the workshop before taking real payments.
+  price: number;
+  // No numeric stock count: these are made-to-order fabrications, not
+  // warehouse-picked units. "out-of-stock" is the only state that blocks
+  // checkout; the rest are informational (shown as the lead-time line).
+  stock: "in-stock" | "made-to-order" | "out-of-stock";
 } & ProductMedia;
 
 // Shown as the "Lead time" spec on every item page unless the item
@@ -54,6 +62,8 @@ export const catalog: CatalogItem[] = [
     type: "Full-Height Lectern",
     color: "Clear",
     placement: "Floor standing",
+    price: 1299,
+    stock: "made-to-order",
   },
   {
     sku: "CALT001ACS",
@@ -78,6 +88,8 @@ export const catalog: CatalogItem[] = [
     type: "Column Lectern",
     color: "Silver",
     placement: "Floor standing",
+    price: 1550,
+    stock: "made-to-order",
   },
   {
     sku: "CALT0012ACB",
@@ -102,6 +114,8 @@ export const catalog: CatalogItem[] = [
     type: "Column Lectern",
     color: "Black",
     placement: "Floor standing",
+    price: 1499,
+    stock: "made-to-order",
   },
 
   // ── Donation & Ballot Boxes ─────────────────
@@ -128,6 +142,8 @@ export const catalog: CatalogItem[] = [
     type: "Lockable Box",
     color: "Clear",
     placement: "Counter top",
+    price: 899,
+    stock: "made-to-order",
   },
   {
     sku: "CADB002",
@@ -152,6 +168,8 @@ export const catalog: CatalogItem[] = [
     type: "Lockable Box",
     color: "Tinted",
     placement: "Counter top",
+    price: 949,
+    stock: "made-to-order",
   },
 
   // ── Raffle Drums & Spinners ─────────────────
@@ -178,6 +196,8 @@ export const catalog: CatalogItem[] = [
     type: "Printed Spinner",
     color: "Clear",
     placement: "Counter top",
+    price: 1199,
+    stock: "made-to-order",
   },
   {
     sku: "CARD002",
@@ -202,6 +222,8 @@ export const catalog: CatalogItem[] = [
     type: "Standard Spinner",
     color: "Clear",
     placement: "Counter top",
+    price: 999,
+    stock: "made-to-order",
   },
 
   // ── Literature Holders ──────────────────────
@@ -228,6 +250,8 @@ export const catalog: CatalogItem[] = [
     type: "Single Pocket",
     color: "Clear",
     placement: "Counter top / Wall mount",
+    price: 599,
+    stock: "made-to-order",
   },
   {
     sku: "CABH002",
@@ -252,6 +276,8 @@ export const catalog: CatalogItem[] = [
     type: "Multi Pocket",
     color: "Clear",
     placement: "Floor standing",
+    price: 1099,
+    stock: "made-to-order",
   },
 
   // ── Acrylic Risers ──────────────────────────
@@ -278,6 +304,8 @@ export const catalog: CatalogItem[] = [
     type: "Riser Set",
     color: "Clear",
     placement: "Counter top",
+    price: 749,
+    stock: "made-to-order",
   },
   {
     sku: "CARS002",
@@ -302,6 +330,8 @@ export const catalog: CatalogItem[] = [
     type: "Riser Set",
     color: "Black",
     placement: "Counter top",
+    price: 699,
+    stock: "made-to-order",
   },
 
   // ── Display Pedestals ───────────────────────
@@ -328,6 +358,8 @@ export const catalog: CatalogItem[] = [
     type: "Mirrored Pedestal",
     color: "Silver",
     placement: "Floor standing",
+    price: 1399,
+    stock: "made-to-order",
   },
   {
     sku: "CADP002",
@@ -352,6 +384,8 @@ export const catalog: CatalogItem[] = [
     type: "Mirrored Pedestal",
     color: "Gold",
     placement: "Floor standing",
+    price: 1450,
+    stock: "made-to-order",
   },
 
   // ── Table Top Displays ──────────────────────
@@ -378,6 +412,8 @@ export const catalog: CatalogItem[] = [
     type: "Sign Holder",
     color: "Clear",
     placement: "Counter top",
+    price: 499,
+    stock: "made-to-order",
   },
 ];
 

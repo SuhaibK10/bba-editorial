@@ -26,7 +26,7 @@ export const stats: Stat[] = [
 // bumps the render height for logo files with a lot of built-in padding
 // around the mark (e.g. Airtel), so every wordmark reads as the same
 // visual weight in the strip despite differing source-file crops.
-export type Client = { name: string; logo?: string; logoSize?: "xs" | "sm" | "md" | "base" | "lg" | "xl" | "2xl" };
+export type Client = { name: string; logo?: string; logoSize?: "2xs" | "xs" | "sm" | "md" | "base" | "lg" | "xl" | "2xl" };
 
 // "sm" exists for very wide, short wordmarks (Armani ~9:1, Assa Abloy
 // ~7:1) — at the base height they'd stretch 300px+ and dominate the strip.
@@ -34,12 +34,12 @@ export const clients: Client[] = [
   { name: "Airtel", logo: "/logos/airtel.png", logoSize: "2xl" },
   { name: "Subway", logo: "/logos/subway.png", logoSize: "xl" },
   { name: "Fossil", logo: "/logos/fossil.svg" },
-  { name: "Michael Kors", logo: "/logos/michael-kors.webp", logoSize: "lg" },
-  { name: "Oppo", logo: "/logos/oppo.png", logoSize: "sm" },
-  { name: "Vivo", logo: "/logos/vivo.png", logoSize: "sm" },
-  { name: "Lava", logo: "/logos/lava.png", logoSize: "xs" },
-  { name: "SBI", logo: "/logos/sbi.png", logoSize: "sm" },
-  { name: "Uniqlo", logo: "/logos/uniqlo.png" },
+  { name: "Michael Kors", logo: "/logos/michael-kors.webp", logoSize: "base" },
+  { name: "Oppo", logo: "/logos/oppo.png", logoSize: "xs" },
+  { name: "Vivo", logo: "/logos/vivo.png", logoSize: "xs" },
+  { name: "Lava", logo: "/logos/lava.png", logoSize: "2xs" },
+  { name: "SBI", logo: "/logos/sbi.png", logoSize: "xs" },
+  { name: "Uniqlo", logo: "/logos/uniqlo.png", logoSize: "md" },
   { name: "Tim Hortons", logo: "/logos/tim-hortons.png", logoSize: "sm" },
   { name: "Giorgio Armani", logo: "/logos/armani.png", logoSize: "md" },
   { name: "Assa Abloy", logo: "/logos/assa-abloy.png", logoSize: "sm" },

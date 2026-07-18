@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
-import { whatsappUrl, emailHref, site } from "@/data/site";
+import { emailHref, site } from "@/data/site";
 import { products, getProduct } from "@/data/products";
 import { getCatalogItem } from "@/data/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import {
   validateQuoteForm,
-  composeWhatsAppMessage,
   type QuoteFormFields,
   type QuoteFormErrors,
 } from "@/lib/quote";
+import CheckIcon from "@/components/shared/icons/CheckIcon";
 
 const inputClass =
   "w-full rounded-lg border border-border bg-white px-4 py-3 font-body text-sm text-text-primary " +
@@ -34,6 +33,7 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
   });
   const [pendingProduct, setPendingProduct] = useState("");
   const [errors, setErrors] = useState<QuoteFormErrors>({});
+  const [submitted, setSubmitted] = useState(false);
 
   // Pre-fill from a deep link like /quote?product=<slug>. The slug may be
   // a category (products.ts) or a catalog item (catalog.ts). Runs once on mount.
@@ -74,9 +74,32 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
     const nextErrors = validateQuoteForm(form, items);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-    window.open(whatsappUrl(composeWhatsAppMessage(form, items)), "_blank", "noopener,noreferrer");
+
     clearCart();
+    setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <div className="max-w-xl rounded-2xl border border-border bg-white p-8 flex flex-col items-start gap-4">
+        <span className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white shrink-0">
+          <CheckIcon size={18} />
+        </span>
+        <div>
+          <h2 className="font-display font-bold text-xl text-text-primary mb-2">
+            Request received.
+          </h2>
+          <p className="font-body text-text-secondary leading-relaxed">
+            Thanks, {form.name.split(" ")[0]} — we&apos;ve got your request and will get back to
+            you within 24 hours. Prefer to talk sooner? Email us at{" "}
+            <a href={emailHref} className="text-accent hover:text-accent-hover underline underline-offset-2">
+              {site.email}
+            </a>.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5 max-w-xl">
@@ -245,11 +268,10 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
         <button type="submit" className="btn-primary">
-          <WhatsAppIcon size={15} />
-          Send via WhatsApp
+          Submit Request
         </button>
         <p className="font-body text-xs text-text-faint">
-          Opens WhatsApp with your request pre-filled. Prefer email?{" "}
+          We respond within 24 hours. Prefer email?{" "}
           <a href={emailHref} className="text-accent hover:text-accent-hover underline underline-offset-2">
             {site.email}
           </a>

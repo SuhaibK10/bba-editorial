@@ -2,24 +2,23 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useCartStore } from "@/lib/cart-store";
+import { useCommerceCartStore } from "@/lib/commerce-cart-store";
+import { formatPrice } from "@/lib/pricing";
 import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
 
-export default function AddToQuoteButton({
+export default function AddToCartButton({
   slug,
-  name,
-  variant = "primary",
+  price,
+  outOfStock = false,
 }: {
   slug: string;
-  name: string;
-  // "secondary" for item pages that already have a real Add to Cart CTA —
-  // Add to Quote is still available there, just not the loudest button.
-  variant?: "primary" | "secondary";
+  price: number;
+  outOfStock?: boolean;
 }) {
-  const items = useCartStore((s) => s.items);
-  const addItem = useCartStore((s) => s.addItem);
-  const alreadyInCart = useCartStore((s) => s.isInCart(slug));
+  const items = useCommerceCartStore((s) => s.items);
+  const addItem = useCommerceCartStore((s) => s.addItem);
+  const alreadyInCart = useCommerceCartStore((s) => s.isInCart(slug));
   const [justAdded, setJustAdded] = useState(false);
 
   useEffect(() => {
@@ -29,29 +28,32 @@ export default function AddToQuoteButton({
   }, [justAdded]);
 
   const handleClick = () => {
-    addItem({ productSlug: slug, name });
+    addItem(slug);
     setJustAdded(true);
   };
 
+  if (outOfStock) {
+    return (
+      <button type="button" disabled className="btn-primary opacity-40 cursor-not-allowed">
+        Out of Stock
+      </button>
+    );
+  }
+
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={alreadyInCart}
-        className={`${variant === "secondary" ? "btn-ghost" : "btn-primary"} disabled:opacity-60`}
-      >
-        {justAdded || alreadyInCart ? (
+      <button type="button" onClick={handleClick} className="btn-primary">
+        {justAdded ? (
           <>
             Added
             <CheckIcon size={14} />
           </>
         ) : (
-          "Add to Quote"
+          `Add to Cart · ${formatPrice(price)}`
         )}
       </button>
 
-      {items.length > 0 && (
+      {(alreadyInCart || items.length > 0) && (
         <Link href="/cart" className="btn-text group">
           View cart ({items.length})
           <ArrowIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />

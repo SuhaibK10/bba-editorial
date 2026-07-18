@@ -81,11 +81,6 @@ export default function HeroSection() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Legibility gradient: only the bottom CTAs/category link need
-          contrast now (the big headline moved to AboutSection), so this
-          is much lighter than a full-bleed darken. */}
-      <div className="absolute inset-0 z-1 bg-linear-to-t from-black/55 via-black/10 to-transparent" />
-
       {/* Bottom-centred text */}
       <div className="container-wide relative z-10 pb-2 md:pb-6">
         <div className="max-w-3xl mx-auto text-center">

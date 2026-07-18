@@ -13,7 +13,7 @@ export default function AllProductsPage() {
   return (
     <div className="bg-background">
       <PageHeader
-        label="Shop all"
+        compact
         title={
           <>
             Our Product

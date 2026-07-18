@@ -1,167 +1,124 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { products } from "@/data/products";
-import { catalog } from "@/data/catalog";
-import { getProduct } from "@/data/products";
+import { products, getProduct } from "@/data/products";
+import { catalog, type CatalogItem } from "@/data/catalog";
 import CatalogItemCard from "@/components/products/CatalogItemCard";
 
 const selectClass =
-  "w-full rounded-lg border border-border bg-white px-3.5 py-2.5 font-body text-sm " +
-  "text-text-primary outline-none focus:border-accent transition-colors duration-200";
+  "font-body text-xs uppercase tracking-wider bg-transparent border border-border rounded-lg " +
+  "text-text-secondary px-3 py-2 outline-none cursor-pointer " +
+  "hover:border-text-primary hover:text-text-primary focus:border-accent transition-colors duration-200";
 
-// Distinct values, in first-seen order, for a dropdown facet.
-function distinct(values: string[]) {
-  return Array.from(new Set(values));
+type SortKey = "featured" | "price-asc" | "price-desc" | "name-asc";
+
+const SORT_OPTIONS: { label: string; value: SortKey }[] = [
+  { label: "Featured", value: "featured" },
+  { label: "Price: Low to High", value: "price-asc" },
+  { label: "Price: High to Low", value: "price-desc" },
+  { label: "Name: A–Z", value: "name-asc" },
+];
+
+function sortItems(items: CatalogItem[], sort: SortKey) {
+  if (sort === "featured") return items;
+  return [...items].sort((a, b) => {
+    if (sort === "price-asc") return a.price - b.price;
+    if (sort === "price-desc") return b.price - a.price;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 export default function CatalogFilterGrid() {
-  const [categories, setCategories] = useState<Set<string>>(new Set());
-  const [type, setType] = useState("All");
-  const [color, setColor] = useState("All");
-  const [placement, setPlacement] = useState("All");
+  const [category, setCategory] = useState<string>("all");
+  const [sort, setSort] = useState<SortKey>("featured");
 
-  const types = useMemo(() => distinct(catalog.map((i) => i.type)).sort(), []);
-  const colors = useMemo(() => distinct(catalog.map((i) => i.color)).sort(), []);
-  const placements = useMemo(() => distinct(catalog.map((i) => i.placement)).sort(), []);
+  const categoriesWithItems = useMemo(
+    () => products.filter((p) => catalog.some((i) => i.categorySlug === p.slug)),
+    []
+  );
 
   const filtered = useMemo(() => {
-    return catalog.filter((item) => {
-      if (categories.size > 0 && !categories.has(item.categorySlug)) return false;
-      if (type !== "All" && item.type !== type) return false;
-      if (color !== "All" && item.color !== color) return false;
-      if (placement !== "All" && item.placement !== placement) return false;
-      return true;
-    });
-  }, [categories, type, color, placement]);
+    if (category === "all") return catalog;
+    return catalog.filter((item) => item.categorySlug === category);
+  }, [category]);
 
-  const toggleCategory = (slug: string) => {
-    setCategories((prev) => {
-      const next = new Set(prev);
-      if (next.has(slug)) next.delete(slug);
-      else next.add(slug);
-      return next;
-    });
-  };
-
-  const clearFilters = () => {
-    setCategories(new Set());
-    setType("All");
-    setColor("All");
-    setPlacement("All");
-  };
-
-  const hasActiveFilters =
-    categories.size > 0 || type !== "All" || color !== "All" || placement !== "All";
+  const sorted = sortItems(filtered, sort);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[16rem_1fr] gap-10 items-start">
-
-      {/* Sidebar */}
-      <aside className="flex flex-col gap-8">
-        <div>
-          <h2 className="font-display font-bold text-sm uppercase tracking-wider text-text-primary mb-4">
-            Filter by Product Category
-          </h2>
-          <div className="flex flex-col gap-2.5">
-            {products.map((p) => (
-              <label
-                key={p.slug}
-                className="flex items-center gap-2.5 font-body text-sm text-text-secondary
-                           hover:text-text-primary transition-colors duration-150 cursor-pointer"
-              >
-                <input
-                  type="checkbox"
-                  checked={categories.has(p.slug)}
-                  onChange={() => toggleCategory(p.slug)}
-                  className="w-4 h-4 rounded border-border accent-accent shrink-0"
-                />
-                {p.name}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h2 className="font-display font-bold text-sm uppercase tracking-wider text-text-primary mb-3">
-            Type
-          </h2>
-          <select value={type} onChange={(e) => setType(e.target.value)} className={selectClass}>
-            <option value="All">All</option>
-            {types.map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <h2 className="font-display font-bold text-sm uppercase tracking-wider text-text-primary mb-3">
-            Color
-          </h2>
-          <select value={color} onChange={(e) => setColor(e.target.value)} className={selectClass}>
-            <option value="All">All</option>
-            {colors.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <h2 className="font-display font-bold text-sm uppercase tracking-wider text-text-primary mb-3">
-            Placement
-          </h2>
-          <select
-            value={placement}
-            onChange={(e) => setPlacement(e.target.value)}
-            className={selectClass}
-          >
-            <option value="All">All</option>
-            {placements.map((pl) => (
-              <option key={pl} value={pl}>{pl}</option>
-            ))}
-          </select>
-        </div>
-
-        {hasActiveFilters && (
+    <div>
+      {/* Category pills */}
+      <div className="flex items-center gap-2 flex-wrap mb-6">
+        <button
+          type="button"
+          onClick={() => setCategory("all")}
+          className={`font-body text-xs tracking-wider uppercase px-4 py-2 rounded-full border transition-colors duration-200 ${
+            category === "all"
+              ? "bg-accent text-white border-accent"
+              : "bg-transparent text-text-secondary border-border hover:border-text-primary hover:text-text-primary"
+          }`}
+        >
+          All
+        </button>
+        {categoriesWithItems.map((p) => (
           <button
+            key={p.slug}
             type="button"
-            onClick={clearFilters}
-            className="font-body text-sm text-accent hover:text-accent-hover font-medium
-                       transition-colors duration-200 text-left"
+            onClick={() => setCategory(p.slug)}
+            className={`font-body text-xs tracking-wider uppercase px-4 py-2 rounded-full border transition-colors duration-200 ${
+              category === p.slug
+                ? "bg-accent text-white border-accent"
+                : "bg-transparent text-text-secondary border-border hover:border-text-primary hover:text-text-primary"
+            }`}
           >
-            Clear all filters
+            {p.name}
           </button>
-        )}
-      </aside>
+        ))}
+      </div>
+
+      {/* Sort + count */}
+      <div className="flex flex-wrap items-center justify-end gap-4 mb-8 pb-4 border-b border-border">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className="font-body text-xs uppercase tracking-wider text-text-faint">Sort by</span>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              className={selectClass}
+            >
+              {SORT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
+          <span className="font-body text-xs text-text-faint whitespace-nowrap">
+            {sorted.length} product{sorted.length === 1 ? "" : "s"}
+          </span>
+        </div>
+      </div>
 
       {/* Grid */}
-      <div>
-        <p className="font-body text-sm text-text-faint mb-6">
-          {filtered.length} product{filtered.length === 1 ? "" : "s"}
-        </p>
-
-        {filtered.length === 0 ? (
-          <div className="flex flex-col items-center text-center py-16 gap-4 border border-border rounded-2xl">
-            <p className="font-body text-text-secondary max-w-sm">
-              No products match those filters yet — the full catalogue is still being imported.
-            </p>
-            <button type="button" onClick={clearFilters} className="btn-primary">
-              Clear filters
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filtered.map((item) => (
-              <CatalogItemCard
-                key={item.sku}
-                item={item}
-                color={getProduct(item.categorySlug)?.color ?? "var(--color-surface-2)"}
-                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-              />
-            ))}
-          </div>
-        )}
-      </div>
+      {sorted.length === 0 ? (
+        <div className="flex flex-col items-center text-center py-16 gap-4 border border-border rounded-2xl">
+          <p className="font-body text-text-secondary max-w-sm">
+            No products match that category yet — the full catalogue is still being imported.
+          </p>
+          <button type="button" onClick={() => setCategory("all")} className="btn-primary">
+            View all products
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6">
+          {sorted.map((item) => (
+            <CatalogItemCard
+              key={item.sku}
+              item={item}
+              color={getProduct(item.categorySlug)?.color ?? "var(--color-surface-2)"}
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              showDescription={false}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

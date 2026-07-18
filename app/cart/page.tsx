@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/shared/PageHeader";
 import CartView from "@/components/cart/CartView";
+import CommerceCartSection from "@/components/checkout/CommerceCartSection";
 
 export const metadata: Metadata = {
   title: "Cart",
   description:
-    "Review the products you'd like quoted. Adjust quantities, add notes, and send the list — we respond within 24 hours.",
+    "Review what's in your cart, check out directly, or send a custom list through for a quote — we respond within 24 hours.",
   alternates: { canonical: "/cart" },
   robots: { index: false },
 };
@@ -17,14 +18,15 @@ export default function CartPage() {
         label="Your cart"
         title={
           <>
-            Everything here,
+            Buy it now,
             <br />
-            <span className="text-accent">quoted in 24 hours.</span>
+            <span className="text-accent">or ask us first.</span>
           </>
         }
-        description="Set approximate quantities and any specifics — size, colour, branding — then send the list across. No payment, no commitment: just a fast, real price."
+        description="Priced items check out directly below. Anything custom — size, colour, branding, bulk — goes in as a quote instead, and we respond within 24 hours."
       />
-      <div className="container-wide pb-20 md:pb-28">
+      <div className="container-wide -mt-4 md:-mt-8 pb-20 md:pb-28">
+        <CommerceCartSection />
         <CartView />
       </div>
     </div>

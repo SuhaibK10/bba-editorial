@@ -7,6 +7,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { User } from "lucide-react";
 import { useWishlistStore } from "@/lib/wishlist-store";
 import { useCartStore } from "@/lib/cart-store";
+import { useCommerceCartStore } from "@/lib/commerce-cart-store";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
 import CartIcon from "@/components/shared/icons/CartIcon";
 import MenuOverlay from "@/components/layout/MenuOverlay";
@@ -37,7 +38,9 @@ const linkClass =
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const wishlistCount = useWishlistStore((s) => s.slugs.length);
-  const cartCount = useCartStore((s) => s.items.length);
+  const quoteCartCount = useCartStore((s) => s.items.length);
+  const commerceCartCount = useCommerceCartStore((s) => s.items.length);
+  const cartCount = quoteCartCount + commerceCartCount;
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 

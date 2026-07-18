@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import ProductMedia from "@/components/products/ProductMedia";
 import CatalogItemCard from "@/components/products/CatalogItemCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
+import AddToCartButton from "@/components/commerce-cart/AddToCartButton";
 import WishlistButton from "@/components/wishlist/WishlistButton";
 import { getProduct } from "@/data/products";
 import { catalog, getCatalogItem, getItemsByCategory, DEFAULT_LEAD_TIME } from "@/data/catalog";
+import { formatPrice } from "@/lib/pricing";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
 
 type Props = { params: Promise<{ slug: string; item: string }> };
@@ -85,7 +87,13 @@ export default async function CatalogItemPage({ params }: Props) {
           {/* Details */}
           <div>
             <span className="section-label">SKU {item.sku}</span>
-            <h1 className="section-heading-lg mb-6">{item.name}</h1>
+            <h1 className="section-heading-lg mb-3">{item.name}</h1>
+            <p className="font-display font-bold text-2xl text-text-primary mb-6">
+              {formatPrice(item.price)}
+              <span className="font-body font-normal text-sm text-text-faint ml-2">
+                inclusive of all taxes
+              </span>
+            </p>
             <p className="font-body text-lg text-text-secondary leading-relaxed mb-10">
               {item.longDesc}
             </p>
@@ -119,9 +127,16 @@ export default async function CatalogItemPage({ params }: Props) {
               ))}
             </dl>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <AddToQuoteButton slug={item.slug} name={item.name} />
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <AddToCartButton
+                slug={item.slug}
+                price={item.price}
+                outOfStock={item.stock === "out-of-stock"}
+              />
               <WishlistButton slug={item.slug} />
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <AddToQuoteButton slug={item.slug} name={item.name} variant="secondary" />
             </div>
 
             <p className="font-body text-sm text-text-secondary mt-6">

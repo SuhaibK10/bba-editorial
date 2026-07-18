@@ -14,6 +14,7 @@ const logoSizeClasses: Record<NonNullable<Client["logoSize"]>, string> = {
   md: "h-8 md:h-9 max-w-36 md:max-w-44",
   sm: "h-6 md:h-7 max-w-28 md:max-w-32",
   xs: "h-5 md:h-6 max-w-24 md:max-w-28",
+  "2xs": "h-4 md:h-5 max-w-20 md:max-w-24",
 };
 
 // Client marquee + stats. Pure CSS animation (see .marquee in globals.css),

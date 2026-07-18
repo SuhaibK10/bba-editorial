@@ -89,8 +89,9 @@ export default function ProductCarousel() {
               className="section-heading-lg"
             >
               Just Buy <span className="text-accent">Once,</span><br />
-              <span className="md:whitespace-nowrap">
-                You Will Keep <span className="text-accent">Repeating.</span>
+              You Will{" "}
+              <span className="whitespace-nowrap">
+                Keep <span className="text-accent">Repeating.</span>
               </span>
             </motion.h2>
           </div>

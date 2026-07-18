@@ -17,6 +17,9 @@ export const site = {
   phone: "919999999999",
   // TODO: replace with the real email
   email: "sales@bbappliances.in",
+  // TODO: replace with the real orders inbox. Internal notification
+  // recipient for every paid checkout order (see app/api/checkout/verify).
+  ordersEmail: "orders@bbappliances.in",
 
   address: {
     street: "GT Karnal Road",

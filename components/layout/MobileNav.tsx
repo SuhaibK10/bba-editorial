@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "@/lib/cart-store";
+import { useCommerceCartStore } from "@/lib/commerce-cart-store";
 import { useVisualViewportBottomOffset } from "@/lib/use-visual-viewport-offset";
 import CartIcon from "@/components/shared/icons/CartIcon";
 
@@ -64,7 +65,10 @@ function AccountIcon({ size = 20, active }: IconProps) {
 
 const NAV = [
   { label: "Home", href: "/", icon: HomeIcon },
-  { label: "Products", href: "/products", icon: ProductsIcon },
+  // Lands on the filterable shop grid, not the category-cards page — but
+  // stays highlighted across every /products/* route (category pages,
+  // item pages) via activeMatch, since those are still "shopping."
+  { label: "Shop", href: "/products/all", activeMatch: "/products", icon: ProductsIcon },
   { label: "Cart", href: "/cart", icon: CartIcon },
   { label: "Account", href: "/account", icon: AccountIcon },
 ] as const;
@@ -78,7 +82,9 @@ const NAV = [
 // the dual-state pattern used in most premium iOS/Android tab bars.
 export default function MobileNav() {
   const pathname = usePathname();
-  const cartCount = useCartStore((s) => s.items.length);
+  const quoteCartCount = useCartStore((s) => s.items.length);
+  const commerceCartCount = useCommerceCartStore((s) => s.items.length);
+  const cartCount = quoteCartCount + commerceCartCount;
   const navRef = useVisualViewportBottomOffset<HTMLElement>();
 
   return (
@@ -87,8 +93,9 @@ export default function MobileNav() {
       className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border"
     >
       <div className="flex items-center h-14">
-        {NAV.map(({ label, href, icon: Icon }) => {
-          const isActive = href === "/" ? pathname === href : pathname.startsWith(href);
+        {NAV.map(({ label, href, icon: Icon, ...rest }) => {
+          const matchOn = "activeMatch" in rest ? rest.activeMatch : href;
+          const isActive = matchOn === "/" ? pathname === matchOn : pathname.startsWith(matchOn);
           const isCart = label === "Cart";
           return (
             <Link
