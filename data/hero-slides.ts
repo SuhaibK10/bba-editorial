@@ -75,6 +75,13 @@ const allSlides: HeroSlide[] = [
     mobileImage: heroImgMobile("v1784378741/ChatGPT_Image_Jul_18_2026_at_06_15_13_PM_bemx37.png"),
     tagline: "",
   },
+  {
+    name: "Floor Standing Displays",
+    slug: "floor-standing-displays-2",
+    desktopImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784408470/ChatGPT_Image_Jul_19_2026_at_02_22_13_AM_bys3ew.png", // paste Cloudinary URL here
+    mobileImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784408470/ChatGPT_Image_Jul_19_2026_at_02_22_13_AM_bys3ew.png", // paste Cloudinary URL here
+    tagline: "",
+  },
 
 ];
 

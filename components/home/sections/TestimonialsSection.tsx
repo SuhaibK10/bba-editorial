@@ -75,7 +75,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="section-pad section-pad-md bg-surface overflow-hidden">
+    <section className="section-pad-tight bg-surface overflow-hidden">
       <div className="container-wide mb-12">
         <motion.p
           initial={{ opacity: 0, y: 12 }}

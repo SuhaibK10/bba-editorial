@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import ProductMedia from "@/components/products/ProductMedia";
 import DiagonalArrowIcon from "@/components/shared/icons/DiagonalArrowIcon";
-import HeartIcon from "@/components/shared/icons/HeartIcon";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
+import WishlistHeartButton from "@/components/wishlist/WishlistHeartButton";
 import { useCommerceCartStore } from "@/lib/commerce-cart-store";
-import { useWishlistStore } from "@/lib/wishlist-store";
 import { formatPrice } from "@/lib/pricing";
 import type { CatalogItem } from "@/data/catalog";
 
@@ -29,9 +28,8 @@ export default function CatalogItemCard({
   const outOfStock = item.stock === "out-of-stock";
 
   const addToCart = useCommerceCartStore((s) => s.addItem);
-  const wished = useWishlistStore((s) => s.slugs.includes(item.slug));
-  const toggleWishlist = useWishlistStore((s) => s.toggle);
   const [justAdded, setJustAdded] = useState(false);
+  const [qty, setQty] = useState(1);
 
   useEffect(() => {
     if (!justAdded) return;
@@ -42,20 +40,32 @@ export default function CatalogItemCard({
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     if (outOfStock) return;
-    addToCart(item.slug);
+    addToCart(item.slug, qty);
     setJustAdded(true);
   };
 
-  const handleWishlist = (e: React.MouseEvent) => {
+  const decreaseQty = (e: React.MouseEvent) => {
     e.preventDefault();
-    toggleWishlist(item.slug);
+    setQty((q) => Math.max(1, q - 1));
+  };
+
+  const increaseQty = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setQty((q) => q + 1);
   };
 
   return (
-    <div className="group flex flex-col">
+    <div className="group relative flex flex-col">
+      <WishlistHeartButton
+        slug={item.slug}
+        name={item.name}
+        size={15}
+        className="absolute top-1.5 right-1.5 z-20 w-8 h-8 text-accent hover:text-accent-hover"
+      />
+
       <Link
         href={href}
-        className="relative block overflow-hidden rounded-xl aspect-3/4 mb-3"
+        className="relative block overflow-hidden rounded-xl aspect-3/4 mb-3 border border-border"
         style={{ background: color }}
       >
         <ProductMedia
@@ -63,18 +73,6 @@ export default function CatalogItemCard({
           sizes={sizes}
           className="group-hover:scale-105 transition-transform duration-500"
         />
-
-        <button
-          type="button"
-          onClick={handleWishlist}
-          aria-label={wished ? `Remove ${item.name} from wishlist` : `Save ${item.name} to wishlist`}
-          aria-pressed={wished}
-          className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm
-                     flex items-center justify-center text-accent shadow-sm
-                     hover:bg-accent hover:text-white transition-colors duration-200"
-        >
-          <HeartIcon size={15} filled={wished} />
-        </button>
 
         {outOfStock && (
           <span className="absolute top-3 left-3 z-10 rounded-full bg-white/90 px-2.5 py-1 font-body text-[10px] uppercase tracking-wider text-text-secondary">
@@ -109,16 +107,46 @@ export default function CatalogItemCard({
         </p>
       )}
 
-      <div className="flex items-center justify-between gap-3 mt-auto pt-2">
-        <span className="font-display font-bold text-sm text-text-primary tabular-nums">
-          {formatPrice(item.price)}
-        </span>
+      <div className="mt-auto pt-2 flex flex-col gap-2.5">
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-display font-bold text-sm text-text-primary tabular-nums">
+            {formatPrice(item.price)}
+          </span>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={decreaseQty}
+              disabled={outOfStock}
+              aria-label={`Decrease quantity of ${item.name}`}
+              className="w-6 h-6 rounded-md border border-border flex items-center justify-center
+                         text-text-secondary hover:border-text-primary hover:text-text-primary
+                         disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
+            >
+              −
+            </button>
+            <span className="w-4 text-center font-body text-xs text-text-primary tabular-nums">
+              {qty}
+            </span>
+            <button
+              type="button"
+              onClick={increaseQty}
+              disabled={outOfStock}
+              aria-label={`Increase quantity of ${item.name}`}
+              className="w-6 h-6 rounded-md border border-border flex items-center justify-center
+                         text-text-secondary hover:border-text-primary hover:text-text-primary
+                         disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
         <button
           type="button"
           onClick={handleAddToCart}
           disabled={outOfStock}
-          className="inline-flex items-center gap-1.5 h-8 px-3.5 rounded-full bg-accent text-white
-                     font-body text-xs font-semibold whitespace-nowrap
+          className="inline-flex items-center justify-center gap-1.5 h-8 px-3.5 rounded-full bg-accent text-white
+                     font-body text-xs font-semibold whitespace-nowrap w-full
                      hover:bg-accent-hover transition-colors duration-200
                      disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-accent"
         >

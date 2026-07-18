@@ -48,7 +48,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero-section"
-      className="relative h-[95svh] md:h-[95vh] flex flex-col justify-end overflow-hidden bg-hero-bg"
+      className="relative h-[calc(100svh-var(--mobile-nav-h))] xl:h-[95vh] flex flex-col justify-end overflow-hidden bg-hero-bg"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

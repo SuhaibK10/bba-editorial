@@ -3,14 +3,12 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { EASE_OUT_EXPO, VIEWPORT_ONCE } from "@/lib/motion";
-import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
-import { whatsappUrl } from "@/data/site";
 
 export default function CtaSection() {
   return (
     <section className="section-pad section-pad-sm">
       <div className="container-wide">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto text-center">
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -38,23 +36,11 @@ export default function CtaSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-start gap-3"
+            className="flex justify-center"
           >
             <Link href="/quote" className="btn-primary">
               Request a Quote
-              
             </Link>
-
-            <a
-              href={whatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost"
-                style={{ height: '40px', fontSize: '0.875rem', padding: '0 1.25rem', borderRadius: '9999px' }}
-            >
-              <WhatsAppIcon size={15} />
-              WhatsApp Us
-            </a>
           </motion.div>
 
         </div>

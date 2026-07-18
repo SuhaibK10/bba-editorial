@@ -17,11 +17,11 @@ export default function AllProductsPage() {
         title={
           <>
             Our Product
-            <br />
-            <span className="text-accent">Range.</span>
+            
+            <span className="text-accent"> Range</span>
           </>
         }
-        description="Filter by category, type, colour or placement to find exactly what you're after. Photography is being added as products come off the workshop floor — every listing here is ready to quote today."
+        description=""
       />
       <div className="container-wide pb-20 md:pb-28">
         <CatalogFilterGrid />

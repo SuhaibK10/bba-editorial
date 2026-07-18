@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12">
 
           {/* Brand */}
-          <div className="max-w-xs">
+          <div className="max-w-xs flex flex-col items-center text-center md:items-start md:text-left">
             <Link href="/" className="flex items-center gap-2.5 mb-5 group w-fit">
               <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center
                               group-hover:scale-105 transition-transform duration-200">

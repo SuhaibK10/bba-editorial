@@ -86,19 +86,18 @@ export default function ProductCarousel() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_ONCE}
               transition={{ delay: 0.1, duration: 0.6, ease: EASE_OUT_EXPO }}
-              className="section-heading-lg"
+              className="section-heading-lg text-center"
             >
               Just Buy <span className="text-accent">Once,</span><br />
-              You Will{" "}
               <span className="whitespace-nowrap">
-                Keep <span className="text-accent">Repeating.</span>
+                You Will Keep <span className="text-accent">Repeating.</span>
               </span>
             </motion.h2>
           </div>
 
           {/* Right: description + nav */}
           <div className="flex flex-col items-start md:items-end gap-4">
-            <p className="font-body text-text-secondary leading-relaxed max-w-xs text-sm">
+            <p className="font-body text-text-secondary leading-relaxed max-w-xs text-sm text-center">
               The categories our clients order most, and reorder
               most often.
             </p>

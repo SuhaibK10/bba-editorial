@@ -34,18 +34,15 @@ export const clients: Client[] = [
   { name: "Airtel", logo: "/logos/airtel.png", logoSize: "2xl" },
   { name: "Subway", logo: "/logos/subway.png", logoSize: "xl" },
   { name: "Fossil", logo: "/logos/fossil.svg" },
-  { name: "Michael Kors", logo: "/logos/michael-kors.webp", logoSize: "base" },
-  { name: "Oppo", logo: "/logos/oppo.png", logoSize: "xs" },
+  { name: "Michael Kors", logo: "/logos/michael-kors.webp", logoSize: "lg" },
   { name: "Vivo", logo: "/logos/vivo.png", logoSize: "xs" },
-  { name: "Lava", logo: "/logos/lava.png", logoSize: "2xs" },
+  { name: "Lava", logo: "/logos/lava.png", logoSize: "xs" },
   { name: "SBI", logo: "/logos/sbi.png", logoSize: "xs" },
   { name: "Uniqlo", logo: "/logos/uniqlo.png", logoSize: "md" },
   { name: "Tim Hortons", logo: "/logos/tim-hortons.png", logoSize: "sm" },
   { name: "Giorgio Armani", logo: "/logos/armani.png", logoSize: "md" },
   { name: "Assa Abloy", logo: "/logos/assa-abloy.png", logoSize: "sm" },
-  { name: "Ambrane" },
-  { name: "100 Pipers" },
-  { name: "Blenders Pride" },
+  { name: "Blenders Pride", logo: "/logos/blenders-pride.png", logoSize: "2xl" },
 ];
 
 export type ProcessStep = { step: string; title: string; desc: string };

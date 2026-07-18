@@ -33,7 +33,7 @@ export default function ClientsSection() {
             <span
               key={`${client.name}-${i}`}
               aria-hidden={i >= clients.length}
-              className="flex items-center mr-16 md:mr-24"
+              className="flex items-center justify-center h-20 md:h-24 mr-16 md:mr-24 shrink-0"
             >
               {client.logo ? (
                 <Image

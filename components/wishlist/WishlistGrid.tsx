@@ -7,13 +7,13 @@ import { getCatalogItem } from "@/data/catalog";
 import { useWishlistStore } from "@/lib/wishlist-store";
 import ProductCard from "@/components/products/ProductCard";
 import CatalogItemCard from "@/components/products/CatalogItemCard";
+import WishlistHeartButton from "@/components/wishlist/WishlistHeartButton";
 import HeartIcon from "@/components/shared/icons/HeartIcon";
 
 const cardSizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
 
 export default function WishlistGrid() {
   const slugs = useWishlistStore((s) => s.slugs);
-  const toggle = useWishlistStore((s) => s.toggle);
 
   // The persisted store only has real data on the client; render nothing on
   // the server pass so the empty state can't flash for users with saved items.
@@ -58,7 +58,19 @@ export default function WishlistGrid() {
         return (
           <div key={slug} className="relative">
             {entry.kind === "category" ? (
-              <ProductCard product={entry.category} sizes={cardSizes} />
+              <>
+                <ProductCard product={entry.category} sizes={cardSizes} />
+                {/* ProductCard has no wishlist heart of its own (category
+                    tiles aren't buyable items) — this is the only toggle
+                    for that case. CatalogItemCard below has its own built
+                    in, so this overlay would just duplicate it there. */}
+                <WishlistHeartButton
+                  slug={slug}
+                  name={name}
+                  size={16}
+                  className="absolute top-7 right-7 w-9 h-9 text-accent hover:text-accent-hover"
+                />
+              </>
             ) : (
               <CatalogItemCard
                 item={entry.item}
@@ -66,16 +78,6 @@ export default function WishlistGrid() {
                 sizes={cardSizes}
               />
             )}
-            <button
-              type="button"
-              onClick={() => toggle(slug)}
-              aria-label={`Remove ${name} from wishlist`}
-              className="absolute top-7 right-7 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm
-                         shadow-sm flex items-center justify-center text-accent
-                         hover:bg-accent hover:text-white transition-colors duration-200"
-            >
-              <HeartIcon size={16} filled />
-            </button>
           </div>
         );
       })}

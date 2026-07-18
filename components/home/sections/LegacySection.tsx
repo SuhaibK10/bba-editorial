@@ -7,7 +7,7 @@ import ArrowIcon from "@/components/shared/icons/ArrowIcon";
 
 export default function LegacySection() {
   return (
-    <section className="section-pad-lg" style={{ background: "#2A2620" }}>
+    <section className="section-pad-tight" style={{ background: "#2A2620" }}>
       <div className="container-wide text-center max-w-3xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
@@ -32,11 +32,11 @@ export default function LegacySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="font-body text-white/70 leading-relaxed mb-8"
+          className="font-body text-white/70 leading-relaxed mb-4"
         >
           Every display we&apos;ve ever made has come out of the same GT Karnal
           Road facility we opened in 1991. No subcontracting, no
-          white-labelling — just three decades of getting better at one craft.
+          white-labelling, just three decades of getting better at one craft.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}

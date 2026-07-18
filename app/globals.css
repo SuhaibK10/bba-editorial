@@ -58,6 +58,12 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: auto;
+    /* Real height of the fixed mobile bottom tab bar (MobileNav), including
+       its iPhone home-indicator safe-area padding. Shared by the page-end
+       spacer (.mobile-nav-spacer) and the hero's mobile height, so nothing
+       the bar overlays — including the hero's own bottom content — ever
+       renders underneath it. Keep in sync with .mobile-nav-bar's height. */
+    --mobile-nav-h: calc(48px + max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px)));
   }
 
   body {
@@ -379,7 +385,7 @@
 
 /* Spacer matching the nav height (+ safe area) so page content doesn't hide behind it */
 .mobile-nav-spacer {
-  height: calc(56px + max(0px, calc(env(safe-area-inset-bottom, 0px) - 8px)));
+  height: var(--mobile-nav-h);
 }
 
 /* Pin the bottom tab bar to its own compositor layer. Reduces jank as iOS/

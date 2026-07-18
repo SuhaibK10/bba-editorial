@@ -163,6 +163,21 @@ export const products: Product[] = [
   },
   {
     id: "09",
+    name: "Display Pedestals",
+    desc: "Clear and mirrored pedestals that give hero products a stage of their own.",
+    longDesc:
+      "Cube and column pedestals in clear, coloured and mirrored acrylic. The standard tool of window dressers, galleries and product launches, built solid enough for daily retail use.",
+    slug: "display-pedestals",
+    color: "#F5F3FF",
+    features: [
+      "Clear, mirrored and coloured finishes",
+      "Cube, column and nesting sets",
+      "Load-tested for heavy merchandise",
+      "Any height, made to order",
+    ],
+  },
+  {
+    id: "10",
     name: "Custom Display Cases",
     desc: "Bespoke enclosures fabricated to your exact dimensions and brand specifications.",
     longDesc:
@@ -179,7 +194,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "10",
+    id: "11",
     name: "Acrylic Lecterns & Podiums",
     desc: "Premium clear and chrome-trimmed lecterns for events, hotels and auditoriums.",
     longDesc:
@@ -194,7 +209,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "11",
+    id: "12",
     name: "Donation & Ballot Boxes",
     desc: "Secure acrylic collection boxes for donations, ballots, coupons and lucky draws.",
     longDesc:
@@ -209,7 +224,7 @@ export const products: Product[] = [
     ],
   },
   {
-    id: "12",
+    id: "13",
     name: "Jewellery Displays",
     desc: "Refined acrylic stands, trays and busts that let the jewellery do the talking.",
     longDesc:
@@ -221,21 +236,6 @@ export const products: Product[] = [
       "Clear, frosted and velvet-finish options",
       "Full counter and window presentation sets",
       "Scratch-free polished edges",
-    ],
-  },
-  {
-    id: "13",
-    name: "Display Pedestals",
-    desc: "Clear and mirrored pedestals that give hero products a stage of their own.",
-    longDesc:
-      "Cube and column pedestals in clear, coloured and mirrored acrylic. The standard tool of window dressers, galleries and product launches, built solid enough for daily retail use.",
-    slug: "display-pedestals",
-    color: "#F5F3FF",
-    features: [
-      "Clear, mirrored and coloured finishes",
-      "Cube, column and nesting sets",
-      "Load-tested for heavy merchandise",
-      "Any height, made to order",
     ],
   },
   {

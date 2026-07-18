@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ProductMedia from "@/components/products/ProductMedia";
+import ImageLightbox from "@/components/products/ImageLightbox";
 import CatalogItemCard from "@/components/products/CatalogItemCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
 import AddToCartButton from "@/components/commerce-cart/AddToCartButton";
@@ -77,10 +77,9 @@ export default async function CatalogItemPage({ params }: Props) {
             className="relative rounded-2xl overflow-hidden aspect-[4/3]"
             style={{ background: category.color }}
           >
-            <ProductMedia
+            <ImageLightbox
               product={item}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
             />
           </div>
 

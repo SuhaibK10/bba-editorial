@@ -89,7 +89,7 @@ export default function MobileNav() {
     <nav
       className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border"
     >
-      <div className="flex items-center h-14">
+      <div className="flex items-center h-12">
         {NAV.map(({ label, href, icon: Icon, ...rest }) => {
           const matchOn = "activeMatch" in rest ? rest.activeMatch : href;
           const isActive = matchOn === "/" ? pathname === matchOn : pathname.startsWith(matchOn);
@@ -100,7 +100,7 @@ export default function MobileNav() {
               href={href}
               aria-label={isCart && cartCount > 0 ? `Cart, ${cartCount} items` : label}
               aria-current={isActive ? "page" : undefined}
-              className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-1 pb-2.5 transition-colors duration-200
+              className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-0.5 pb-2.5 transition-colors duration-200
                           ${isActive ? "text-accent" : "text-text-secondary hover:text-text-primary"}`}
             >
               <span className="relative flex leading-none">

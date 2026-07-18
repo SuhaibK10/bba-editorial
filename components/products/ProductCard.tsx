@@ -29,7 +29,7 @@ export default function ProductCard({
       style={{ background: product.color }}
     >
       <div className="p-4 pb-0">
-        <div className={`relative overflow-hidden rounded-xl ${imageHeight}`}>
+        <div className={`relative overflow-hidden rounded-xl border border-border ${imageHeight}`}>
           <ProductMedia
             product={product}
             sizes={sizes}

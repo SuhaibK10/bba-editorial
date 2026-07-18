@@ -42,6 +42,7 @@ export const catalog: CatalogItem[] = [
   {
     sku: "CALT001",
     name: "Classic Acrylic Lectern",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784402336/Generated_Image_July_19_2026_-_12_40AM_ttjs4k.jpg",
     slug: "classic-acrylic-lectern",
     categorySlug: "acrylic-lecterns-podiums",
     desc: "The all-clear classic: thick cast acrylic with an interior shelf, delivered ready to use.",
@@ -68,6 +69,7 @@ export const catalog: CatalogItem[] = [
   {
     sku: "CALT001ACS",
     name: "Acrylic Lectern, Silver Chrome Column",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784401439/Generated_Image_July_19_2026_-_12_32AM_lokvou.jpg", // paste Cloudinary URL here
     slug: "acrylic-lectern-silver-chrome",
     categorySlug: "acrylic-lecterns-podiums",
     desc: "Clear acrylic reading top on a single chromed aluminium column with a weighted base.",
@@ -94,6 +96,7 @@ export const catalog: CatalogItem[] = [
   {
     sku: "CALT0012ACB",
     name: "Acrylic Lectern, Black Chrome Column",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784403460/Generated_Image_July_19_2026_-_12_59AM_r8crca.jpg", // paste Cloudinary URL here
     slug: "acrylic-lectern-black-chrome",
     categorySlug: "acrylic-lecterns-podiums",
     desc: "Sleek black acrylic reading top with a matching black chrome column and weighted base.",
@@ -121,7 +124,8 @@ export const catalog: CatalogItem[] = [
   // ── Donation & Ballot Boxes ─────────────────
   {
     sku: "CADB001",
-    name: "Lockable Donation Box with A6 Header",
+    name: "Lockable Donation Box ",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784403328/Generated_Image_July_19_2026_-_1_02AM_ovo7au.jpg", // paste Cloudinary URL here
     slug: "lockable-donation-box-a6-header",
     categorySlug: "donation-ballot-boxes",
     desc: "Clear lockable collection box with an A6 signage header and a wide 85mm entry slot.",
@@ -147,7 +151,8 @@ export const catalog: CatalogItem[] = [
   },
   {
     sku: "CADB002",
-    name: "Tinted Donation Box with A6 Header",
+    name: "Tinted Donation Box ",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784404756/Generated_Image_July_19_2026_-_1_28AM_ay0ezm.jpg", // paste Cloudinary URL here
     slug: "tinted-donation-box-a6-header",
     categorySlug: "donation-ballot-boxes",
     desc: "Dark tinted acrylic collection box that conceals contents while showing fill level.",
@@ -172,36 +177,40 @@ export const catalog: CatalogItem[] = [
     stock: "made-to-order",
   },
 
-  // ── Raffle Drums & Spinners ─────────────────
+  // ── Literature Holders ──────────────────────
   {
-    sku: "CARD001",
-    name: '13.5" Raffle Spinner with Custom Print',
-    slug: "raffle-spinner-13-custom-print",
-    categorySlug: "raffle-drums-spinners",
-    desc: "Octagonal clear drum with two full-colour printed panels and a locking access door.",
+    sku: "CABH001",
+    name: "Brochure Holder",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784407082/Generated_Image_July_19_2026_-_1_36AM_wtl54x.jpg", // paste Cloudinary URL here
+    slug: "single-tier-a4-brochure-holder",
+    categorySlug: "literature-holders",
+    desc: "The workhorse A4 dispenser: counter-top or wall-mounted, with a deep 41mm pocket.",
     longDesc:
-      "A counter-top raffle drum built for promotions that need to draw a crowd. The octagonal barrel in 5mm clear acrylic spins a full 360° to mix entries, while two 104 × 304mm digitally printed panels put your branding on the drum itself. A 150 × 4mm slot accepts entry forms and envelopes, and a lockable door spanning two faces makes drawing winners and emptying the drum effortless.",
+      "The staple of bank branches, clinics, travel desks and showrooms. This single-pocket holder presents A4 (210 × 297mm) literature in portrait, with a deep cut-out that makes taking a brochure easy and a 41mm pocket that holds a generous stack. Angled feet tilt the pocket toward the customer on a counter; two keyhole cut-outs let the same unit mount flat on a wall.",
     highlights: [
-      "Two 104 × 304mm full-colour printed panels",
-      "5mm clear acrylic, 355 × 302mm barrel",
-      "360° rotation with built-in carry handles",
-      "Lockable two-face access door",
+      "Fits standard A4 portrait literature",
+      "41mm deep pocket holds a full stack",
+      "Counter-top or wall-mounted via keyholes",
+      "Polished edges for an acrylic-clear look",
     ],
     specs: [
-      { label: "Finish", value: "Clear, custom print" },
-      { label: "Placement", value: "Counter top" },
-      { label: "Barrel", value: "355 × 302mm" },
-      { label: "Security", value: "Built-in lock" },
+      { label: "Finish", value: "Clear" },
+      { label: "Placement", value: "Counter top / wall mount" },
+      { label: "Media size", value: "A4, portrait" },
+      { label: "Pocket depth", value: "41mm" },
     ],
-    type: "Printed Spinner",
+    type: "Single Pocket",
     color: "Clear",
-    placement: "Counter top",
-    price: 1199,
+    placement: "Counter top / Wall mount",
+    price: 599,
     stock: "made-to-order",
   },
+
+  // ── Raffle Drums & Spinners ─────────────────
   {
     sku: "CARD002",
-    name: '12" Raffle Spinner',
+    name: 'Raffle Spinner',
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784407621/Generated_Image_July_19_2026_-_2_16AM_gtbmmt.jpg", // paste Cloudinary URL here
     slug: "raffle-spinner-12",
     categorySlug: "raffle-drums-spinners",
     desc: "Compact clear raffle barrel with visible contents that keep every draw provably fair.",
@@ -226,90 +235,11 @@ export const catalog: CatalogItem[] = [
     stock: "made-to-order",
   },
 
-  // ── Literature Holders ──────────────────────
-  {
-    sku: "CABH001",
-    name: "Single-Tier A4 Brochure Holder",
-    slug: "single-tier-a4-brochure-holder",
-    categorySlug: "literature-holders",
-    desc: "The workhorse A4 dispenser: counter-top or wall-mounted, with a deep 41mm pocket.",
-    longDesc:
-      "The staple of bank branches, clinics, travel desks and showrooms. This single-pocket holder presents A4 (210 × 297mm) literature in portrait, with a deep cut-out that makes taking a brochure easy and a 41mm pocket that holds a generous stack. Angled feet tilt the pocket toward the customer on a counter; two keyhole cut-outs let the same unit mount flat on a wall.",
-    highlights: [
-      "Fits standard A4 portrait literature",
-      "41mm deep pocket holds a full stack",
-      "Counter-top or wall-mounted via keyholes",
-      "Polished edges for an acrylic-clear look",
-    ],
-    specs: [
-      { label: "Finish", value: "Clear" },
-      { label: "Placement", value: "Counter top / wall mount" },
-      { label: "Media size", value: "A4, portrait" },
-      { label: "Pocket depth", value: "41mm" },
-    ],
-    type: "Single Pocket",
-    color: "Clear",
-    placement: "Counter top / Wall mount",
-    price: 599,
-    stock: "made-to-order",
-  },
-  {
-    sku: "CABH002",
-    name: "Nine-Pocket A4 Brochure Rack",
-    slug: "nine-pocket-a4-brochure-rack",
-    categorySlug: "literature-holders",
-    desc: "Floor-standing rack with nine A4 pockets for lobbies, showrooms and exhibition stands.",
-    longDesc:
-      "When one pocket isn't enough. This floor-standing rack presents nine A4 titles at once, keeping catalogues, rate cards and brochures organised and face-out in high-traffic spaces. A self-standing footprint means no wall required — position it beside reception, at the entrance or on the exhibition floor.",
-    highlights: [
-      "Nine A4 pockets, face-out presentation",
-      "Free-standing, no wall fixing needed",
-      "Suits lobbies, showrooms and events",
-      "Clear acrylic keeps covers fully visible",
-    ],
-    specs: [
-      { label: "Finish", value: "Clear" },
-      { label: "Placement", value: "Floor standing" },
-      { label: "Media size", value: "A4" },
-      { label: "Capacity", value: "9 pockets" },
-    ],
-    type: "Multi Pocket",
-    color: "Clear",
-    placement: "Floor standing",
-    price: 1099,
-    stock: "made-to-order",
-  },
-
   // ── Acrylic Risers ──────────────────────────
-  {
-    sku: "CARS001",
-    name: "Seven-Piece Clear Riser Set",
-    slug: "seven-piece-clear-riser-set",
-    categorySlug: "acrylic-risers",
-    desc: "Seven nesting U-shaped risers that build instant height into any counter display.",
-    longDesc:
-      "Seven graduated risers in 3mm clear acrylic with polished edges — the fastest way to give a flat counter display depth and hierarchy. The nesting design stores in the space of the largest piece, and the risers stack safely to build taller arrangements. Use two, use all seven, reconfigure for every campaign.",
-    highlights: [
-      "Seven graduated, nesting sizes",
-      "3mm clear acrylic, polished edges",
-      "Stackable for taller configurations",
-      "Stores flat inside the largest piece",
-    ],
-    specs: [
-      { label: "Finish", value: "Clear" },
-      { label: "Placement", value: "Counter top" },
-      { label: "Pieces", value: "7" },
-      { label: "Shape", value: "U-shaped, nesting" },
-    ],
-    type: "Riser Set",
-    color: "Clear",
-    placement: "Counter top",
-    price: 749,
-    stock: "made-to-order",
-  },
   {
     sku: "CARS002",
     name: "Five-Piece Black Riser Set",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784405571/Generated_Image_July_19_2026_-_1_38AM_sbhxlc.jpg", // paste Cloudinary URL here
     slug: "five-piece-black-riser-set",
     categorySlug: "acrylic-risers",
     desc: "Five graduated black risers that add drama and depth to jewellery and cosmetic displays.",
@@ -338,6 +268,7 @@ export const catalog: CatalogItem[] = [
   {
     sku: "CADP001",
     name: "Silver Mirrored Pedestal",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784407081/ChatGPT_Image_Jul_19_2026_at_01_57_22_AM_dftd6a.png", // paste Cloudinary URL here
     slug: "silver-mirrored-pedestal",
     categorySlug: "display-pedestals",
     desc: "Mirror-finish acrylic pedestal that multiplies light around whatever sits on top.",
@@ -361,58 +292,33 @@ export const catalog: CatalogItem[] = [
     price: 1399,
     stock: "made-to-order",
   },
-  {
-    sku: "CADP002",
-    name: "Gold Mirrored Pedestal",
-    slug: "gold-mirrored-pedestal",
-    categorySlug: "display-pedestals",
-    desc: "Richly hued gold mirror pedestal for launches and displays that need warmth and glamour.",
-    longDesc:
-      "The same five-sided mirrored construction in a rich gold finish. Gold mirror flatters jewellery, fragrance, festive and luxury merchandise, adding warmth that silver can't. Reflective faces catch and multiply ambient light, making the pedestal a statement piece even before the product goes on top.",
-    highlights: [
-      "Mirrored acrylic, gold finish",
-      "Five-sided construction, open bottom",
-      "Load-tested for heavy merchandise",
-      "Multiple footprints made to order",
-    ],
-    specs: [
-      { label: "Finish", value: "Gold mirror" },
-      { label: "Placement", value: "Floor standing" },
-      { label: "Construction", value: "5-sided, open bottom" },
-      { label: "Sizes", value: "Multiple, made to order" },
-    ],
-    type: "Mirrored Pedestal",
-    color: "Gold",
-    placement: "Floor standing",
-    price: 1450,
-    stock: "made-to-order",
-  },
 
-  // ── Table Top Displays ──────────────────────
+  // ── Floor Standing Displays ──────────────────
   {
-    sku: "CATT001",
-    name: 'Slant-Back Sign Holder, 4" × 6"',
-    slug: "slant-back-sign-holder-4x6",
-    categorySlug: "table-top-displays",
-    desc: "The everyday counter sign holder: angled for reading, side-loading in seconds.",
+    sku: "CAFD001",
+    name: "Modular Floor Display Tower",
+    image: "https://res.cloudinary.com/deh394y0h/image/upload/v1784408470/ChatGPT_Image_Jul_19_2026_at_02_22_13_AM_bys3ew.png", // paste Cloudinary URL here
+    slug: "modular-floor-display-tower",
+    categorySlug: "floor-standing-displays",
+    desc: "Full-height acrylic tower with three branded shelves, built to anchor a brand zone.",
     longDesc:
-      "The simplest piece of point-of-sale kit there is, done properly. The slant-back angle presents a 4 × 6 inch card at a natural reading angle on counters and tabletops, and the side-insert design swaps messages in seconds. Order in quantity for menus, price cards, table numbers and compliance notices across every counter you run.",
+      "A full-height acrylic display tower with three fixed shelves and a header panel sized for branding or a campaign graphic. The weighted base keeps it stable in high-footfall showrooms, malls and flagship stores, while the open, all-clear construction lets merchandise take center stage on every level. Ships flat-packed with tool-free assembly.",
     highlights: [
-      "Holds 4 × 6 inch cards in portrait",
-      "Slant-back angle for easy reading",
-      "Side insert — swap messages in seconds",
-      "Economical in case-pack quantities",
+      "Three fixed shelves plus header branding panel",
+      "Weighted base for stability in busy spaces",
+      "Flat-packed, tool-free assembly",
+      "Clear, glass-like acrylic construction",
     ],
     specs: [
       { label: "Finish", value: "Clear" },
-      { label: "Placement", value: "Counter top" },
-      { label: "Media size", value: '4" × 6", portrait' },
-      { label: "Loading", value: "Side insert" },
+      { label: "Placement", value: "Floor standing" },
+      { label: "Shelves", value: "3 fixed tiers" },
+      { label: "Assembly", value: "Flat-packed, tool-free" },
     ],
-    type: "Sign Holder",
+    type: "Display Tower",
     color: "Clear",
-    placement: "Counter top",
-    price: 499,
+    placement: "Floor standing",
+    price: 2499,
     stock: "made-to-order",
   },
 ];

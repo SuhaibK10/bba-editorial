@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { useCommerceCartStore } from "@/lib/commerce-cart-store";
 import { getCatalogItem } from "@/data/catalog";
+import Image from "next/image";
 import { getProduct } from "@/data/products";
 import { formatPrice } from "@/lib/pricing";
 import ArrowIcon from "@/components/shared/icons/ArrowIcon";
@@ -48,11 +49,20 @@ export default function CommerceCartSection() {
               <div key={item.slug} className="rounded-2xl border border-border bg-white p-5">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="flex items-center gap-3.5 min-w-0">
-                    <span
-                      className="w-10 h-10 rounded-xl shrink-0"
+                    <div
+                      className="relative w-10 h-10 rounded-xl shrink-0 overflow-hidden"
                       style={{ background: color }}
-                      aria-hidden="true"
-                    />
+                    >
+                      {item.image && (
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          sizes="40px"
+                          className="object-cover"
+                        />
+                      )}
+                    </div>
                     <div className="min-w-0">
                       <p className="font-body text-[11px] uppercase tracking-[0.12em] text-text-faint">
                         {item.sku}

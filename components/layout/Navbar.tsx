@@ -73,7 +73,7 @@ const { scrollYProgress } = useScroll();
         <div className="relative mx-auto max-w-5xl">
         <div
           className="relative flex items-center justify-between
-                     h-12.5 md:h-12 rounded-full px-2 md:px-3
+                     h-13 md:h-12.5 rounded-full px-2 md:px-3
                      border backdrop-blur-md bg-surface/95 border-border shadow-card"
         >
 
@@ -109,6 +109,10 @@ const { scrollYProgress } = useScroll();
 
               <Link href="/" className={linkClass}>
                 Home
+              </Link>
+
+              <Link href="/products/all" className={linkClass}>
+                Shop
               </Link>
 
               <CategoryDropdown />

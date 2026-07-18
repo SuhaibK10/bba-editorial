@@ -23,7 +23,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.6, delay: 0.05, ease: EASE_OUT_EXPO }}
-            className="font-display font-medium text-2xl md:text-3xl text-accent mb-3 text-center"
+            className="font-display font-medium text-2xl md:text-3xl text-accent mb-10 text-center"
           >
             India&apos;s most trusted acrylic manufacturer.
           </motion.p>

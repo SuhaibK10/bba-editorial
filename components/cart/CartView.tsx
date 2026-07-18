@@ -50,21 +50,30 @@ export default function CartView() {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center text-center py-16 gap-4">
-        <CartIcon size={40} className="text-text-faint" />
-        <p className="font-body text-text-secondary max-w-sm">
-          Your cart is empty. Add products you&apos;d like us to quote and they&apos;ll
-          collect here.
-        </p>
-        <Link href="/products" className="btn-primary mt-2">
-          Browse Products
-        </Link>
+      <div>
+        <h2 className="font-display font-bold text-sm uppercase tracking-wider text-text-primary mb-6">
+          Your Quote List
+        </h2>
+        <div className="flex flex-col items-center text-center py-16 gap-4">
+          <CartIcon size={40} className="text-text-faint" />
+          <p className="font-body text-text-secondary max-w-sm">
+            Your quote list is empty. Add products you&apos;d like us to quote and they&apos;ll
+            collect here.
+          </p>
+          <Link href="/products" className="btn-primary mt-2">
+            Browse Products
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-10 items-start">
+    <div>
+      <h2 className="font-display font-bold text-sm uppercase tracking-wider text-text-primary mb-6">
+        Your Quote List
+      </h2>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_20rem] gap-10 items-start">
 
       {/* Item rows */}
       <div className="flex flex-col gap-4">
@@ -169,6 +178,7 @@ export default function CartView() {
           </button>
         </div>
       </aside>
+      </div>
     </div>
   );
 }
