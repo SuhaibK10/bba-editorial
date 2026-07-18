@@ -83,7 +83,7 @@ export default function HeroSection() {
 
       {/* Bottom-centred text */}
       <div className="container-wide relative z-10 pb-2 md:pb-6">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
           {/* Per-slide selling line */}
           <AnimatePresence mode="wait">
             {slide.tagline && (
@@ -94,7 +94,7 @@ export default function HeroSection() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
                 className="font-display font-bold text-2xl md:text-4xl text-white leading-tight
-                           mb-4 md:mb-6 [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]"
+                           mb-4 md:mb-6"
               >
                 {slide.tagline}
               </motion.p>
