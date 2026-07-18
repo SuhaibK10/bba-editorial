@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "@/lib/cart-store";
 import { useCommerceCartStore } from "@/lib/commerce-cart-store";
-import { useVisualViewportBottomOffset } from "@/lib/use-visual-viewport-offset";
 import CartIcon from "@/components/shared/icons/CartIcon";
 
 type IconProps = { size?: number; active?: boolean };
@@ -85,11 +84,9 @@ export default function MobileNav() {
   const quoteCartCount = useCartStore((s) => s.items.length);
   const commerceCartCount = useCommerceCartStore((s) => s.items.length);
   const cartCount = quoteCartCount + commerceCartCount;
-  const navRef = useVisualViewportBottomOffset<HTMLElement>();
 
   return (
     <nav
-      ref={navRef}
       className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border"
     >
       <div className="flex items-center h-14">
@@ -103,7 +100,7 @@ export default function MobileNav() {
               href={href}
               aria-label={isCart && cartCount > 0 ? `Cart, ${cartCount} items` : label}
               aria-current={isActive ? "page" : undefined}
-              className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-2 pb-2.5 transition-colors duration-200
+              className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-1 pb-2.5 transition-colors duration-200
                           ${isActive ? "text-accent" : "text-text-secondary hover:text-text-primary"}`}
             >
               <span className="relative flex leading-none">

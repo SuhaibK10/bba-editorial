@@ -58,34 +58,24 @@ const allSlides: HeroSlide[] = [
     name: "Acrlyic Photoframes",
     slug: "acrylic-risers",
     desktopImage: heroImg("ChatGPT_Image_Jul_18_2026_at_05_16_29_PM_ej0cs8"),
-    mobileImage: heroImgMobile("Generated_Image_July_18_2026_-_5_18PM_glfpav.jpg"),
+    mobileImage: heroImgMobile("ChatGPT_Image_Jul_18_2026_at_05_34_00_PM_vffops.png"),
   },
 
-  // ── Paste new slides below: full Cloudinary URLs, not just the public_id ──
-  // (unlike the slides above, these skip the heroImg()/heroImgMobile()
-  // helpers entirely, so whatever crop/transform is already in your pasted
-  // link is exactly what renders — no extra c_fill applied on top).
   {
     name: "Acrylic Ruffle Drum",
     slug: "new-slide-1",
-    desktopImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784379575/Generated_Image_July_18_2026_-_6_28PM_codwn2.jpg", // paste desktop Cloudinary link here
-    mobileImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784379291/ChatGPT_Image_Jul_18_2026_at_06_23_33_PM_l1mzji.png",  // paste mobile Cloudinary link here
+    desktopImage: heroImg("v1784379575/Generated_Image_July_18_2026_-_6_28PM_codwn2.jpg"),
+    mobileImage: heroImgMobile("v1784379291/ChatGPT_Image_Jul_18_2026_at_06_23_33_PM_l1mzji.png"),
     tagline: "",
   },
   {
-    name: "New Slide 2",
+    name: "Acrlyic Static Signage",
     slug: "new-slide-2",
-    desktopImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784378386/Generated_Image_July_18_2026_-_6_07PM_k5ngpw.jpg",
-    mobileImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784378741/ChatGPT_Image_Jul_18_2026_at_06_15_13_PM_bemx37.png",
+    desktopImage: heroImg("v1784378386/Generated_Image_July_18_2026_-_6_07PM_k5ngpw.jpg"),
+    mobileImage: heroImgMobile("v1784378741/ChatGPT_Image_Jul_18_2026_at_06_15_13_PM_bemx37.png"),
     tagline: "",
   },
-  {
-    name: "New Slide 3",
-    slug: "new-slide-3",
-    desktopImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784378386/Generated_Image_July_18_2026_-_6_07PM_k5ngpw.jpg",
-    mobileImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784378386/Generated_Image_July_18_2026_-_6_07PM_k5ngpw.jpg",
-    tagline: "",
-  },
+
 ];
 
 // Drops any slide still waiting on a pasted-in desktopImage, so an
