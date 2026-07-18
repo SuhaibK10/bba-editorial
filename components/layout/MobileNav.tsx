@@ -99,7 +99,7 @@ export default function MobileNav() {
               className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-2 pb-2.5 transition-colors duration-200
                           ${isActive ? "text-accent" : "text-text-secondary hover:text-text-primary"}`}
             >
-              <span className="relative">
+              <span className="relative flex leading-none">
                 <Icon active={isActive} />
                 {isCart && cartCount > 0 && (
                   <span
@@ -112,7 +112,7 @@ export default function MobileNav() {
                   </span>
                 )}
               </span>
-              <span className="font-body text-[10px] tracking-wide uppercase">{label}</span>
+              <span className="font-body text-[10px] leading-none tracking-wide uppercase">{label}</span>
             </Link>
           );
         })}
