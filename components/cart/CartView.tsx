@@ -157,7 +157,7 @@ export default function CartView() {
           </span>
         </div>
         <p className="font-body text-sm text-text-secondary leading-relaxed mb-6">
-          No prices here on purpose — every order is custom. Send us this list
+          No prices here on purpose: every order is custom. Send us this list
           and we&apos;ll quote it within 24 hours.
         </p>
         <Link href="/quote" className="btn-primary w-full justify-center mb-3">

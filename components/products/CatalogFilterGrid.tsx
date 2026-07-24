@@ -100,7 +100,7 @@ export default function CatalogFilterGrid() {
       {sorted.length === 0 ? (
         <div className="flex flex-col items-center text-center py-16 gap-4 border border-border rounded-2xl">
           <p className="font-body text-text-secondary max-w-sm">
-            No products match that category yet — the full catalogue is still being imported.
+            No products match that category yet. The full catalogue is still being imported.
           </p>
           <button type="button" onClick={() => setCategory("all")} className="btn-primary">
             View all products

@@ -21,7 +21,7 @@ export default function B2BEnquiryPage() {
             <span className="text-accent">business, at scale.</span>
           </>
         }
-        description="Multiple outlets, recurring orders, or a custom supply arrangement — tell us about your business and our team will reach out within 24 hours."
+        description="Multiple outlets, recurring orders, or a custom supply arrangement. Tell us about your business and our team will reach out within 24 hours."
       />
 
       <div className="container-wide pb-20 md:pb-28">

@@ -182,7 +182,7 @@ export default function B2BEnquiryForm() {
 
       {sent && (
         <p role="status" className="font-body text-sm text-accent">
-          WhatsApp opened in a new tab — send the message to complete your enquiry.
+          WhatsApp opened in a new tab. Send the message to complete your enquiry.
         </p>
       )}
     </form>

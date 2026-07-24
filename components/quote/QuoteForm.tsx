@@ -90,7 +90,7 @@ export default function QuoteForm({ initialProduct }: { initialProduct?: string 
             Request received.
           </h2>
           <p className="font-body text-text-secondary leading-relaxed">
-            Thanks, {form.name.split(" ")[0]} — we&apos;ve got your request and will get back to
+            Thanks, {form.name.split(" ")[0]}. We&apos;ve got your request and will get back to
             you within 24 hours. Prefer to talk sooner? Email us at{" "}
             <a href={emailHref} className="text-accent hover:text-accent-hover underline underline-offset-2">
               {site.email}

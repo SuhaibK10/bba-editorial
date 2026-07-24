@@ -198,7 +198,7 @@ export default function CheckoutView() {
     return (
       <div className="flex flex-col items-center text-center py-16 gap-4">
         <p className="font-body text-text-secondary max-w-sm">
-          Your cart is empty — add something first.
+          Your cart is empty. Add something first.
         </p>
         <Link href="/products" className="btn-primary mt-2">
           Browse Products

@@ -74,7 +74,7 @@ export default async function CatalogItemPage({ params }: Props) {
 
           {/* Media */}
           <div
-            className="relative rounded-2xl overflow-hidden aspect-[4/3]"
+            className="relative rounded-2xl overflow-hidden aspect-4/3"
             style={{ background: category.color }}
           >
             <ImageLightbox
@@ -146,7 +146,7 @@ export default async function CatalogItemPage({ params }: Props) {
               >
                 Customize this product
               </Link>{" "}
-              — volume pricing available on request.
+              (volume pricing available on request).
             </p>
           </div>
         </div>

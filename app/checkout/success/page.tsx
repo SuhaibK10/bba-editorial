@@ -48,14 +48,14 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
         compact
         title={
           <>
-            Order confirmed
+            Order confirmed.
             <br />
-            <span className="text-accent">— thank you.</span>
+            <span className="text-accent">Thank you.</span>
           </>
         }
         description={
           order
-            ? `${order.full_name}, we've received your order for ${itemCount} item${itemCount === 1 ? "" : "s"} — ${formatPrice(order.total)}. A confirmation has been emailed to you.`
+            ? `${order.full_name}, we've received your order for ${itemCount} item${itemCount === 1 ? "" : "s"}, totalling ${formatPrice(order.total)}. A confirmation has been emailed to you.`
             : "We've received your order and emailed a confirmation. We'll be in touch with despatch details shortly."
         }
       />

@@ -157,7 +157,7 @@ export const catalog: CatalogItem[] = [
     categorySlug: "donation-ballot-boxes",
     desc: "Dark tinted acrylic collection box that conceals contents while showing fill level.",
     longDesc:
-      "The tinted twin of our clear donation box. Dark acrylic obscures what's inside — useful for ballots, feedback and confidential suggestions — while still letting staff judge when it needs emptying. An A6 landscape header advertises the cause, an 80mm slot accepts contributions, and the built-in lock keeps contents secure between collections.",
+      "The tinted twin of our clear donation box. Dark acrylic obscures what's inside, useful for ballots, feedback and confidential suggestions, while still letting staff judge when it needs emptying. An A6 landscape header advertises the cause, an 80mm slot accepts contributions, and the built-in lock keeps contents secure between collections.",
     highlights: [
       "Tinted acrylic conceals individual contents",
       "A6 landscape header for a custom graphic",
@@ -244,7 +244,7 @@ export const catalog: CatalogItem[] = [
     categorySlug: "acrylic-risers",
     desc: "Five graduated black risers that add drama and depth to jewellery and cosmetic displays.",
     longDesc:
-      "Five graduated U-shaped risers in black acrylic, stepping up smoothly so every product on the counter gets its own level. The dark finish makes metallics, glass and jewel tones pop — a favourite of jewellery counters, perfumeries and collectible displays. A protective film ships on every surface; peel it off and the gloss is flawless.",
+      "Five graduated U-shaped risers in black acrylic, stepping up smoothly so every product on the counter gets its own level. The dark finish makes metallics, glass and jewel tones pop, a favourite of jewellery counters, perfumeries and collectible displays. A protective film ships on every surface; peel it off and the gloss is flawless.",
     highlights: [
       "Five graduated sizes for layered displays",
       "Gloss black finish flatters metallics and glass",

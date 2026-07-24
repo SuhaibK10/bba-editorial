@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 
   return NextResponse.redirect(
     `${origin}/login?error=${encodeURIComponent(
-      "That link didn't verify — it may have expired. Try signing in, or sign up again."
+      "That link didn't verify. It may have expired, so try signing in, or sign up again."
     )}`
   );
 }

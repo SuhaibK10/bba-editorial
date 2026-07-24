@@ -69,9 +69,9 @@ export default function ProductCarousel() {
     <section className="section-pad section-pad-top-tight section-pad-bottom-tight overflow-hidden">
 
       <div className="container-wide mb-16 md:mb-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="flex flex-col items-center text-center gap-6">
 
-          {/* Left: heading */}
+          {/* Heading */}
           <div>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -95,48 +95,21 @@ export default function ProductCarousel() {
             </motion.h2>
           </div>
 
-          {/* Right: description + nav */}
-          <div className="flex flex-col items-start md:items-end gap-4">
+          {/* Description + nav */}
+          <div className="flex flex-col items-center gap-4">
             <p className="font-body text-text-secondary leading-relaxed max-w-xs text-sm text-center">
               The categories our clients order most, and reorder
               most often.
             </p>
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => goTo(current - 1)}
-                disabled={current === 0}
-                aria-label="Previous product"
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center
-                           text-text-secondary hover:border-text-primary hover:text-text-primary
-                           disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
-              >
-                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-              <button
-                onClick={() => goTo(current + 1)}
-                disabled={current === carouselProducts.length - 1}
-                aria-label="Next product"
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center
-                           text-text-secondary hover:border-text-primary hover:text-text-primary
-                           disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
-              >
-                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-5 rounded-full border border-border flex items-center justify-start pl-1.5">
-                  <motion.div
-                    animate={{ x: [0, 18, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-1.5 h-1 rounded-full bg-text-faint"
-                  />
-                </div>
-                <span className="font-body text-xs text-text-secondary">Scroll to explore</span>
+            <div className="flex md:hidden items-center gap-2">
+              <div className="w-8 h-5 rounded-full border border-border flex items-center justify-start pl-1.5">
+                <motion.div
+                  animate={{ x: [0, 18, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-1.5 h-1 rounded-full bg-text-faint"
+                />
               </div>
+              <span className="font-body text-xs text-text-secondary">Scroll to explore</span>
             </div>
           </div>
 
@@ -160,7 +133,7 @@ export default function ProductCarousel() {
                 key={product.id}
                 animate={{ scale: isActive ? 1 : 0.99, opacity: isActive ? 1 : 0.99 }}
                 transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-                className="rounded-2xl overflow-hidden flex-shrink-0"
+                className="rounded-2xl overflow-hidden shrink-0"
                 style={{ width: CARD_WIDTH, background: product.color }}
                 onClick={() => { if (!isDragging.current) goTo(i); }}
               >
@@ -172,7 +145,7 @@ export default function ProductCarousel() {
                       sizes={`${CARD_WIDTH}px`}
                       className="pointer-events-none"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/1 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/1 to-transparent" />
                     <Link
                       href={`/products/${product.slug}`}
                       onClick={e => { if (isDragging.current) e.preventDefault(); }}
@@ -203,8 +176,36 @@ export default function ProductCarousel() {
         </motion.div>
       </div>
 
+      {/* Arrow nav: centred below the carousel */}
+      <div className="container-wide mt-5 flex justify-center items-center gap-4">
+        <button
+          onClick={() => goTo(current - 1)}
+          disabled={current === 0}
+          aria-label="Previous product"
+          className="w-10 h-10 rounded-full border border-border flex items-center justify-center
+                     text-text-secondary hover:border-text-primary hover:text-text-primary
+                     disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+        >
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M7.5 2l-4 4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        <button
+          onClick={() => goTo(current + 1)}
+          disabled={current === carouselProducts.length - 1}
+          aria-label="Next product"
+          className="w-10 h-10 rounded-full border border-border flex items-center justify-center
+                     text-text-secondary hover:border-text-primary hover:text-text-primary
+                     disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-200"
+        >
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M4.5 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
       {/* Animated Counter */}
-      <div className="container-wide mt-8">
+      <div className="container-wide mt-4 flex justify-center">
         <div className="flex items-center gap-1.5 font-body text-sm text-text-faint tabular-nums">
           <AnimatePresence mode="wait">
             <motion.span
