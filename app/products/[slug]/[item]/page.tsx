@@ -5,7 +5,7 @@ import ImageLightbox from "@/components/products/ImageLightbox";
 import CatalogItemCard from "@/components/products/CatalogItemCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
 import AddToCartButton from "@/components/commerce-cart/AddToCartButton";
-import WishlistButton from "@/components/wishlist/WishlistButton";
+import WishlistHeartButton from "@/components/wishlist/WishlistHeartButton";
 import { getProduct } from "@/data/products";
 import { catalog, getCatalogItem, getItemsByCategory, DEFAULT_LEAD_TIME } from "@/data/catalog";
 import { formatPrice } from "@/lib/pricing";
@@ -77,6 +77,12 @@ export default async function CatalogItemPage({ params }: Props) {
             className="relative rounded-2xl overflow-hidden aspect-4/3"
             style={{ background: category.color }}
           >
+            <WishlistHeartButton
+              slug={item.slug}
+              name={item.name}
+              size={16}
+              className="absolute top-3 right-3 z-20 w-9 h-9 text-accent hover:text-accent-hover"
+            />
             <ImageLightbox
               product={item}
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -126,15 +132,12 @@ export default async function CatalogItemPage({ params }: Props) {
               ))}
             </dl>
 
-            <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="flex flex-wrap items-center gap-3">
               <AddToCartButton
                 slug={item.slug}
                 price={item.price}
                 outOfStock={item.stock === "out-of-stock"}
               />
-              <WishlistButton slug={item.slug} />
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
               <AddToQuoteButton slug={item.slug} name={item.name} variant="secondary" />
             </div>
 

@@ -33,13 +33,21 @@ export default function AddToQuoteButton({
     setJustAdded(true);
   };
 
+  // Matches .btn-primary's exact box (h-10, rounded-full, same text size)
+  // so it sits flush next to a real Add to Cart button on the same line,
+  // instead of .btn-ghost's taller/wider default footprint.
+  const secondaryClass =
+    "inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full border border-border " +
+    "bg-white text-text-primary text-sm font-semibold whitespace-nowrap " +
+    "hover:border-text-primary transition-colors duration-200";
+
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
       <button
         type="button"
         onClick={handleClick}
         disabled={alreadyInCart}
-        className={`${variant === "secondary" ? "btn-ghost" : "btn-primary"} disabled:opacity-60`}
+        className={`${variant === "secondary" ? secondaryClass : "btn-primary"} disabled:opacity-60`}
       >
         {justAdded || alreadyInCart ? (
           <>

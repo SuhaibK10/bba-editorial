@@ -69,7 +69,7 @@ const { scrollYProgress } = useScroll();
 
   return (
     <>
-      <header className="fixed top-2 md:top-3 inset-x-0 z-50 px-3 md:px-6">
+      <header className="fixed top-1.5 md:top-2.5 inset-x-0 z-50 px-3 md:px-6">
         <div className="relative mx-auto max-w-5xl">
         <div
           className="relative flex items-center justify-between

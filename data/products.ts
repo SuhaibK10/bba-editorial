@@ -66,7 +66,7 @@ export const products: Product[] = [
       "Point-of-purchase display systems designed around one job: converting attention into sales at the shelf. From counter units to end-caps, engineered for FMCG, cosmetics and electronics brands.",
     slug: "retail-pop-displays",
     image:
-      "https://res.cloudinary.com/deh394y0h/image/upload/v1779898405/POP_Displays_mccdso.png",
+      "https://res.cloudinary.com/deh394y0h/image/upload/v1784922613/Category_j9yrqn.png",
     color: "#ECFEFF",
     features: [
       "Counter, shelf and end-cap formats",

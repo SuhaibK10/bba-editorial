@@ -17,9 +17,9 @@ const badgeIcons: Record<string, React.ComponentType<{ size?: number; className?
 
 export default function TrustBadges() {
   return (
-    <section className="border-y border-border">
+    <section>
       <div className="container-wide">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border divide-y divide-border sm:divide-x lg:divide-y-0">
           {trustBadges.map((badge, i) => {
             const Icon = badgeIcons[badge.title] ?? CheckIcon;
             return (
@@ -29,7 +29,7 @@ export default function TrustBadges() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={VIEWPORT_ONCE}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: EASE_OUT_EXPO }}
-                className="py-8 px-2 lg:px-6 lg:border-l lg:first:border-l-0 border-border"
+                className="py-8 px-4 lg:px-6"
               >
                 <div className="flex items-center gap-2.5 mb-1.5">
                   <Icon size={19} className="text-accent shrink-0" />

@@ -16,9 +16,32 @@ export default function HeroSection() {
   const [playing, setPlaying] = useState(true);
   const touchStartX = useRef(0);
 
-  const next = useCallback(() => {
-    setCurrent((c) => (c + 1) % heroSlides.length);
+  // Acrylic Lectern, Name Plates and Literature Holder (indexes 0–2) are
+  // desktop-only-skipped: they stay in the mobile rotation but drop out
+  // at xl, matching the breakpoint the image/indicator swap already uses
+  // elsewhere here. Everything from index 3 on stays on both.
+  const DESKTOP_SKIP_INDEXES = [0, 1, 2];
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1280px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
+
+  const desktopSlides = heroSlides.filter((_, i) => !DESKTOP_SKIP_INDEXES.includes(i));
+  const activeSlides = isDesktop && desktopSlides.length > 0 ? desktopSlides : heroSlides;
+
+  // Reset to the first slide of whichever list is active whenever the
+  // breakpoint is crossed, so `current` never points past the shorter array.
+  useEffect(() => {
+    setCurrent(0);
+  }, [isDesktop]);
+
+  const next = useCallback(() => {
+    setCurrent((c) => (c + 1) % activeSlides.length);
+  }, [activeSlides.length]);
 
   useEffect(() => {
     if (!playing) return;
@@ -39,10 +62,10 @@ export default function HeroSection() {
     const delta = touchStartX.current - (e.changedTouches[0]?.clientX ?? 0);
     if (Math.abs(delta) < 40) return;
     const dir = delta > 0 ? 1 : -1;
-    goTo((current + dir + heroSlides.length) % heroSlides.length);
+    goTo((current + dir + activeSlides.length) % activeSlides.length);
   };
 
-  const slide = heroSlides[current];
+  const slide = activeSlides[current];
   if (!slide) return null;
 
   return (
@@ -68,7 +91,7 @@ export default function HeroSection() {
             fill
             preload={current === 0}
             sizes="100vw"
-            className="object-cover object-center md:hidden"
+            className="object-cover object-center xl:hidden"
           />
           <Image
             src={slide.desktopImage}
@@ -76,13 +99,23 @@ export default function HeroSection() {
             fill
             preload={current === 0}
             sizes="100vw"
-            className="hidden md:block object-cover object-center"
+            className="hidden xl:block object-cover object-center"
           />
         </motion.div>
       </AnimatePresence>
 
+      {/* Per-slide text scrim: only for photos bright enough at the
+          bottom that the shared text-shadow alone isn't enough. */}
+      {slide.textScrim && (
+        <div
+          className="absolute inset-x-0 bottom-0 h-2/3 z-1 pointer-events-none
+                     bg-linear-to-t from-black/70 via-black/25 to-transparent"
+          aria-hidden="true"
+        />
+      )}
+
       {/* Bottom-centred text */}
-      <div className="container-wide relative z-10 pb-2 md:pb-6">
+      <div className="container-wide relative z-10 pb-2 md:pb-1">
         <div className="max-w-3xl mx-auto text-center [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
           {/* Per-slide selling line */}
           <AnimatePresence mode="wait">
@@ -104,7 +137,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE_OUT_EXPO }}
-            className="flex flex-wrap gap-3 justify-center mt-5 md:mt-8 mb-2 md:mb-8"
+            className="flex flex-wrap gap-3 justify-center mt-5 md:mt-8 mb-2 md:mb-0"
           >
             <Link
               href="/quote"
@@ -128,9 +161,9 @@ export default function HeroSection() {
           </motion.div>
 
           {/* Mobile indicators: centred below CTAs */}
-          <div className="flex md:hidden flex-col items-center gap-3 mt-2">
+          <div className="flex xl:hidden flex-col items-center gap-3 mt-2">
             <HeroDots
-              slides={heroSlides}
+              slides={activeSlides}
               current={current}
               onSelect={goTo}
               slideMs={SLIDE_MS}
@@ -141,9 +174,9 @@ export default function HeroSection() {
       </div>
 
       {/* Desktop indicators: bottom-right corner */}
-      <div className="hidden md:flex absolute bottom-8 right-8 z-10 items-center gap-4">
+      <div className="hidden xl:flex absolute bottom-8 right-8 z-10 items-center gap-4">
         <HeroDots
-          slides={heroSlides}
+          slides={activeSlides}
           current={current}
           onSelect={goTo}
           slideMs={SLIDE_MS}

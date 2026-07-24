@@ -15,7 +15,7 @@ export default function CartPage() {
   return (
     <div className="bg-background">
       <PageHeader
-        label="Your cart"
+        compact
         centered
         title={
           <>

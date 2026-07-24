@@ -7,6 +7,10 @@ export type HeroSlide = {
   desktopImage: string;
   mobileImage?: string;
   tagline?: string; // selling line shown above the hero CTAs
+  // Per-slide opt-in: adds a dark bottom gradient behind the text for
+  // photos bright enough at the bottom that the white tagline/CTAs lose
+  // contrast — the shared text-shadow alone isn't enough on those.
+  textScrim?: boolean;
 };
 
 const heroCrop = "c_fill,g_auto,w_1920,h_1280";
@@ -30,7 +34,7 @@ const allSlides: HeroSlide[] = [
   {
     name: "Acrylic Lectern",
     slug: "Acrylic Lectern",
-    desktopImage: heroImg("Generated_Image_July_12_2026_-_5_01PM_kcswvt.jpg"),
+    desktopImage: heroImg("Generated_Image_July_19_2026_-_12_40AM_ttjs4k.jpg"),
     mobileImage: heroImgMobile("Generated_Image_July_12_2026_-_5_08PM_tlbj4u.jpg"),
     tagline: "The Acrylic Lectern that commands every room.",
   },
@@ -51,9 +55,10 @@ const allSlides: HeroSlide[] = [
   {
     name: "Retail POP Displays",
     slug: "mobile-charging-stations",
-    desktopImage: heroImg("POP_Displays_mccdso.png"),
-    mobileImage: heroImgMobile("Generated_Image_July_18_2026_-_6_30PM_a9ntp5"),
+    desktopImage: heroImg("deskt_qfzhdz.png"),
+    mobileImage: heroImgMobile("mobile_ucu1er.png"),
     tagline: "Retail POP Displays built to stop shoppers mid-aisle.",
+    textScrim: true,
   },
   {
     name: "Acrylic Photoframes",
@@ -80,8 +85,8 @@ const allSlides: HeroSlide[] = [
   {
     name: "Floor Standing Displays",
     slug: "floor-standing-displays-2",
-    desktopImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784408470/ChatGPT_Image_Jul_19_2026_at_02_22_13_AM_bys3ew.png", // paste Cloudinary URL here
-    mobileImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784408470/ChatGPT_Image_Jul_19_2026_at_02_22_13_AM_bys3ew.png", // paste Cloudinary URL here
+    desktopImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784923955/de_qz2w6z.png", // paste Cloudinary URL here
+    mobileImage: "https://res.cloudinary.com/deh394y0h/image/upload/v1784923549/mo_zr7337.png", // paste Cloudinary URL here
     tagline: "Floor Standing Displays built to anchor any brand zone.",
   },
 

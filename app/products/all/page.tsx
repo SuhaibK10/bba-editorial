@@ -24,7 +24,7 @@ export default function AllProductsPage() {
         }
         description=""
       />
-      <div className="container-wide pb-20 md:pb-28">
+      <div className="container-wide pb-20 md:pb-28 -mt-4 md:-mt-6">
         <CatalogFilterGrid />
       </div>
     </div>

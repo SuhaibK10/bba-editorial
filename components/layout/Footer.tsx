@@ -1,5 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site, whatsappUrl, phoneHref, emailHref } from "@/data/site";
+
+// Official marks (sourced from Wikimedia Commons, each brand's current
+// public logo file) in public/logos/payments/. Rendered on a small white
+// chip regardless of the mark's own colours, since some of these aren't
+// legible directly on this footer's near-black background.
+const PAYMENT_METHODS = [
+  { name: "UPI", file: "upi.svg" },
+  { name: "Visa", file: "visa.svg" },
+  { name: "Mastercard", file: "mastercard.svg" },
+  { name: "RuPay", file: "rupay.svg" },
+];
 
 const links = [
   { label: "Products", href: "/products" },
@@ -69,7 +81,38 @@ export default function Footer() {
           <p className="text-white/25 font-body text-xs">
             © {new Date().getFullYear()} B & B Appliances. All rights reserved.
           </p>
-          
+
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1.5">
+              {PAYMENT_METHODS.map(({ name, file }) => (
+                <span
+                  key={name}
+                  className="rounded-md bg-white h-6 px-2 flex items-center justify-center"
+                >
+                  <Image
+                    src={`/logos/payments/${file}`}
+                    alt={name}
+                    width={40}
+                    height={16}
+                    className="h-3.5 w-auto object-contain"
+                  />
+                </span>
+              ))}
+            </div>
+            <span className="hidden sm:block h-4 w-px bg-white/10" aria-hidden="true" />
+            <span className="flex items-center gap-1.5 font-body text-xs text-white/30">
+              Secured by
+              <span className="rounded bg-white h-4 px-1 flex items-center justify-center">
+                <Image
+                  src="/logos/payments/razorpay.svg"
+                  alt="Razorpay"
+                  width={64}
+                  height={14}
+                  className="h-2.5 w-auto object-contain"
+                />
+              </span>
+            </span>
+          </div>
         </div>
 
       </div>

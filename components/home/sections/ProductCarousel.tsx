@@ -101,16 +101,6 @@ export default function ProductCarousel() {
               The categories our clients order most, and reorder
               most often.
             </p>
-            <div className="flex md:hidden items-center gap-2">
-              <div className="w-8 h-5 rounded-full border border-border flex items-center justify-start pl-1.5">
-                <motion.div
-                  animate={{ x: [0, 18, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-1.5 h-1 rounded-full bg-text-faint"
-                />
-              </div>
-              <span className="font-body text-xs text-text-secondary">Scroll to explore</span>
-            </div>
           </div>
 
         </div>
@@ -176,8 +166,20 @@ export default function ProductCarousel() {
         </motion.div>
       </div>
 
-      {/* Arrow nav: centred below the carousel */}
-      <div className="container-wide mt-5 flex justify-center items-center gap-4">
+      {/* Scroll to explore: touch devices (phones + tablets), just below the category images */}
+      <div className="container-wide mt-5 flex xl:hidden justify-center items-center gap-2">
+        <div className="w-8 h-5 rounded-full border border-border flex items-center justify-start pl-1.5">
+          <motion.div
+            animate={{ x: [0, 18, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1.5 h-1 rounded-full bg-text-faint"
+          />
+        </div>
+        <span className="font-body text-xs text-text-secondary">Scroll to explore</span>
+      </div>
+
+      {/* Arrow nav: centred below the carousel, desktop only (touch devices swipe) */}
+      <div className="container-wide mt-5 hidden xl:flex justify-center items-center gap-4">
         <button
           onClick={() => goTo(current - 1)}
           disabled={current === 0}

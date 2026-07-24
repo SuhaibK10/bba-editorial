@@ -85,41 +85,43 @@ export default function MobileNav() {
   const commerceCartCount = useCommerceCartStore((s) => s.items.length);
   const cartCount = quoteCartCount + commerceCartCount;
 
+  const renderTab = ({ label, href, icon: Icon, ...rest }: (typeof NAV)[number]) => {
+    const matchOn = "activeMatch" in rest ? rest.activeMatch : href;
+    const isActive = matchOn === "/" ? pathname === matchOn : pathname.startsWith(matchOn);
+    const isCart = label === "Cart";
+    return (
+      <Link
+        key={label}
+        href={href}
+        aria-label={isCart && cartCount > 0 ? `Cart, ${cartCount} items` : label}
+        aria-current={isActive ? "page" : undefined}
+        className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-0.5 pb-2.5 transition-colors duration-200
+                    ${isActive ? "text-accent" : "text-text-secondary hover:text-text-primary"}`}
+      >
+        <span className="relative flex leading-none">
+          <Icon active={isActive} />
+          {isCart && cartCount > 0 && (
+            <span
+              className="absolute -top-1 -right-1.5 min-w-3.75 h-3.75 px-0.75 rounded-full
+                         bg-accent text-white text-[9px] font-bold flex items-center justify-center
+                         tabular-nums"
+              aria-hidden="true"
+            >
+              {cartCount > 9 ? "9+" : cartCount}
+            </span>
+          )}
+        </span>
+        <span className="font-body text-[10px] leading-none tracking-wide uppercase">{label}</span>
+      </Link>
+    );
+  };
+
   return (
     <nav
       className="mobile-nav-bar xl:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-border"
     >
       <div className="flex items-center h-12">
-        {NAV.map(({ label, href, icon: Icon, ...rest }) => {
-          const matchOn = "activeMatch" in rest ? rest.activeMatch : href;
-          const isActive = matchOn === "/" ? pathname === matchOn : pathname.startsWith(matchOn);
-          const isCart = label === "Cart";
-          return (
-            <Link
-              key={label}
-              href={href}
-              aria-label={isCart && cartCount > 0 ? `Cart, ${cartCount} items` : label}
-              aria-current={isActive ? "page" : undefined}
-              className={`relative flex-1 flex flex-col items-center justify-center gap-1 pt-0.5 pb-2.5 transition-colors duration-200
-                          ${isActive ? "text-accent" : "text-text-secondary hover:text-text-primary"}`}
-            >
-              <span className="relative flex leading-none">
-                <Icon active={isActive} />
-                {isCart && cartCount > 0 && (
-                  <span
-                    className="absolute -top-1 -right-1.5 min-w-3.75 h-3.75 px-0.75 rounded-full
-                               bg-accent text-white text-[9px] font-bold flex items-center justify-center
-                               tabular-nums"
-                    aria-hidden="true"
-                  >
-                    {cartCount > 9 ? "9+" : cartCount}
-                  </span>
-                )}
-              </span>
-              <span className="font-body text-[10px] leading-none tracking-wide uppercase">{label}</span>
-            </Link>
-          );
-        })}
+        {NAV.map(renderTab)}
       </div>
     </nav>
   );

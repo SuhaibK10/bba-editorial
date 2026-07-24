@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { User } from "lucide-react";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import { products } from "@/data/products";
 import WhatsAppIcon from "@/components/shared/WhatsAppIcon";
 import ChevronIcon from "@/components/shared/icons/ChevronIcon";
 import GoogleIcon from "@/components/shared/icons/GoogleIcon";
 import { signInWithGoogle } from "@/lib/auth/actions";
+import { createClient } from "@/lib/supabase/client";
 import { site, whatsappUrl } from "@/data/site";
 
 // Full-screen nav overlay, opened from the Navbar hamburger (shown below
@@ -24,6 +26,20 @@ export default function MenuOverlay({
   navLinks: { label: string; href: string }[];
 }) {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  // Client-side auth check: this overlay is a Client Component with no
+  // server-fetched user prop, so it has to ask Supabase itself. Also
+  // listens for sign-in/out so the button swaps without a full reload.
+  useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return;
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setSignedIn(Boolean(data.user)));
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSignedIn(Boolean(session?.user));
+    });
+    return () => subscription.subscription.unsubscribe();
+  }, []);
 
   return (
     <AnimatePresence>
@@ -136,18 +152,32 @@ export default function MenuOverlay({
                 </a>
               </div>
 
-              <form action={signInWithGoogle} className="mt-3">
-                <button
-                  type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2.5 h-10
+              {signedIn ? (
+                <Link
+                  href="/account"
+                  onClick={onClose}
+                  className="w-full mt-3 inline-flex items-center justify-center gap-2.5 h-10
                              px-4 rounded-full border border-border bg-white
                              text-text-primary text-sm font-body font-medium whitespace-nowrap
                              hover:border-accent transition-colors duration-200"
                 >
-                  <GoogleIcon size={16} />
-                  Sign in with Google
-                </button>
-              </form>
+                  <User size={16} />
+                  My Account
+                </Link>
+              ) : (
+                <form action={signInWithGoogle} className="mt-3">
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2.5 h-10
+                               px-4 rounded-full border border-border bg-white
+                               text-text-primary text-sm font-body font-medium whitespace-nowrap
+                               hover:border-accent transition-colors duration-200"
+                  >
+                    <GoogleIcon size={16} />
+                    Sign in with Google
+                  </button>
+                </form>
+              )}
               <p className="text-center text-text-faint text-xs font-body pt-1">
                 {site.name} · {site.address.street}, {site.address.city}
               </p>
