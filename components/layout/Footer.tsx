@@ -43,6 +43,38 @@ export default function Footer() {
             <p className="text-white/40 font-body text-sm leading-relaxed ">
               India&apos;s trusted acrylic manufacturer.<br/>Serving 13+ industries for over 35+ years.<br/> {site.address.street}, {site.address.city}.
             </p>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-5">
+              <div className="flex items-center gap-1.5">
+                {PAYMENT_METHODS.map(({ name, file }) => (
+                  <span
+                    key={name}
+                    className="rounded-md bg-white h-6 px-2 flex items-center justify-center"
+                  >
+                    <Image
+                      src={`/logos/payments/${file}`}
+                      alt={name}
+                      width={40}
+                      height={16}
+                      className="h-3.5 w-auto object-contain"
+                    />
+                  </span>
+                ))}
+              </div>
+              <span className="hidden sm:block h-4 w-px bg-white/10" aria-hidden="true" />
+              <span className="flex items-center gap-1.5 font-body text-xs text-white/30">
+                Secured by
+                <span className="rounded-md bg-white h-6 px-2 flex items-center justify-center">
+                  <Image
+                    src="/logos/payments/razorpay.svg"
+                    alt="Razorpay"
+                    width={64}
+                    height={14}
+                    className="h-3.5 w-auto object-contain"
+                  />
+                </span>
+              </span>
+            </div>
           </div>
 
           {/* Links */}
@@ -81,38 +113,6 @@ export default function Footer() {
           <p className="text-white/25 font-body text-xs">
             © {new Date().getFullYear()} B & B Appliances. All rights reserved.
           </p>
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              {PAYMENT_METHODS.map(({ name, file }) => (
-                <span
-                  key={name}
-                  className="rounded-md bg-white h-6 px-2 flex items-center justify-center"
-                >
-                  <Image
-                    src={`/logos/payments/${file}`}
-                    alt={name}
-                    width={40}
-                    height={16}
-                    className="h-3.5 w-auto object-contain"
-                  />
-                </span>
-              ))}
-            </div>
-            <span className="hidden sm:block h-4 w-px bg-white/10" aria-hidden="true" />
-            <span className="flex items-center gap-1.5 font-body text-xs text-white/30">
-              Secured by
-              <span className="rounded bg-white h-4 px-1 flex items-center justify-center">
-                <Image
-                  src="/logos/payments/razorpay.svg"
-                  alt="Razorpay"
-                  width={64}
-                  height={14}
-                  className="h-2.5 w-auto object-contain"
-                />
-              </span>
-            </span>
-          </div>
         </div>
 
       </div>

@@ -19,7 +19,7 @@ export default function TrustBadges() {
   return (
     <section>
       <div className="container-wide">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border divide-y divide-border sm:divide-x lg:divide-y-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[#d9d2c7] divide-y divide-[#d9d2c7] sm:divide-x lg:divide-y-0">
           {trustBadges.map((badge, i) => {
             const Icon = badgeIcons[badge.title] ?? CheckIcon;
             return (
