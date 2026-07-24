@@ -14,6 +14,7 @@ export default function AllProductsPage() {
     <div className="bg-background">
       <PageHeader
         compact
+        centered
         title={
           <>
             Our Product
