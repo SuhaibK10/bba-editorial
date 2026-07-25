@@ -17,7 +17,7 @@ export default function CommerceCartSection() {
   const removeItem = useCommerceCartStore((s) => s.removeItem);
   const updateQuantity = useCommerceCartStore((s) => s.updateQuantity);
 
-  // Same hydration-guard pattern as CartView: avoid an empty-state flash
+  // Avoid an empty-state flash
   // before the persisted store has hydrated on the client.
   const hydrated = useSyncExternalStore(
     () => () => {},

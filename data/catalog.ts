@@ -321,6 +321,91 @@ export const catalog: CatalogItem[] = [
     price: 2499,
     stock: "made-to-order",
   },
+
+  // ── Protective Screens & Shields ─────────────
+  {
+    sku: "CAPS001",
+    name: "Countertop Sneeze Guard with Access Hole",
+    image: "", // paste Cloudinary URL here
+    slug: "countertop-sneeze-guard-access-hole",
+    categorySlug: "protective-screens-shields",
+    desc: "Clear acrylic counter shield with a curved access hole for handing over items safely.",
+    longDesc:
+      "A freestanding acrylic barrier sized for counters and service points, with a curved cutout at the base that lets staff and customers exchange items, cards or cash without stepping around the shield. Ships as a single rigid panel with a stable footed base, ready to place and use.",
+    highlights: [
+      "Curved access hole at counter height",
+      "5mm clear acrylic, polished edges",
+      "Stable footed base, no drilling required",
+      "Wipes clean with standard glass cleaner",
+    ],
+    specs: [
+      { label: "Finish", value: "Clear" },
+      { label: "Placement", value: "Counter top" },
+      { label: "Material", value: "5mm cast acrylic" },
+      { label: "Access", value: "Curved hand-through cutout" },
+    ],
+    type: "Counter Shield",
+    color: "Clear",
+    placement: "Counter top",
+    price: 1899,
+    stock: "made-to-order",
+  },
+
+  // ── Acrylic Trays ─────────────────────────────
+  {
+    sku: "CATR001",
+    name: "Rectangular Acrylic Serving Tray",
+    image: "", // paste Cloudinary URL here
+    slug: "rectangular-acrylic-serving-tray",
+    categorySlug: "acrylic-trays",
+    desc: "A clean-edged acrylic tray for serving, retail counters or desk organisation.",
+    longDesc:
+      "A rigid, lightweight acrylic tray with rounded corners and a shallow lip that keeps contents contained without hiding them. Equally at home carrying cups across a service counter, presenting retail samples, or corralling everyday items on a desk.",
+    highlights: [
+      "Shallow lip keeps contents contained",
+      "Rounded corners, comfortable to carry",
+      "Lightweight, stacks flat for storage",
+      "Clear or tinted acrylic on request",
+    ],
+    specs: [
+      { label: "Finish", value: "Clear" },
+      { label: "Placement", value: "Counter top / desk" },
+      { label: "Material", value: "3mm cast acrylic" },
+      { label: "Shape", value: "Rectangular, rounded corners" },
+    ],
+    type: "Serving Tray",
+    color: "Clear",
+    placement: "Counter top",
+    price: 599,
+    stock: "made-to-order",
+  },
+  {
+    sku: "CATR002",
+    name: "Multi-Compartment Pegboard & Slatwall Organizer Tray",
+    image: "", // paste Cloudinary URL here
+    slug: "multi-compartment-organizer-tray",
+    categorySlug: "acrylic-trays",
+    desc: "A slotted acrylic tray that mounts to pegboard or slatwall, or sits flat on a counter.",
+    longDesc:
+      "Four equal compartments divide small, loose stock into a neat, browsable grid — built for pegboard and slatwall walls but equally happy sitting flat on a countertop. Two included metal U-hooks handle the wall-mounted setup; skip them and it works as a freestanding organizer instead.",
+    highlights: [
+      "Four equal compartments for sorting small items",
+      "Mounts to pegboard or slatwall, or sits flat",
+      "Two metal U-hooks included",
+      "Clear acrylic, polished edges",
+    ],
+    specs: [
+      { label: "Finish", value: "Clear" },
+      { label: "Placement", value: "Wall mount / counter top" },
+      { label: "Material", value: "Cast acrylic" },
+      { label: "Compartments", value: "4 equal slots" },
+    ],
+    type: "Organizer Tray",
+    color: "Clear",
+    placement: "Wall mount / counter top",
+    price: 749,
+    stock: "made-to-order",
+  },
 ];
 
 export const getCatalogItem = (slug: string) =>

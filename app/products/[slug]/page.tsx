@@ -5,7 +5,7 @@ import ProductMedia from "@/components/products/ProductMedia";
 import ProductCard from "@/components/products/ProductCard";
 import CatalogItemCard from "@/components/products/CatalogItemCard";
 import AddToQuoteButton from "@/components/quote/AddToQuoteButton";
-import WishlistButton from "@/components/wishlist/WishlistButton";
+import WishlistHeartButton from "@/components/wishlist/WishlistHeartButton";
 import { products, getProduct } from "@/data/products";
 import { getItemsByCategory } from "@/data/catalog";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
@@ -66,6 +66,12 @@ export default async function ProductPage({ params }: Props) {
             className="relative rounded-2xl overflow-hidden aspect-[4/3]"
             style={{ background: product.color }}
           >
+            <WishlistHeartButton
+              slug={product.slug}
+              name={product.name}
+              size={16}
+              className="absolute top-3 right-3 z-20 w-9 h-9 text-accent hover:text-accent-hover"
+            />
             <ProductMedia
               product={product}
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -95,7 +101,6 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="flex flex-wrap items-center gap-3">
               <AddToQuoteButton slug={product.slug} name={product.name} />
-              <WishlistButton slug={product.slug} />
             </div>
           </div>
         </div>

@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import ProductMedia from "@/components/products/ProductMedia";
 import DiagonalArrowIcon from "@/components/shared/icons/DiagonalArrowIcon";
 import CheckIcon from "@/components/shared/icons/CheckIcon";
+import ChevronIcon from "@/components/shared/icons/ChevronIcon";
 import WishlistHeartButton from "@/components/wishlist/WishlistHeartButton";
 import { useCommerceCartStore } from "@/lib/commerce-cart-store";
 import { formatPrice } from "@/lib/pricing";
@@ -18,12 +20,17 @@ export default function CatalogItemCard({
   color,
   sizes,
   showDescription = true,
+  collapsibleDescription = false,
 }: {
   item: CatalogItem;
   color: string;
   sizes: string;
   showDescription?: boolean;
+  // Shop grid: description stays hidden until "View details" is tapped,
+  // keeping the dense grid compact without dropping the copy entirely.
+  collapsibleDescription?: boolean;
 }) {
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const href = `/products/${item.categorySlug}/${item.slug}`;
   const outOfStock = item.stock === "out-of-stock";
 
@@ -105,6 +112,42 @@ export default function CatalogItemCard({
         <p className="font-body text-sm text-text-secondary leading-relaxed mt-1 mb-2">
           {item.desc}
         </p>
+      )}
+
+      {collapsibleDescription && (
+        <div className="mt-1 mb-2">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setDetailsOpen((v) => !v);
+            }}
+            aria-expanded={detailsOpen}
+            className="flex items-center gap-1 font-body text-xs font-medium text-text-faint
+                       hover:text-text-primary transition-colors duration-200"
+          >
+            View details
+            <ChevronIcon
+              size={9}
+              className={`transition-transform duration-200 ${detailsOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          <AnimatePresence initial={false}>
+            {detailsOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <p className="font-body text-sm text-text-secondary leading-relaxed pt-1.5">
+                  {item.desc}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       )}
 
       <div className="mt-auto pt-2 flex flex-col gap-2.5">

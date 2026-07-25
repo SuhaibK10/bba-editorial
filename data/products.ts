@@ -268,6 +268,36 @@ export const products: Product[] = [
       "Custom shapes and thicknesses",
     ],
   },
+  {
+    id: "16",
+    name: "Protective Screens & Shields",
+    desc: "Clear acrylic barriers and sneeze guards for counters, service points and shared spaces.",
+    longDesc:
+      "Freestanding and counter-mounted acrylic shields that keep service points hygienic without hiding the person behind them. A practical fit for pharmacy counters, F&B service lines and reception desks, built on the same fabrication line as the rest of the range.",
+    slug: "protective-screens-shields",
+    color: "#F1F5F9",
+    features: [
+      "Freestanding and counter-clamp mounting options",
+      "Pass-through or access-hole cutouts on request",
+      "Polished edges, no sharp corners",
+      "Custom heights and widths, made to order",
+    ],
+  },
+  {
+    id: "17",
+    name: "Acrylic Trays",
+    desc: "Clear and coloured acrylic trays for serving, retail display and desk organisation.",
+    longDesc:
+      "Lightweight acrylic trays that carry, serve or display without hiding what's on them. Sized for hospitality service, retail counters and everyday desk use, in clear or tinted finishes.",
+    slug: "acrylic-trays",
+    color: "#F7FEE7",
+    features: [
+      "Clear, frosted and coloured acrylic options",
+      "Rounded, comfortable-grip edges",
+      "Stackable for compact storage",
+      "Custom sizes and shapes made to order",
+    ],
+  },
 ];
 
 export const getProduct = (slug: string) =>

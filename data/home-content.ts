@@ -6,8 +6,6 @@
 // shown as quote-linked entries on /products.
 export const moreCategories: string[] = [
   "Menu & Card Holders",
-  "Protective Screens & Shields",
-  "Acrylic Trays",
   "Sign & Poster Frames",
 ];
 

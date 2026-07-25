@@ -129,25 +129,29 @@ export default function ProductCarousel() {
               >
                 {/* Image */}
                 <div className="p-4 pb-0">
-                  <div className="relative overflow-hidden rounded-xl" style={{ height: IMAGE_HEIGHT }}>
+                  <Link
+                    href={`/products/${product.slug}`}
+                    onClick={e => { if (isDragging.current) e.preventDefault(); }}
+                    aria-label={`View ${product.name}`}
+                    className="group/img relative block overflow-hidden rounded-xl"
+                    style={{ height: IMAGE_HEIGHT }}
+                  >
                     <ProductMedia
                       product={product}
                       sizes={`${CARD_WIDTH}px`}
-                      className="pointer-events-none"
+                      className="pointer-events-none group-hover/img:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/1 to-transparent" />
-                    <Link
-                      href={`/products/${product.slug}`}
-                      onClick={e => { if (isDragging.current) e.preventDefault(); }}
-                      aria-label={`View ${product.name}`}
+                    <span
+                      aria-hidden="true"
                       className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90
                                  backdrop-blur-sm flex items-center justify-center
-                                 hover:bg-accent hover:text-white
+                                 group-hover/img:bg-accent group-hover/img:text-white
                                  transition-all duration-200 shadow-sm"
                     >
                       <DiagonalArrowIcon size={12} />
-                    </Link>
-                  </div>
+                    </span>
+                  </Link>
                 </div>
 
                 {/* Text panel */}
